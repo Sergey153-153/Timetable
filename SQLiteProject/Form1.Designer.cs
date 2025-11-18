@@ -30,6 +30,7 @@
         {
             this.cbCountry = new System.Windows.Forms.ComboBox();
             this.dgvRegion = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegion)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,14 +49,25 @@
             this.dgvRegion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRegion.Location = new System.Drawing.Point(12, 53);
             this.dgvRegion.Name = "dgvRegion";
-            this.dgvRegion.Size = new System.Drawing.Size(366, 150);
+            this.dgvRegion.Size = new System.Drawing.Size(335, 164);
             this.dgvRegion.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(259, 9);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "пара";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(390, 213);
+            this.ClientSize = new System.Drawing.Size(359, 628);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvRegion);
             this.Controls.Add(this.cbCountry);
             this.Name = "Form1";
@@ -70,7 +82,7 @@
 
         private System.Windows.Forms.ComboBox cbCountry;
         private System.Windows.Forms.DataGridView dgvRegion;
-
+        private System.Windows.Forms.Button button1;
     }
 }
 
