@@ -130,7 +130,7 @@ namespace SQLiteProject
 
         private void loadFromDBCountry()
         {
-            dictCountry = sqliteQ.getListCountry();
+            //dictCountry = sqliteQ.getListCountry();
             cbCountry.Items.Clear();
             foreach (KeyValuePair<string, int> pair in dictCountry)
             {
@@ -144,7 +144,7 @@ namespace SQLiteProject
         {
             string curCountry = cbCountry.SelectedItem == null ? "" : cbCountry.SelectedItem.ToString();
 
-            listInfoRegion = sqliteQ.getListRegion(curCountry);
+            //listInfoRegion = sqliteQ.getListRegion(curCountry);
             dgvRegion.DataSource = listInfoRegion;
         }
 
