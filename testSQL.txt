@@ -1,0 +1,222 @@
+﻿
+20.окт.2015 22:54:35 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+20.окт.2015 22:54:56 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+20.окт.2015 23:33:23 ERR 
+Ошибка при вставке новой записи в таблицу partners!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO partners (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+SQL logic error or missing database
+no such table: partners
+
+20.окт.2015 23:33:23 ERR 
+Ошибка при вставке новой записи в таблицу partners!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO partners (id_country,name_country,sname_country,id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country,@id_country,@name_country,@sname_country)
+SQL logic error or missing database
+no such table: partners
+
+20.окт.2015 23:33:26 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+20.окт.2015 23:35:19 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+20.окт.2015 23:35:19 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country,id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country,@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+20.окт.2015 23:35:22 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 00:09:32 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 00:09:32 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 00:09:33 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+SQL logic error or missing database
+table country has no column named id_region
+
+21.окт.2015 00:09:34 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+SQL logic error or missing database
+table country has no column named id_region
+
+21.окт.2015 00:09:34 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+SQL logic error or missing database
+table country has no column named id_region
+
+21.окт.2015 00:09:40 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 00:10:13 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 00:10:13 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 00:10:18 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 00:13:20 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 00:13:20 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 00:13:22 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+constraint failed
+UNIQUE constraint failed: region.id_region
+
+21.окт.2015 00:13:22 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+constraint failed
+UNIQUE constraint failed: region.id_region
+
+21.окт.2015 00:13:22 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+constraint failed
+UNIQUE constraint failed: region.id_region
+
+21.окт.2015 00:13:33 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 00:34:27 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 00:37:32 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 00:40:03 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 01:31:01 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 01:33:33 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 01:33:34 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+constraint failed
+UNIQUE constraint failed: country.id_country
+
+21.окт.2015 01:33:35 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+constraint failed
+UNIQUE constraint failed: region.id_region
+
+21.окт.2015 01:33:35 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+constraint failed
+UNIQUE constraint failed: region.id_region
+
+21.окт.2015 01:33:35 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+constraint failed
+UNIQUE constraint failed: region.id_region
+
+21.окт.2015 01:36:27 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+21.окт.2015 01:37:01 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+17.окт.2020 14:31:10 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+18.ноя.2025 16:54:21 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
