@@ -31,7 +31,7 @@ namespace SQLiteProject
             public int region_id { get; set; }
             public string region_name { get; set; }
         }
-        //private List<InfoRegion> listInfoRegion;
+        private List<InfoRegion> listInfoRegion;
 
         public Form1()
         {
@@ -145,7 +145,7 @@ namespace SQLiteProject
             string curCountry = cbCountry.SelectedItem == null ? "" : cbCountry.SelectedItem.ToString();
 
             //listInfoRegion = sqliteQ.getListRegion(curCountry);
-            //dgvRegion.DataSource = listInfoRegion;
+            dgvRegion.DataSource = listInfoRegion;
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -162,7 +162,7 @@ namespace SQLiteProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MoreLesson f2 = new MoreLesson(this);
+            Form2 f2 = new Form2(this);
             this.Hide();
             f2.Show();
         }
