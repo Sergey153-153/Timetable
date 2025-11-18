@@ -63,8 +63,7 @@ namespace mySQLite
                     [Subject] TEXT NOT NULL,
                     [Teacher] TEXT,
                     [Location] TEXT,
-                    [StartTime] TEXT,
-                    [EndTime] TEXT,
+                    [Time] TEXT,
                     FOREIGN KEY ([ScheduleID]) REFERENCES Schedules([ScheduleID])
                     );";
 
@@ -104,88 +103,12 @@ namespace mySQLite
         }
         #endregion
 
-        public int GetNextScheduleID()
-        {
-            DataTable dt = _sqlt.FetchByColumn(
-                "Schedules",
-                "MAX(ScheduleID) AS maxId",
-                "",
-                ""
-            );
-
-            int maxId = 0;
-            if (dt.Rows.Count > 0 && dt.Rows[0]["maxId"].ToString() != "")
-                maxId = int.Parse(dt.Rows[0]["maxId"].ToString());
-
-            return maxId + 1;
-        }
-
-        public int CopySchedule(int oldScheduleID, string newCode, string newName)
-        {
-            int newID = GetNextScheduleID();
-
-            int res = AddSchedule(newID, newCode, newName, 2);
-            if (res == 0) return 0;
-
-            DataTable dt = _sqlt.FetchByColumn(
-                "Lessons",
-                "WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
-                "ScheduleID = " + oldScheduleID,
-                ""
-            );
-
-            foreach (DataRow row in dt.Rows)
-            {
-                string sql = @"INSERT INTO Lessons 
-                       (ScheduleID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time)
-                       VALUES (" +
-                               newID + ", " +
-                               row["WeekNumber"] + ", " +
-                               row["DayOfWeek"] + ", " +
-                               row["LessonNumber"] + ", '" +
-                               row["Subject"] + "', '" +
-                               row["Teacher"] + "', '" +
-                               row["Location"] + "', '" +
-                               row["Time"] + "');";
-
-                _sqlt.ExecuteNonQuery(sql);
-            }
-
-            return newID;
-        }
-        
-        public int DeleteSchedule(int scheduleID)
-        {
-            try
-            {
-                _sqlt.BeginTransaction();
-
-                _sqlt.ExecuteNonQuery("DELETE FROM Lessons WHERE ScheduleID = " + scheduleID);
-                _sqlt.ExecuteNonQuery("DELETE FROM Schedules WHERE ScheduleID = " + scheduleID);
-
-                _sqlt.CommitTransaction();
-                return 1;
-            }
-            catch (Exception ex)
-            {
-                _sqlt.RollBackTransaction();
-                SaveLog("Ошибка DeleteSchedule: " + ex.Message);
-                return 0;
-            }
-        }
-
-        public int GetSchedulesCount()
-        {
-            DataTable dt = _sqlt.FetchByColumn("Schedules", "COUNT(*) AS cnt", "", "");
-            return int.Parse(dt.Rows[0]["cnt"].ToString());
-        }
-
         #region Добавление расписания
 
         public int AddSchedule(int id, string code, string name, int type)
         {
             string sql = @"INSERT INTO Schedules ([ScheduleID], [Code], [Name], [Type])
-                   VALUES (" + id + ", '" + code + "', '" + name + "', " + type + ");";
+                       VALUES (" + id + ", '" + code + "', '" + name + "', " + type + ");";
 
             try
             {
@@ -200,10 +123,10 @@ namespace mySQLite
         }
 
         public int AddLesson(int scheduleID, int week, int day, int lessonNumber,
-                             string subject, string teacher, string location, string startTime, string endTime)
+                             string subject, string teacher, string location, string time)
         {
-            string sql = @"INSERT INTO Lessons ([ScheduleID], [WeekNumber], [DayOfWeek], [LessonNumber], [Subject], [Teacher], [Location], [StartTime], [EndTime])
-                       VALUES (" + scheduleID + ", " + week + ", " + day + ", " + lessonNumber + ", '" + subject + "', '" + teacher + "', '" + location + "', '" + startTime + "', '" + endTime + "');";
+            string sql = @"INSERT INTO Lessons ([ScheduleID], [WeekNumber], [DayOfWeek], [LessonNumber], [Subject], [Teacher], [Location], [Time])
+                       VALUES (" + scheduleID + ", " + week + ", " + day + ", " + lessonNumber + ", '" + subject + "', '" + teacher + "', '" + location + "', '" + time + "');";
 
             try
             {
@@ -293,7 +216,7 @@ namespace mySQLite
     public class ScheduleInfo
     {
         public int ScheduleID;
-        public int Type;
+        public int Type; // 1 = однонедельное, 2 = двухнедельное
     }
 
     public class LessonInfo
