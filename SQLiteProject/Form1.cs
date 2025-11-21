@@ -162,7 +162,7 @@ namespace SQLiteProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2(this);
+            MoreLesson f2 = new MoreLesson(this);
             this.Hide();
             f2.Show();
         }
