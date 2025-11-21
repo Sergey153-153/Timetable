@@ -231,7 +231,13 @@ UNIQUE constraint failed: region.id_region
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
 
-19.ноя.2025 23:45:41 ERR 
-Ошибка при закрытии подключения к базе данных mydb.sqlite
+21.ноя.2025 23:34:24 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+21.ноя.2025 23:34:55 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
