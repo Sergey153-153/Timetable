@@ -47,23 +47,25 @@ namespace mySQLite
         public int CreateTables(string dbName, bool isTransact = true)
         {
             ClearDB();
-            string sqlCmd = @"CREATE TABLE country (
-                    [id_country] INT NOT NULL,
-                    [name_country] TEXT NOT NULL,
-                    [sname_country] TEXT NOT NULL,
-                    PRIMARY KEY (id_country));";
+            string sqlCmd = @"CREATE TABLE Schedules (
+                    [ScheduleID] INTEGER PRIMARY KEY,
+                    [Code] TEXT NOT NULL UNIQUE,
+                    [Name] TEXT,
+                    [Type] INTEGER NOT NULL
+                    );";
 
-            sqlCmd += @"CREATE TABLE region (
-                    [id_region] INT NOT NULL,
-                    [name_region] TEXT NOT NULL,
-                    [sname_region] TEXT NOT NULL,
-                    PRIMARY KEY (id_region));";
-
-            sqlCmd += @"CREATE TABLE country_region (
-                    [id_region] INT NOT NULL,
-                    [id_country] INT NOT NULL,
-                    FOREIGN KEY(id_region) REFERENCES region(id_region),
-                    FOREIGN KEY(id_country) REFERENCES country(id_country)
+            sqlCmd += @"CREATE TABLE Lessons (
+                    [LessonID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                    [ScheduleID] INTEGER NOT NULL,
+                    [WeekNumber] INTEGER NOT NULL,
+                    [DayOfWeek] INTEGER NOT NULL,
+                    [LessonNumber] INTEGER NOT NULL,
+                    [Subject] TEXT NOT NULL,
+                    [Teacher] TEXT,
+                    [Location] TEXT,
+                    [StartTime] TEXT,
+                    [EndTime] TEXT,
+                    FOREIGN KEY ([ScheduleID]) REFERENCES Schedules([ScheduleID])
                     );";
 
             if (isTransact)
@@ -102,96 +104,209 @@ namespace mySQLite
         }
         #endregion
 
-
-        public int getFirstFreeIndexRecord(string dbtable)
+        public int GetNextScheduleID()
         {
-            string curResult = string.Empty;
-            string curTable = string.Empty;
-            switch (dbtable)
-            {
-                case "city":
-                    curResult = "MAX (ci.id_city) maxId";
-                    curTable = "city ci";
-                    break;
-            }
-            DataTable dt = _sqlt.FetchByColumn(curTable, curResult, "", "");
-            return int.Parse(dt.Rows[0]["maxId"].ToString()) + 1;
+            DataTable dt = _sqlt.FetchByColumn(
+                "Schedules",
+                "MAX(ScheduleID) AS maxId",
+                "",
+                ""
+            );
+
+            int maxId = 0;
+            if (dt.Rows.Count > 0 && dt.Rows[0]["maxId"].ToString() != "")
+                maxId = int.Parse(dt.Rows[0]["maxId"].ToString());
+
+            return maxId + 1;
         }
 
-        public int getIdRecord(string dbtable, string value, string value2="")
+        public int CopySchedule(int oldScheduleID, string newCode, string newName)
         {
-            string curResult = string.Empty;
-            string curTable = string.Empty;
-            string curCondition = string.Empty;
+            int newID = GetNextScheduleID();
 
-            switch (dbtable)
+            int res = AddSchedule(newID, newCode, newName, 2);
+            if (res == 0) return 0;
+
+            DataTable dt = _sqlt.FetchByColumn(
+                "Lessons",
+                "WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
+                "ScheduleID = " + oldScheduleID,
+                ""
+            );
+
+            foreach (DataRow row in dt.Rows)
             {
-                case "region":
-                    curResult = "r.id_region idRec";
-                    curTable = "region r";
-                    curCondition = "r.name_region = " + "'" + value + "'";
-                break;
-                case "city":
-                    curResult = "ci.id_city idRec";
-                    curTable = "city ci";
-                    curCondition = "ci.name_city = " + "'" + value + "'";
-                    if (value2 != string.Empty)
-                        curCondition += " AND ci.note_city = " + "'" + value2 + "'";
-                break;
+                string sql = @"INSERT INTO Lessons 
+                       (ScheduleID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time)
+                       VALUES (" +
+                               newID + ", " +
+                               row["WeekNumber"] + ", " +
+                               row["DayOfWeek"] + ", " +
+                               row["LessonNumber"] + ", '" +
+                               row["Subject"] + "', '" +
+                               row["Teacher"] + "', '" +
+                               row["Location"] + "', '" +
+                               row["Time"] + "');";
+
+                _sqlt.ExecuteNonQuery(sql);
             }
 
-            DataTable dt = _sqlt.FetchByColumn(curTable, curResult, curCondition, "");
-            return int.Parse(dt.Rows[0]["idRec"].ToString());
+            return newID;
+        }
+        
+        public int DeleteSchedule(int scheduleID)
+        {
+            try
+            {
+                _sqlt.BeginTransaction();
+
+                _sqlt.ExecuteNonQuery("DELETE FROM Lessons WHERE ScheduleID = " + scheduleID);
+                _sqlt.ExecuteNonQuery("DELETE FROM Schedules WHERE ScheduleID = " + scheduleID);
+
+                _sqlt.CommitTransaction();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                _sqlt.RollBackTransaction();
+                SaveLog("Ошибка DeleteSchedule: " + ex.Message);
+                return 0;
+            }
         }
 
-        #region Запросы данных о городах
-
-        public int getNumberOfCities(string curCity)
+        public int GetSchedulesCount()
         {
-            DataTable dt = _sqlt.FetchByColumn("city ci", "COUNT(*) as cnt", " ci.name_city = '" + curCity + "' ");
+            DataTable dt = _sqlt.FetchByColumn("Schedules", "COUNT(*) AS cnt", "", "");
             return int.Parse(dt.Rows[0]["cnt"].ToString());
         }
 
-        public Dictionary<string, int> getListCountry()
+        #region Добавление расписания
+
+        public int AddSchedule(int id, string code, string name, int type)
         {
-            Dictionary<string, int> newD = new Dictionary<string, int>();
-            DataTable dt = _sqlt.FetchByColumn("country", "id_country, name_country", "", "ORDER BY name_country ASC");
-            foreach (DataRow row in dt.Rows)
+            string sql = @"INSERT INTO Schedules ([ScheduleID], [Code], [Name], [Type])
+                   VALUES (" + id + ", '" + code + "', '" + name + "', " + type + ");";
+
+            try
             {
-                newD[row["name_country"].ToString()] = int.Parse(row["id_country"].ToString());
-                
+                _sqlt.ExecuteNonQuery(sql);
+                return 1;
             }
-            return newD;
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка AddSchedule: " + ex.Message);
+                return 0;
+            }
         }
 
-        public List<SQLiteProject.Form1.InfoRegion> getListRegion(string curCountry = "")
+        public int AddLesson(int scheduleID, int week, int day, int lessonNumber,
+                             string subject, string teacher, string location, string startTime, string endTime)
         {
-            Dictionary<string, int> newD = new Dictionary<string, int>();
+            string sql = @"INSERT INTO Lessons ([ScheduleID], [WeekNumber], [DayOfWeek], [LessonNumber], [Subject], [Teacher], [Location], [StartTime], [EndTime])
+                       VALUES (" + scheduleID + ", " + week + ", " + day + ", " + lessonNumber + ", '" + subject + "', '" + teacher + "', '" + location + "', '" + startTime + "', '" + endTime + "');";
 
-            string curResult = "r.id_region rid, r.name_region rname";
-            string curTable = "region r";
-            string curCondition = string.Empty;
-            string curOther = "ORDER BY r.name_region ASC";
-
-            if (curCountry != string.Empty)
+            try
             {
-                curTable = "region r, country c, country_region rc";
-                curCondition = " c.name_country = '" + curCountry + "' AND rc.id_country = c.id_country AND r.id_region = rc.id_region ";
+                _sqlt.ExecuteNonQuery(sql);
+                return 1;
             }
-            DataTable dt = _sqlt.FetchByColumn(curTable, curResult, curCondition, curOther);
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка AddLesson: " + ex.Message);
+                return 0;
+            }
+        }
 
-            List<SQLiteProject.Form1.InfoRegion> tmpList = new List<SQLiteProject.Form1.InfoRegion>();
+        #endregion
 
-            SQLiteProject.Form1.InfoRegion tmpRec;
+        #region Получение расписания
+
+        public ScheduleInfo getScheduleByCode(string code)
+        {
+            DataTable dt = _sqlt.FetchByColumn("Schedules", "ScheduleID, Type", "Code = '" + code + "'", "");
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            ScheduleInfo info = new ScheduleInfo();
+            info.ScheduleID = int.Parse(dt.Rows[0]["ScheduleID"].ToString());
+            info.Type = int.Parse(dt.Rows[0]["Type"].ToString());
+
+            return info;
+        }
+
+        public List<LessonInfo> getOneWeekLessons(int scheduleID)
+        {
+            DataTable dt = _sqlt.FetchByColumn("Lessons",
+                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
+                "ScheduleID = " + scheduleID + " AND WeekNumber = 0",
+                "ORDER BY DayOfWeek, LessonNumber");
+
+            List<LessonInfo> lessons = new List<LessonInfo>();
             foreach (DataRow row in dt.Rows)
             {
-                tmpRec = new SQLiteProject.Form1.InfoRegion();
-                tmpRec.region_id = int.Parse(row["rid"].ToString());
-                tmpRec.region_name = row["rname"].ToString();
-                tmpList.Add(tmpRec);
+                LessonInfo li = new LessonInfo();
+                li.LessonID = int.Parse(row["LessonID"].ToString());
+                li.WeekNumber = int.Parse(row["WeekNumber"].ToString());
+                li.DayOfWeek = int.Parse(row["DayOfWeek"].ToString());
+                li.LessonNumber = int.Parse(row["LessonNumber"].ToString());
+                li.Subject = row["Subject"].ToString();
+                li.Teacher = row["Teacher"].ToString();
+                li.Location = row["Location"].ToString();
+                li.Time = row["Time"].ToString();
+                lessons.Add(li);
             }
-            return tmpList;
+
+            return lessons;
         }
+
+        public List<LessonInfo> getTwoWeekLessons(int scheduleID, int weekNumber)
+        {
+            DataTable dt = _sqlt.FetchByColumn("Lessons",
+                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
+                "ScheduleID = " + scheduleID + " AND WeekNumber = " + weekNumber,
+                "ORDER BY DayOfWeek, LessonNumber");
+
+            List<LessonInfo> lessons = new List<LessonInfo>();
+            foreach (DataRow row in dt.Rows)
+            {
+                LessonInfo li = new LessonInfo();
+                li.LessonID = int.Parse(row["LessonID"].ToString());
+                li.WeekNumber = int.Parse(row["WeekNumber"].ToString());
+                li.DayOfWeek = int.Parse(row["DayOfWeek"].ToString());
+                li.LessonNumber = int.Parse(row["LessonNumber"].ToString());
+                li.Subject = row["Subject"].ToString();
+                li.Teacher = row["Teacher"].ToString();
+                li.Location = row["Location"].ToString();
+                li.Time = row["Time"].ToString();
+                lessons.Add(li);
+            }
+
+            return lessons;
+        }
+
         #endregion
     }
+
+    #region Классы для хранения информации
+
+    public class ScheduleInfo
+    {
+        public int ScheduleID;
+        public int Type;
+    }
+
+    public class LessonInfo
+    {
+        public int LessonID;
+        public int WeekNumber;
+        public int DayOfWeek;
+        public int LessonNumber;
+        public string Subject;
+        public string Teacher;
+        public string Location;
+        public string Time;
+    }
+
+    #endregion
 }
