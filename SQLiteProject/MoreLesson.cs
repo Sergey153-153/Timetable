@@ -17,7 +17,7 @@ namespace SQLiteProject
 {
     public partial class MoreLesson : Form
     {
-        //проверка морЛесон
+        //проверка морЛесон_1
         private Form1 form1;
         private int LessonId;
 
