@@ -19,12 +19,19 @@ namespace SQLiteProject
     {
 
         private Form1 form1;
-        private int currentLessonId;
+        private int LessonId;
 
         public MoreLesson(Form1 parentForm)
         {
             InitializeComponent();
             form1 = parentForm;
+        }
+
+        public MoreLesson(Form1 parentForm, int lessonId)
+        {
+            InitializeComponent();
+            form1 = parentForm;
+            LessonId = lessonId;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,7 +42,7 @@ namespace SQLiteProject
 
         private void btnMove_Click(object sender, EventArgs e)
         {
-            MoveForm mf = new MoveForm(currentLessonId);
+            MoveForm mf = new MoveForm(LessonId);
             mf.Show();
         }
 
