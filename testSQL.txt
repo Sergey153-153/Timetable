@@ -252,3 +252,25 @@ table sqlite_sequence may not be dropped
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+22.ноя.2025 09:15:03 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+22.ноя.2025 09:15:16 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+22.ноя.2025 12:11:08 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+22.ноя.2025 12:11:20 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
