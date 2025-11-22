@@ -274,3 +274,59 @@ table sqlite_sequence may not be dropped
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+22.ноя.2025 12:28:51 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+SQL logic error or missing database
+no such table: country
+
+22.ноя.2025 12:28:51 ERR 
+Ошибка при вставке новой записи в таблицу country!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country (id_country,name_country,sname_country) VALUES (@id_country,@name_country,@sname_country)
+SQL logic error or missing database
+no such table: country
+
+22.ноя.2025 12:28:53 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+SQL logic error or missing database
+no such table: region
+
+22.ноя.2025 12:28:53 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+SQL logic error or missing database
+no such table: region
+
+22.ноя.2025 12:28:53 ERR 
+Ошибка при вставке новой записи в таблицу region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO region (id_region,name_region,sname_region) VALUES (@id_region,@name_region,@sname_region)
+SQL logic error or missing database
+no such table: region
+
+22.ноя.2025 12:28:59 ERR 
+Ошибка при вставке новой записи в таблицу country_region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country_region (id_region,id_country) VALUES (@id_region,@id_country)
+SQL logic error or missing database
+no such table: country_region
+
+22.ноя.2025 12:28:59 ERR 
+Ошибка при вставке новой записи в таблицу country_region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country_region (id_region,id_country) VALUES (@id_region,@id_country)
+SQL logic error or missing database
+no such table: country_region
+
+22.ноя.2025 12:28:59 ERR 
+Ошибка при вставке новой записи в таблицу country_region!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO country_region (id_region,id_country) VALUES (@id_region,@id_country)
+SQL logic error or missing database
+no such table: country_region
