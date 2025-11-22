@@ -31,7 +31,7 @@ namespace SQLiteProject
             public int region_id { get; set; }
             public string region_name { get; set; }
         }
-        private List<InfoRegion> listInfoRegion;
+        //private List<InfoRegion> listInfoRegion;
 
         public Form1()
         {
