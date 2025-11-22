@@ -72,88 +72,72 @@ namespace SQLiteProject
 
         private void saveDataToDB()
         {
-            /*int id1 = 1;
-            sqliteQ.AddSchedule(id1, "1212", "Двухнедельное расписание", 2);
+            List<string> listSchedules = new List<string>()
+            {
+                "1;1212;Двухнедельное расписание;2",
+                "2;1111;Однонедельное расписание;1"
+            };
 
-            sqliteQ.AddLesson(id1, 1, 1, 1, "ТОК", "Соловьев В.П.", "27б", "13:00", "14:30");
-            sqliteQ.AddLesson(id1, 2, 1, 1, "История России", "Пирогов Д.В.", "ПСПШ", "17:00", "18:30");
+            List<string> listLessons = new List<string>()
+            {
+                // Расписание 1
+                "1;1;1;1;ТОК;Соловьев В.П.;27б;13:00;14:30",
+                "1;2;1;1;История России;Пирогов Д.В.;ПСПШ;17:00;18:30",
 
-            int id2 = 2;
-            sqliteQ.AddSchedule(id2, "1111", "Однонедельное расписание", 1);
-
-            sqliteQ.AddLesson(id2, 0, 2, 1, "ТОК", "Соловьев В.П.", "27б", "13:00", "14:30");
-            sqliteQ.AddLesson(id2, 0, 2, 2, "ТОК", "Соловьев В.П.", "27б", "14:40", "16:10");
-            sqliteQ.AddLesson(id2, 0, 2, 3, "РЛП", "Николаев К.Г.", "27б", "16:40", "18:10");
-            sqliteQ.AddLesson(id2, 0, 2, 4, "Компьютерное моделирование", "Соловьев А.В.", "27б", "18:20", "20:35");
-
-            sqliteQ.AddLesson(id2, 0, 3, 1, "История России", "Пирогов Д.В.", "ПСПШ", "17:00", "18:30");
-            sqliteQ.AddLesson(id2, 0, 3, 2, "История России", "Пирогов Д.В.", "ПСПШ", "18:35", "20:05");
-
-            sqliteQ.AddLesson(id2, 0, 5, 1, "Применение IT в гуманитарной сфере", "Глинников МВ", "27б", "10:30", "12:00");
-            sqliteQ.AddLesson(id2, 0, 5, 2, "Применение IT в гуманитарной сфере", "Глинников МВ", "27б", "12:10", "13:35");
-            sqliteQ.AddLesson(id2, 0, 5, 3, "Экстримальные задачи", "Пугачев О.В.", "Т1", "14:00", "15:30");
-            sqliteQ.AddLesson(id2, 0, 5, 4, "Экстримальные задачи", "Пугачев О.В.", "Т1", "15:40", "17:10");
-            sqliteQ.AddLesson(id2, 0, 5, 5, "История России", "Пирогов Д.В.", "Т6", "17:20", "18:50");
-
-            sqliteQ.AddLesson(id2, 0, 6, 1, "ТРПО", "Пуцко Н.Н.", "115", "9:00", "10:30");
-            sqliteQ.AddLesson(id2, 0, 6, 2, "ТРПО", "Пуцко Н.Н.", "115", "10:40", "12:10");
-            sqliteQ.AddLesson(id2, 0, 6, 3, "АИС", "Пуцко Н.Н.", "115", "12:30", "14:00");
-            sqliteQ.AddLesson(id2, 0, 6, 4, "АИС", "Пуцко Н.Н.", "115", "14:10", "14:55"); */
-            /*
-            listCountry = new List<string>();
-            listCountry.Add("1;Россия;-");
-            listCountry.Add("2;Беларусь;-");
-
-            listRegion = new List<string>();
-            listRegion.Add("1;Москва;-");
-            listRegion.Add("2;Санкт-Петербург;-");
-            listRegion.Add("3;Минск;-");
-
-            listCountryRegion = new List<string>();
-            listCountryRegion.Add("1;1");
-            listCountryRegion.Add("2;1");
-            listCountryRegion.Add("3;2");
+                // Расписание 2
+                "2;0;2;1;ТОК;Соловьев В.П.;27б;13:00;14:30",
+                "2;0;2;2;ТОК;Соловьев В.П.;27б;14:40;16:10",
+                "2;0;2;3;РЛП;Николаев К.Г.;27б;16:40;18:10",
+                "2;0;2;4;Компьютерное моделирование;Соловьев А.В.;27б;18:20;20:35",
+                "2;0;3;1;История России;Пирогов Д.В.;ПСПШ;17:00;18:30",
+                "2;0;3;2;История России;Пирогов Д.В.;ПСПШ;18:35;20:05",
+                "2;0;5;1;Применение IT в гуманитарной сфере;Глинников МВ;27б;10:30;12:00",
+                "2;0;5;2;Применение IT в гуманитарной сфере;Глинников МВ;27б;12:10;13:35",
+                "2;0;5;3;Экстримальные задачи;Пугачев О.В.;Т1;14:00;15:30",
+                "2;0;5;4;Экстримальные задачи;Пугачев О.В.;Т1;15:40;17:10",
+                "2;0;5;5;История России;Пирогов Д.В.;Т6;17:20;18:50",
+                "2;0;6;1;ТРПО;Пуцко Н.Н.;115;09:00;10:30",
+                "2;0;6;2;ТРПО;Пуцко Н.Н.;115;10:40;12:10",
+                "2;0;6;3;АИС;Пуцко Н.Н.;115;12:30;14:00",
+                "2;0;6;4;АИС;Пуцко Н.Н.;115;14:10;14:55"
+            };
 
             ParametersCollection paramss = new ParametersCollection();
             int cntErr = 0;
 
-            for (int i = 0; i < listCountry.Count; i++)
+            for (int i = 0; i < listSchedules.Count; i++)
             {
-                string[] arrCountry = listCountry[i].Split(';');
+                string[] arrSchedule = listSchedules[i].Split(';');
                 paramss.Clear();
-                paramss.Add("id_country", arrCountry[0], System.Data.DbType.Int32);
-                paramss.Add("name_country", arrCountry[1], System.Data.DbType.String);
-                paramss.Add("sname_country", arrCountry[2], System.Data.DbType.String);
-                if (sqliteQ._sqlt.Insert("country", paramss) == 0)
-                    cntErr++;            
-            }
-            MessageBox.Show("Данные о странах: Обработано записей: " + listCountry.Count.ToString() + ". Ошибок: " + cntErr.ToString() + ".");
+                paramss.Add("ScheduleID", arrSchedule[0], System.Data.DbType.Int32);
+                paramss.Add("Code", arrSchedule[1], System.Data.DbType.String);
+                paramss.Add("Name", arrSchedule[2], System.Data.DbType.String);
+                paramss.Add("Type", arrSchedule[3], System.Data.DbType.Int32);
 
-            cntErr = 0;
-            for (int i = 0; i < listRegion.Count; i++)
-            {
-                string[] arrRegion = listRegion[i].Split(';');
-                paramss.Clear();
-                paramss.Add("id_region", arrRegion[0], System.Data.DbType.Int32);
-                paramss.Add("name_region", arrRegion[1], System.Data.DbType.String);
-                paramss.Add("sname_region", arrRegion[2], System.Data.DbType.String);
-                if (sqliteQ._sqlt.Insert("region", paramss) == 0)
+                if (sqliteQ._sqlt.Insert("Schedules", paramss) == 0)
                     cntErr++;
             }
-            MessageBox.Show("Данные о регионах: Обработано записей: " + listRegion.Count.ToString() + ". Ошибок: " + cntErr.ToString() + ".");
+            MessageBox.Show($"Данные о расписаниях: Обработано записей: {listSchedules.Count}. Ошибок: {cntErr}.");
 
             cntErr = 0;
-            for (int i = 0; i < listCountryRegion.Count; i++)
+            for (int i = 0; i < listLessons.Count; i++)
             {
-                string[] arrCountryRegion = listCountryRegion[i].Split(';');
+                string[] arrLesson = listLessons[i].Split(';');
                 paramss.Clear();
-                paramss.Add("id_region", arrCountryRegion[0], System.Data.DbType.Int32);
-                paramss.Add("id_country", arrCountryRegion[1], System.Data.DbType.Int32);
-                if (sqliteQ._sqlt.Insert("country_region", paramss) == 0)
+                paramss.Add("ScheduleID", arrLesson[0], System.Data.DbType.Int32);
+                paramss.Add("WeekNumber", arrLesson[1], System.Data.DbType.Int32);
+                paramss.Add("DayOfWeek", arrLesson[2], System.Data.DbType.Int32);
+                paramss.Add("LessonNumber", arrLesson[3], System.Data.DbType.Int32);
+                paramss.Add("Subject", arrLesson[4], System.Data.DbType.String);
+                paramss.Add("Teacher", arrLesson[5], System.Data.DbType.String);
+                paramss.Add("Location", arrLesson[6], System.Data.DbType.String);
+                paramss.Add("StartTime", arrLesson[7], System.Data.DbType.String);
+                paramss.Add("EndTime", arrLesson[8], System.Data.DbType.String);
+
+                if (sqliteQ._sqlt.Insert("Lessons", paramss) == 0)
                     cntErr++;
             }
-            MessageBox.Show("Данные о связях страна-регион: Обработано записей: " + listCountryRegion.Count.ToString() + ". Ошибок: " + cntErr.ToString() + ".");
-            */
+            MessageBox.Show($"Данные об уроках: Обработано записей: {listLessons.Count}. Ошибок: {cntErr}.");
         }
 
 
