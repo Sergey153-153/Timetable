@@ -158,7 +158,7 @@ namespace SQLiteProject
             string curCountry = cbCountry.SelectedItem == null ? "" : cbCountry.SelectedItem.ToString();
 
             //listInfoRegion = sqliteQ.getListRegion(curCountry);
-            dgvRegion.DataSource = listInfoRegion;
+            //dgvRegion.DataSource = listInfoRegion;
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -178,6 +178,11 @@ namespace SQLiteProject
             MoreLesson f2 = new MoreLesson(this);
             this.Hide();
             f2.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
