@@ -20,9 +20,8 @@ namespace SQLiteProject
         SQLiteQueries sqliteQ;
 
         private const int COUNT_TABLES_IN_DB = 3; //кол-во таблиц в БД
-        public List<string> listCountry;
-        public List<string> listRegion;
-        public List<string> listCountryRegion;
+        public List<string> listSchedules;
+        public List<string> listLessons;
 
         public Dictionary<string, int> dictCountry = new Dictionary<string, int>();
 
@@ -139,16 +138,19 @@ namespace SQLiteProject
             }
             MessageBox.Show($"Данные об уроках: Обработано записей: {listLessons.Count}. Ошибок: {cntErr}.");
         }
-
-
         private void loadFromDBCountry()
         {
-            //dictCountry = sqliteQ.getListCountry();
             cbCountry.Items.Clear();
-            foreach (KeyValuePair<string, int> pair in dictCountry)
+            DataTable dt = sqliteQ._sqlt.FetchByColumn("Schedules", "ScheduleID, Name", "", "ORDER BY ScheduleID");
+
+            foreach (DataRow row in dt.Rows)
             {
-                cbCountry.Items.Add(pair.Key);
+                cbCountry.Items.Add(new KeyValuePair<int, string>(
+                    int.Parse(row["ScheduleID"].ToString()),
+                    row["Name"].ToString()
+                ));
             }
+
             if (cbCountry.Items.Count > 0)
                 cbCountry.SelectedIndex = 0;
         }

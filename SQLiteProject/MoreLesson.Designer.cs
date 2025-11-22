@@ -127,11 +127,11 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Отмена";
+            this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // Form2
+            // MoreLesson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -145,7 +145,7 @@
             this.Controls.Add(this.lblLessonInfo);
             this.Controls.Add(this.lblSubjectName);
             this.Controls.Add(this.button1);
-            this.Name = "Form2";
+            this.Name = "MoreLesson";
             this.Text = "Экран пары";
             this.ResumeLayout(false);
             this.PerformLayout();
