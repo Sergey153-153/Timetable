@@ -18,7 +18,7 @@ namespace SQLiteProject
     public partial class Form1 : Form
     {
         SQLiteQueries sqliteQ;
-
+        //для проверки подкачки 
         private const int COUNT_TABLES_IN_DB = 3; //кол-во таблиц в БД
         public List<string> listSchedules;
         public List<string> listLessons;
