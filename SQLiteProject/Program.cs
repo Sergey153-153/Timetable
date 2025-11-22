@@ -15,14 +15,7 @@ namespace SQLiteProject
         [STAThread]
         static void Main()
         {
-            SQLiteQueries sql = new SQLiteQueries("mydb.sqlite");
-            sql.CreateTables("mydb.sqlite");
-
-            if (sql.GetSchedulesCount() == 0)
-            {
-                ScheduleInitializer.CreateDefaultSchedules(sql);
-            }
-
+           
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
