@@ -13,13 +13,17 @@ using System.Data.SQLite;
 using DatabaseLib;
 using mySQLite;
 
+using Microsoft.VisualBasic;
+
 namespace SQLiteProject
 {
     public partial class MoreLesson : Form
     {
-        //проверка морЛесон_1
+
         private Form1 form1;
         private int LessonId;
+        private SQLiteQueries sqliteQ;
+
 
         public MoreLesson(Form1 parentForm)
         {
@@ -27,10 +31,11 @@ namespace SQLiteProject
             form1 = parentForm;
         }
 
-        public MoreLesson(Form1 parentForm, int lessonId)
+        public MoreLesson(Form1 parentForm, SQLiteQueries db, int lessonId = -1)
         {
             InitializeComponent();
             form1 = parentForm;
+            sqliteQ = db;
             LessonId = lessonId;
         }
 
@@ -60,6 +65,42 @@ namespace SQLiteProject
                         //DeleteForever();
                 }
             }
+        }
+
+        private void btnReplaceSchedule_Click(object sender, EventArgs e)
+        {
+            string code = Interaction.InputBox("Введите код расписания:", "Замена расписания", "");
+
+            if (string.IsNullOrWhiteSpace(code))
+                return;
+
+            var info = sqliteQ.getScheduleByCode(code);
+
+            if (info == null)
+            {
+                MessageBox.Show("Расписание с таким кодом не найдено!");
+                return;
+            }
+
+            int targetID = 1;
+
+            // удаляем расписание с ID = 1
+            if (sqliteQ.DeleteSchedule(targetID) == 0)
+            {
+                MessageBox.Show("Ошибка удаления старого расписания!");
+                return;
+            }
+
+            // копируем в ID = 1
+            int res = sqliteQ.CopySchedule(info.ScheduleID, targetID, code, "Скопировано " + code);
+
+            if (res == 0)
+            {
+                MessageBox.Show("Ошибка копирования нового расписания!");
+                return;
+            }
+
+            MessageBox.Show("Расписание успешно заменено!");
         }
     }
 }

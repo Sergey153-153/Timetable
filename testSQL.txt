@@ -596,3 +596,121 @@ table sqlite_sequence may not be dropped
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+23.ноя.2025 00:34:48 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+23.ноя.2025 13:47:23 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+23.ноя.2025 13:48:20 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: INSERT INTO Schedules ([ScheduleID], [Code], [Name], [Type])
+                   VALUES (1, '1111', 'Скопировано 1111', 2);
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 13:49:35 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: INSERT INTO Schedules ([ScheduleID], [Code], [Name], [Type])
+                   VALUES (1, '1212', 'Скопировано 1212', 2);
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 13:49:49 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+23.ноя.2025 13:54:21 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: INSERT INTO Schedules ([ScheduleID], [Code], [Name], [Type])
+                   VALUES (1, '1212', 'Скопировано 1212', 2);
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 13:58:01 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+23.ноя.2025 14:03:37 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+23.ноя.2025 14:03:46 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: 
+                INSERT INTO Schedules (ScheduleID, Code, Name, Type)
+                VALUES (1, '1111', 'Скопировано 1111', 1);
+            
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 14:04:06 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: 
+                INSERT INTO Schedules (ScheduleID, Code, Name, Type)
+                VALUES (1, '1212', 'Скопировано 1212', 2);
+            
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 14:04:20 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+23.ноя.2025 14:11:52 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: 
+                INSERT INTO Schedules (ScheduleID, Code, Name, Type)
+                VALUES (1, '1111', 'Скопировано 1111', 1);
+            
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 14:12:47 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: 
+                INSERT INTO Schedules (ScheduleID, Code, Name, Type)
+                VALUES (1, '1212', 'Скопировано 1212', 2);
+            
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 14:13:36 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: 
+                INSERT INTO Schedules (ScheduleID, Code, Name, Type)
+                VALUES (1, '1212', 'Скопировано 1212', 2);
+            
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 14:14:24 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: 
+                INSERT INTO Schedules (ScheduleID, Code, Name, Type)
+                VALUES (1, '1111', 'Скопировано 1111', 1);
+            
+constraint failed
+UNIQUE constraint failed: Schedules.Code
+
+23.ноя.2025 14:15:21 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+23.ноя.2025 14:16:25 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".

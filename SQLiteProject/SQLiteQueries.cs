@@ -120,40 +120,67 @@ namespace mySQLite
             return maxId + 1;
         }
 
-        public int CopySchedule(int oldScheduleID, string newCode, string newName)
+        public int CopySchedule(int oldScheduleID, int newScheduleID, string newCode, string newName)
         {
-            int newID = GetNextScheduleID();
+            // 1. Получаем старое расписание
+            DataTable sched = _sqlt.FetchByColumn(
+                "Schedules",
+                "*",
+                "ScheduleID = " + oldScheduleID,
+                ""
+            );
 
-            int res = AddSchedule(newID, newCode, newName, 2);
-            if (res == 0) return 0;
+            if (sched.Rows.Count == 0)
+                return 0; // старое расписание не найдено
 
+            DataRow s = sched.Rows[0];
+
+            // 2. Берём тип расписания (одна/две недели)
+            int type = Convert.ToInt32(s["Type"]);
+
+            // 3. Экранируем одинарные кавычки в коде и имени
+            newCode = newCode.Replace("'", "''");
+            newName = newName.Replace("'", "''");
+
+            // 4. Создаём новое расписание с новым ScheduleID
+            string sqlAdd = $@"
+                INSERT INTO Schedules (ScheduleID, Code, Name, Type)
+                VALUES ({newScheduleID}, '{newCode}', '{newName}', {type});
+            ";
+
+            if (_sqlt.ExecuteNonQuery(sqlAdd) == 0)
+                return 0;
+
+            // 5. Копируем все уроки из старого расписания в новое
             DataTable dt = _sqlt.FetchByColumn(
                 "Lessons",
-                "WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
+                "*",
                 "ScheduleID = " + oldScheduleID,
                 ""
             );
 
             foreach (DataRow row in dt.Rows)
             {
-                string sql = @"INSERT INTO Lessons 
-                       (ScheduleID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time)
-                       VALUES (" +
-                               newID + ", " +
-                               row["WeekNumber"] + ", " +
-                               row["DayOfWeek"] + ", " +
-                               row["LessonNumber"] + ", '" +
-                               row["Subject"] + "', '" +
-                               row["Teacher"] + "', '" +
-                               row["Location"] + "', '" +
-                               row["Time"] + "');";
+                string subject = row["Subject"] == DBNull.Value ? "" : row["Subject"].ToString().Replace("'", "''");
+                string teacher = row["Teacher"] == DBNull.Value ? "" : row["Teacher"].ToString().Replace("'", "''");
+                string location = row["Location"] == DBNull.Value ? "" : row["Location"].ToString().Replace("'", "''");
+                string startTime = row["StartTime"] == DBNull.Value ? "" : row["StartTime"].ToString();
+                string endTime = row["EndTime"] == DBNull.Value ? "" : row["EndTime"].ToString();
 
-                _sqlt.ExecuteNonQuery(sql);
+                string sqlLesson = $@"
+                    INSERT INTO Lessons 
+                    (ScheduleID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime)
+                    VALUES ({newScheduleID}, {row["WeekNumber"]}, {row["DayOfWeek"]}, {row["LessonNumber"]},
+                    '{subject}', '{teacher}', '{location}', '{startTime}', '{endTime}');
+                ";
+
+                _sqlt.ExecuteNonQuery(sqlLesson);
             }
 
-            return newID;
+            // 6. Возвращаем новый ScheduleID
+            return newScheduleID;
         }
-        
+
         public int DeleteSchedule(int scheduleID)
         {
             try
