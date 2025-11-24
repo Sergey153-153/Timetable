@@ -22,9 +22,6 @@ namespace mySQLite
 
 
         #region Создание таблиц в БД
-        /// <summary>
-        /// Создание таблиц
-        /// </summary>
         private void SaveLog(string txt, string fileTo = "testSQL.txt")
         {
             StreamWriter streamWriter = new StreamWriter(@"..\..\..\" + fileTo, false, Encoding.GetEncoding("utf-8"));
