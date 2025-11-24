@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.lblSubjectName = new System.Windows.Forms.Label();
-            this.lblLessonInfo = new System.Windows.Forms.Label();
+            this.lblSubject = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.lblTeacher = new System.Windows.Forms.Label();
             this.lblTasksTitle = new System.Windows.Forms.Label();
             this.btnAddHomework = new System.Windows.Forms.Button();
@@ -50,28 +50,28 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // lblSubjectName
+            // lblSubject
             // 
-            this.lblSubjectName.AutoEllipsis = true;
-            this.lblSubjectName.AutoSize = true;
-            this.lblSubjectName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblSubjectName.Location = new System.Drawing.Point(148, 23);
-            this.lblSubjectName.Name = "lblSubjectName";
-            this.lblSubjectName.Size = new System.Drawing.Size(59, 25);
-            this.lblSubjectName.TabIndex = 1;
-            this.lblSubjectName.Text = "АИС";
-            this.lblSubjectName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblSubjectName.UseWaitCursor = true;
+            this.lblSubject.AutoEllipsis = true;
+            this.lblSubject.AutoSize = true;
+            this.lblSubject.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblSubject.Location = new System.Drawing.Point(148, 23);
+            this.lblSubject.Name = "lblSubject";
+            this.lblSubject.Size = new System.Drawing.Size(59, 25);
+            this.lblSubject.TabIndex = 1;
+            this.lblSubject.Text = "АИС";
+            this.lblSubject.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblSubject.UseWaitCursor = true;
             // 
-            // lblLessonInfo
+            // lblTime
             // 
-            this.lblLessonInfo.AutoSize = true;
-            this.lblLessonInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblLessonInfo.Location = new System.Drawing.Point(61, 65);
-            this.lblLessonInfo.Name = "lblLessonInfo";
-            this.lblLessonInfo.Size = new System.Drawing.Size(232, 20);
-            this.lblLessonInfo.TabIndex = 2;
-            this.lblLessonInfo.Text = "1 неделя, суббота: 9:00–10:30";
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblTime.Location = new System.Drawing.Point(61, 65);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(232, 20);
+            this.lblTime.TabIndex = 2;
+            this.lblTime.Text = "1 неделя, суббота: 9:00–10:30";
             // 
             // lblTeacher
             // 
@@ -154,8 +154,8 @@
             this.Controls.Add(this.btnAddHomework);
             this.Controls.Add(this.lblTasksTitle);
             this.Controls.Add(this.lblTeacher);
-            this.Controls.Add(this.lblLessonInfo);
-            this.Controls.Add(this.lblSubjectName);
+            this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.lblSubject);
             this.Controls.Add(this.button1);
             this.Name = "MoreLesson";
             this.Text = "Экран пары";
@@ -167,8 +167,8 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label lblSubjectName;
-        private System.Windows.Forms.Label lblLessonInfo;
+        private System.Windows.Forms.Label lblSubject;
+        private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblTeacher;
         private System.Windows.Forms.Label lblTasksTitle;
         private System.Windows.Forms.Button btnAddHomework;

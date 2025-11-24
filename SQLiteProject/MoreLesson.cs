@@ -26,22 +26,61 @@ namespace SQLiteProject
 
         private int z;
 
-        public MoreLesson(Form1 parentForm)
+        public MoreLesson(Form1 parentForm, SQLiteQueries db, int lessonId)
         {
             InitializeComponent();
-            form1 = parentForm;
-        }
 
-        public MoreLesson(Form1 parentForm, SQLiteQueries db, int lessonId = -1)
-        {
-            InitializeComponent();
             form1 = parentForm;
             sqliteQ = db;
-            LessonId = lessonId;
+            LessonId = 10;
+
+            LoadLessonInfo();
+
+            lblSubject.Left = (this.ClientSize.Width - lblSubject.Width) / 2;
+            lblTime.Left = (this.ClientSize.Width - lblTime.Width) / 2;
+            lblTeacher.Left = (this.ClientSize.Width - lblTeacher.Width) / 2;
+
+        }
+
+        private void LoadLessonInfo()
+        {
+            var lesson = sqliteQ.GetLessonById(LessonId);
+
+            if (lesson == null)
+            {
+                MessageBox.Show("Ошибка: пара не найдена!");
+                return;
+            }
+
+            lblSubject.Text = lesson.Subject;
+            lblTeacher.Text = lesson.Teacher;
+
+            string dayText = GetDayName(lesson.DayOfWeek);
+
+            // 🔥 Если WeekNumber = 0 → не выводим неделю
+            if (lesson.WeekNumber == 0)
+                lblTime.Text = $"{dayText}: {lesson.Time}";
+            else
+                lblTime.Text = $"{lesson.WeekNumber} неделя, {dayText}: {lesson.Time}";
+        }
+
+        private string GetDayName(int day)
+        {
+            switch (day)
+            {
+                case 1: return "Понедельник";
+                case 2: return "Вторник";
+                case 3: return "Среда";
+                case 4: return "Четверг";
+                case 5: return "Пятница";
+                case 6: return "Суббота";
+                default: return "?";
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            form1.Location = this.Location;
             form1.Show();
             this.Close();
         }

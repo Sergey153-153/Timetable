@@ -179,6 +179,35 @@ namespace mySQLite
             }
         }
 
+        public LessonInfo GetLessonById(int lessonId)
+        {
+            DataTable dt = _sqlt.FetchByColumn(
+                "Lessons",
+                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime",
+                "LessonID = " + lessonId,
+                ""
+            );
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            DataRow row = dt.Rows[0];
+
+            LessonInfo li = new LessonInfo();
+            li.LessonID = int.Parse(row["LessonID"].ToString());
+            li.WeekNumber = int.Parse(row["WeekNumber"].ToString());
+            li.DayOfWeek = int.Parse(row["DayOfWeek"].ToString());
+            li.LessonNumber = int.Parse(row["LessonNumber"].ToString());
+            li.Subject = row["Subject"].ToString();
+            li.Teacher = row["Teacher"].ToString();
+            li.Location = row["Location"].ToString();
+
+            // Тут у тебя StartTime / EndTime в базе, а в классах LessonInfo — поле Time
+            li.Time = $"{row["StartTime"]}-{row["EndTime"]}";
+
+            return li;
+        }
+
         public int GetSchedulesCount()
         {
             DataTable dt = _sqlt.FetchByColumn("Schedules", "COUNT(*) AS cnt", "", "");

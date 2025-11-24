@@ -177,10 +177,15 @@ namespace SQLiteProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             MoreLesson f2 = new MoreLesson(this, sqliteQ, 1);
+            f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;  // чтобы позиция была как у Form1
+            f2.Location = this.Location;                  // ставим точно поверх Form1
+
+            f2.Show();        // показываем
+            f2.BringToFront(); // поднимаем вверх
+            f2.Activate();     // делаем активной
             this.Hide();
-            f2.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
