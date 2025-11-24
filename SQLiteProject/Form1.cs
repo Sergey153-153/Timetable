@@ -97,7 +97,7 @@ namespace SQLiteProject
                 "3;0;3;2;История России;Пирогов Д.В.;ПСПШ;18:35;20:05",
                 "3;0;5;1;Применение IT в гуманитарной сфере;Глинников МВ;27б;10:30;12:00",
                 "3;0;5;2;Применение IT в гуманитарной сфере;Глинников МВ;27б;12:10;13:35",
-                "33;0;5;3;Экстримальные задачи;Пугачев О.В.;Т1;14:00;15:30",
+                "3;0;5;3;Экстримальные задачи;Пугачев О.В.;Т1;14:00;15:30",
                 "3;0;5;4;Экстримальные задачи;Пугачев О.В.;Т1;15:40;17:10",
                 "3;0;5;5;История России;Пирогов Д.В.;Т6;17:20;18:50",
                 "3;0;6;1;ТРПО;Пуцко Н.Н.;115;09:00;10:30",
@@ -107,42 +107,37 @@ namespace SQLiteProject
             };
 
             ParametersCollection paramss = new ParametersCollection();
-            int cntErr = 0;
 
-            for (int i = 0; i < listSchedules.Count; i++)
-            {
-                string[] arrSchedule = listSchedules[i].Split(';');
-                paramss.Clear();
-                paramss.Add("ScheduleID", arrSchedule[0], System.Data.DbType.Int32);
-                paramss.Add("Code", arrSchedule[1], System.Data.DbType.String);
-                paramss.Add("Name", arrSchedule[2], System.Data.DbType.String);
-                paramss.Add("Type", arrSchedule[3], System.Data.DbType.Int32);
+            int errSchedules = sqliteQ.AddSchedules(listSchedules);
+            MessageBox.Show($"Обработано расписаний: {listSchedules.Count}, ошибок: {errSchedules}");
 
-                if (sqliteQ._sqlt.Insert("Schedules", paramss) == 0)
-                    cntErr++;
-            }
-            MessageBox.Show($"Данные о расписаниях: Обработано записей: {listSchedules.Count}. Ошибок: {cntErr}.");
+            int errLessons = sqliteQ.AddLessons(listLessons);
+            MessageBox.Show($"Обработано уроков: {listLessons.Count}, ошибок: {errLessons}");
 
-            cntErr = 0;
-            for (int i = 0; i < listLessons.Count; i++)
-            {
-                string[] arrLesson = listLessons[i].Split(';');
-                paramss.Clear();
-                paramss.Add("ScheduleID", arrLesson[0], System.Data.DbType.Int32);
-                paramss.Add("WeekNumber", arrLesson[1], System.Data.DbType.Int32);
-                paramss.Add("DayOfWeek", arrLesson[2], System.Data.DbType.Int32);
-                paramss.Add("LessonNumber", arrLesson[3], System.Data.DbType.Int32);
-                paramss.Add("Subject", arrLesson[4], System.Data.DbType.String);
-                paramss.Add("Teacher", arrLesson[5], System.Data.DbType.String);
-                paramss.Add("Location", arrLesson[6], System.Data.DbType.String);
-                paramss.Add("StartTime", arrLesson[7], System.Data.DbType.String);
-                paramss.Add("EndTime", arrLesson[8], System.Data.DbType.String);
-
-                if (sqliteQ._sqlt.Insert("Lessons", paramss) == 0)
-                    cntErr++;
-            }
-            MessageBox.Show($"Данные об уроках: Обработано записей: {listLessons.Count}. Ошибок: {cntErr}.");
         }
+
+        public void RefreshAllSchedulesData()
+        {
+            // 1. Обновляем ComboBox с расписаниями
+            if (cbCountry != null)
+            {
+                cbCountry.Items.Clear();
+                DataTable dt = sqliteQ._sqlt.FetchByColumn("Schedules", "ScheduleID, Name", "", "ORDER BY ScheduleID");
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbCountry.Items.Add(new KeyValuePair<int, string>(
+                        int.Parse(row["ScheduleID"].ToString()),
+                        row["Name"].ToString()
+                    ));
+                }
+                if (cbCountry.Items.Count > 0)
+                    cbCountry.SelectedIndex = 0;
+            }
+
+            // 2. Можно добавить сюда обновление любых других контролов,
+            // которые зависят от расписаний
+        }
+
         private void loadFromDBCountry()
         {
             cbCountry.Items.Clear();

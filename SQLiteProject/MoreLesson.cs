@@ -24,6 +24,7 @@ namespace SQLiteProject
         private int LessonId;
         private SQLiteQueries sqliteQ;
 
+        private int z;
 
         public MoreLesson(Form1 parentForm)
         {
@@ -58,10 +59,10 @@ namespace SQLiteProject
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     if (form.SelectedOption == "Day")
-                        ;
+                        z = 1;
                         //DeleteForThisDay();
                     else if (form.SelectedOption == "Forever")
-                        ;
+                        z = 2;
                         //DeleteForever();
                 }
             }
@@ -92,7 +93,7 @@ namespace SQLiteProject
             }
 
             // копируем в ID = 1
-            int res = sqliteQ.CopySchedule(info.ScheduleID, targetID, code, "Скопировано " + code);
+            int res = sqliteQ.CopySchedule(info.ScheduleID, targetID);
 
             if (res == 0)
             {
@@ -101,6 +102,7 @@ namespace SQLiteProject
             }
 
             MessageBox.Show("Расписание успешно заменено!");
+            form1.RefreshAllSchedulesData();
         }
     }
 }
