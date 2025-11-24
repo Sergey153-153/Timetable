@@ -159,8 +159,6 @@ namespace mySQLite
             return newScheduleID;
         }
 
-
-
         public int DeleteSchedule(int scheduleID)
         {
             try
