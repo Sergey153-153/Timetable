@@ -19,7 +19,7 @@ namespace SQLiteProject
     {
         SQLiteQueries sqliteQ;
         
-        private const int COUNT_TABLES_IN_DB = 3; //кол-во таблиц в БД
+        private const int COUNT_TABLES_IN_DB = 4; //кол-во таблиц в БД
         public List<string> listSchedules;
         public List<string> listLessons;
 

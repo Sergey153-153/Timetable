@@ -66,6 +66,17 @@ namespace mySQLite
                     FOREIGN KEY ([ScheduleID]) REFERENCES Schedules([ScheduleID])
                     );";
 
+            sqlCmd += @"CREATE TABLE LessonOverrides (
+                    [OverrideID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                    [LessonID] INTEGER NOT NULL,
+                    [OverrideDate] TEXT NOT NULL,
+                    [IsActive] INTEGER NOT NULL,
+                    [NewStartTime] TEXT,
+                    [NewEndTime] TEXT,
+                    [NewLocation] TEXT,
+                    FOREIGN KEY ([LessonID]) REFERENCES Lessons([LessonID])
+                    );";
+
             if (isTransact)
                 _sqlt.BeginTransaction();
 
@@ -205,10 +216,49 @@ namespace mySQLite
             return li;
         }
 
-        public int GetSchedulesCount()
+        public int AddLessonOverrides(List<string> listOverrides)
         {
-            DataTable dt = _sqlt.FetchByColumn("Schedules", "COUNT(*) AS cnt", "", "");
-            return int.Parse(dt.Rows[0]["cnt"].ToString());
+            if (listOverrides == null || listOverrides.Count == 0) return 0;
+
+            ParametersCollection paramss = new ParametersCollection();
+            int cntErr = 0;
+
+            foreach (var item in listOverrides)
+            {
+                // Формат: "LessonID;OverrideDate;IsActive;NewStartTime;NewEndTime;NewLocation"
+                string[] arr = item.Split(';');
+                paramss.Clear();
+                paramss.Add("LessonID", arr[0], System.Data.DbType.Int32);
+                paramss.Add("OverrideDate", arr[1], System.Data.DbType.String);
+                paramss.Add("IsActive", arr[2], System.Data.DbType.Int32);
+                paramss.Add("NewStartTime", string.IsNullOrEmpty(arr[3]) ? null : arr[3], System.Data.DbType.String);
+                paramss.Add("NewEndTime", string.IsNullOrEmpty(arr[4]) ? null : arr[4], System.Data.DbType.String);
+                paramss.Add("NewLocation", string.IsNullOrEmpty(arr[5]) ? null : arr[5], System.Data.DbType.String);
+
+                if (_sqlt.Insert("LessonOverrides", paramss) == 0) cntErr++;
+            }
+
+            return cntErr;
+        }
+
+        public int DeleteLessonForever(int lessonId)
+        {
+            try
+            {
+                ParametersCollection paramss = new ParametersCollection();
+                paramss.Add("LessonID", lessonId, System.Data.DbType.Int32);
+
+                _sqlt.Delete("Lessons", "LessonID=@LessonID", paramss);
+
+                // Если исключений не было — считаем удаление успешным
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка DeleteLessonForever: {ex.Message}");
+                return 0;
+            }
+
         }
 
         #region Добавление расписания

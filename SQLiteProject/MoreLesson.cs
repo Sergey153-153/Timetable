@@ -1,19 +1,18 @@
-﻿using System;
+﻿using DatabaseLib;
+using Microsoft.VisualBasic;
+using mySQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
+using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using System.Data.SQLite;
-using DatabaseLib;
-using mySQLite;
-
-using Microsoft.VisualBasic;
 
 namespace SQLiteProject
 {
@@ -24,7 +23,7 @@ namespace SQLiteProject
         private int LessonId;
         private SQLiteQueries sqliteQ;
 
-        private int z;
+        //private int z;
 
         public MoreLesson(Form1 parentForm, SQLiteQueries db, int lessonId)
         {
@@ -57,7 +56,7 @@ namespace SQLiteProject
 
             string dayText = GetDayName(lesson.DayOfWeek);
 
-            // 🔥 Если WeekNumber = 0 → не выводим неделю
+            //Если WeekNumber = 0 → не выводим неделю
             if (lesson.WeekNumber == 0)
                 lblTime.Text = $"{dayText}: {lesson.Time}";
             else
@@ -87,23 +86,123 @@ namespace SQLiteProject
 
         private void btnMove_Click(object sender, EventArgs e)
         {
-            MoveForm mf = new MoveForm(LessonId);
-            mf.Show();
+            using (Form pickDateTime = new Form())
+            {
+                pickDateTime.Width = 350;
+                pickDateTime.Height = 200;
+                pickDateTime.Text = "Выберите дату и время пары";
+
+                // Метки и контролы
+                Label lblStart = new Label() { Text = "Начало:", Left = 10, Top = 10, Width = 80 };
+                DateTimePicker dtStart = new DateTimePicker()
+                {
+                    Left = 100,
+                    Top = 10,
+                    Width = 220,
+                    Format = DateTimePickerFormat.Custom,
+                    CustomFormat = "dd.MM.yyyy HH:mm"
+                };
+
+                CheckBox chkEnd = new CheckBox() { Text = "Указать время конца", Left = 10, Top = 50, Width = 150 };
+                DateTimePicker dtEnd = new DateTimePicker()
+                {
+                    Left = 160,
+                    Top = 50,
+                    Width = 160,
+                    Format = DateTimePickerFormat.Custom,
+                    CustomFormat = "HH:mm",
+                    ShowUpDown = true,
+                    Enabled = false
+                };
+
+                Button btnOk = new Button() { Text = "OK", Left = 100, Width = 80, Top = 100, DialogResult = DialogResult.OK };
+                Button btnCancel = new Button() { Text = "Отмена", Left = 190, Width = 80, Top = 100, DialogResult = DialogResult.Cancel };
+
+                pickDateTime.Controls.Add(lblStart);
+                pickDateTime.Controls.Add(dtStart);
+                pickDateTime.Controls.Add(chkEnd);
+                pickDateTime.Controls.Add(dtEnd);
+                pickDateTime.Controls.Add(btnOk);
+                pickDateTime.Controls.Add(btnCancel);
+
+                pickDateTime.AcceptButton = btnOk;
+                pickDateTime.CancelButton = btnCancel;
+
+                // Обработчик галочки
+                chkEnd.CheckedChanged += (s, ev) => dtEnd.Enabled = chkEnd.Checked;
+
+                if (pickDateTime.ShowDialog() != DialogResult.OK)
+                    return;
+
+                DateTime startTime = dtStart.Value;
+                DateTime endTime;
+
+                if (!chkEnd.Checked)
+                    endTime = startTime.AddMinutes(90);
+                else
+                    endTime = new DateTime(startTime.Year, startTime.Month, startTime.Day,
+                                           dtEnd.Value.Hour, dtEnd.Value.Minute, 0);
+
+                string overrideDate = startTime.ToString("yyyy-MM-dd");
+                string newStartTime = startTime.ToString("HH:mm");
+                string newEndTime = endTime.ToString("HH:mm");
+                string newLocation = ""; // пусто, но не null
+
+                string line = $"{LessonId};{overrideDate};1;{newStartTime};{newEndTime};{newLocation}";
+
+                List<string> listOverrides = new List<string>() { line };
+                int err = sqliteQ.AddLessonOverrides(listOverrides);
+
+                if (err == 0)
+                    MessageBox.Show($"Пара успешно перенесена!\n{startTime:dd.MM.yyyy HH:mm} - {endTime:HH:mm}");
+                else
+                    MessageBox.Show("Ошибка при переносе пары.");
+
+                form1.RefreshAllSchedulesData();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            using (DeleteForm form = new DeleteForm())
+            using (Form deleteForm = new Form())
             {
-                if (form.ShowDialog() == DialogResult.OK)
+                deleteForm.Width = 300;
+                deleteForm.Height = 200;
+                deleteForm.Text = "Удаление пары";
+
+                Button btnDay = new Button() { Text = "Удалить только в этот день", Left = 20, Top = 20, Width = 250, DialogResult = DialogResult.Yes };
+                Button btnForever = new Button() { Text = "Удалить навсегда", Left = 20, Top = 60, Width = 250, DialogResult = DialogResult.OK };
+                Button btnCancel = new Button() { Text = "Отмена", Left = 20, Top = 100, Width = 250, DialogResult = DialogResult.Cancel };
+
+                deleteForm.Controls.Add(btnDay);
+                deleteForm.Controls.Add(btnForever);
+                deleteForm.Controls.Add(btnCancel);
+
+                if (deleteForm.ShowDialog() == DialogResult.Cancel)
+                    return;
+
+                if (deleteForm.DialogResult == DialogResult.Yes)
                 {
-                    if (form.SelectedOption == "Day")
-                        z = 1;
-                        //DeleteForThisDay();
-                    else if (form.SelectedOption == "Forever")
-                        z = 2;
-                        //DeleteForever();
+                    // Удаление только на сегодня
+                    string line = $"{LessonId};{DateTime.Today:yyyy-MM-dd};0;;;;";
+                    List<string> listOverrides = new List<string>() { line };
+                    int err = sqliteQ.AddLessonOverrides(listOverrides);
+
+                    if (err == 0)
+                        MessageBox.Show("Пара удалена только на сегодня!");
+                    else
+                        MessageBox.Show("Ошибка удаления пары на сегодня.");
                 }
+                else if (deleteForm.DialogResult == DialogResult.OK)
+                {
+                    // Удаление навсегда
+                    if (sqliteQ.DeleteLessonForever(LessonId) > 0)
+                        MessageBox.Show("Пара удалена навсегда!");
+                    else
+                        MessageBox.Show("Ошибка удаления пары навсегда.");
+                }
+
+                form1.RefreshAllSchedulesData();
             }
         }
 
@@ -133,7 +232,6 @@ namespace SQLiteProject
                 inputForm.AcceptButton = btnOk;
                 inputForm.CancelButton = btnCancel;
 
-                // Показываем форму как модальный InputBox
                 if (inputForm.ShowDialog() != DialogResult.OK)
                     return;
 
