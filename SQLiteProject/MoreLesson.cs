@@ -109,39 +109,66 @@ namespace SQLiteProject
 
         private void btnReplaceSchedule_Click(object sender, EventArgs e)
         {
-            string code = Interaction.InputBox("Введите код расписания:", "Замена расписания", "");
-
-            if (string.IsNullOrWhiteSpace(code))
-                return;
-
-            var info = sqliteQ.getScheduleByCode(code);
-
-            if (info == null)
+            // Создаем форму для ввода кода
+            using (Form inputForm = new Form())
             {
-                MessageBox.Show("Расписание с таким кодом не найдено!");
-                return;
+                inputForm.Width = 400;
+                inputForm.Height = 150;
+                inputForm.Text = "Замена расписания";
+                inputForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                inputForm.StartPosition = FormStartPosition.CenterParent;
+                inputForm.MinimizeBox = false;
+                inputForm.MaximizeBox = false;
+
+                Label lbl = new Label() { Left = 10, Top = 10, Text = "Введите код расписания:", AutoSize = true };
+                TextBox txt = new TextBox() { Left = 10, Top = 40, Width = 360 };
+                Button btnOk = new Button() { Text = "OK", Left = 200, Width = 80, Top = 70, DialogResult = DialogResult.OK };
+                Button btnCancel = new Button() { Text = "Отмена", Left = 290, Width = 80, Top = 70, DialogResult = DialogResult.Cancel };
+
+                inputForm.Controls.Add(lbl);
+                inputForm.Controls.Add(txt);
+                inputForm.Controls.Add(btnOk);
+                inputForm.Controls.Add(btnCancel);
+
+                inputForm.AcceptButton = btnOk;
+                inputForm.CancelButton = btnCancel;
+
+                // Показываем форму как модальный InputBox
+                if (inputForm.ShowDialog() != DialogResult.OK)
+                    return;
+
+                string code = txt.Text;
+
+                if (string.IsNullOrWhiteSpace(code))
+                    return;
+
+                var info = sqliteQ.getScheduleByCode(code);
+
+                if (info == null)
+                {
+                    MessageBox.Show("Расписание с таким кодом не найдено!");
+                    return;
+                }
+
+                int targetID = 1;
+
+                if (sqliteQ.DeleteSchedule(targetID) == 0)
+                {
+                    MessageBox.Show("Ошибка удаления старого расписания!");
+                    return;
+                }
+
+                int res = sqliteQ.CopySchedule(info.ScheduleID, targetID);
+
+                if (res == 0)
+                {
+                    MessageBox.Show("Ошибка копирования нового расписания!");
+                    return;
+                }
+
+                MessageBox.Show("Расписание успешно заменено!");
+                form1.RefreshAllSchedulesData();
             }
-
-            int targetID = 1;
-
-            // удаляем расписание с ID = 1
-            if (sqliteQ.DeleteSchedule(targetID) == 0)
-            {
-                MessageBox.Show("Ошибка удаления старого расписания!");
-                return;
-            }
-
-            // копируем в ID = 1
-            int res = sqliteQ.CopySchedule(info.ScheduleID, targetID);
-
-            if (res == 0)
-            {
-                MessageBox.Show("Ошибка копирования нового расписания!");
-                return;
-            }
-
-            MessageBox.Show("Расписание успешно заменено!");
-            form1.RefreshAllSchedulesData();
         }
     }
 }
