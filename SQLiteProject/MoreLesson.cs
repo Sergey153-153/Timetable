@@ -32,7 +32,7 @@ namespace SQLiteProject
 
             form1 = parentForm;
             sqliteQ = db;
-            LessonId = 10;
+            LessonId = lessonId;
 
             LoadLessonInfo();
 
