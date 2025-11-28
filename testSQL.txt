@@ -82,24 +82,23 @@ table Schedules already exists!
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 00:35:03 ERR 
+28.ноя.2025 23:57:58 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 00:35:22 ERR 
+29.ноя.2025 00:06:55 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 00:07:41 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 00:08:29 ERR 
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
 
-29.ноя.2025 00:45:58 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 00:46:02 ERR 
-Ошибка при закрытии подключения к базе данных Timetable.db
-Доступ к ликвидированному объекту невозможен.
-Имя объекта: "SQLiteConnection".
-
-29.ноя.2025 00:53:31 ERR 
+29.ноя.2025 00:11:21 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!

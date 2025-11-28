@@ -26,6 +26,51 @@ namespace SQLiteProject
         public Form1()
         {
             InitializeComponent();
+            panelLessons.AutoScroll = true;
+        }
+
+        public void ShowLessonsAsButtons(List<LessonInfo> lessons)
+        {
+            panelLessons.Controls.Clear(); // очищаем старые кнопки
+
+            int y = 10; // начальная позиция
+            int buttonHeight = 40;
+            int buttonWidth = panelLessons.ClientSize.Width - 20; // немного отступа
+
+            foreach (var lesson in lessons)
+            {
+                Button btn = new Button();
+                btn.Text = $"{lesson.Time} - {lesson.Subject}";
+                btn.Tag = lesson.LessonID; // сохраняем id урока
+                btn.Width = buttonWidth;
+                btn.Height = buttonHeight;
+                btn.Left = 10;
+                btn.Top = y;
+
+                btn.Click += LessonButton_Click;
+
+                panelLessons.Controls.Add(btn);
+                y += buttonHeight + 10; // смещение для следующей кнопки
+            }
+        }
+
+        private void LessonButton_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn == null) return;
+
+            int lessonId = (int)btn.Tag;
+
+            // открываем форму MoreLesson
+            MoreLesson f2 = new MoreLesson(this, sqliteQ, lessonId);
+            f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = this.Location;
+
+            f2.Show();
+            f2.BringToFront();
+            f2.Activate();
+            this.Hide();
         }
 
         public int GetDayNumber(string day)
@@ -72,15 +117,6 @@ namespace SQLiteProject
                 saveDataToDB();
             }
         }
-            /*foreach (LessonInfo lesson in  lessons)
-            {
-                button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-            }*/
 
         private void saveDataToDB()
         {
@@ -247,118 +283,37 @@ namespace SQLiteProject
             connectToDB();
             //saveDataToDB();
             loadFromDBCountry();
-            pww(sender, e);
+            List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(DateTime.Today);
+            MessageBox.Show($"Найдено уроков: {todaysLessons.Count}");
+            ShowLessonsAsButtons(todaysLessons);
+
         }
 
-        private void pww(object sender, EventArgs e)
-        {
-            List<LessonInfo> lessons = sqliteQ.getOneWeekLessons(1);
-            List<LessonInfo> lesson_for_day = new List<LessonInfo>();
-            foreach (LessonInfo lesson in lessons)
-            {
-                if (lesson.DayOfWeek == GetDayNumber(DateTime.Now.DayOfWeek.ToString()))
-                {
-                    lesson_for_day.Add(lesson);
-                }
-            }
-            int i = 0;
-            while (i < lesson_for_day.Count)
-            {
-                button1.Text = lesson_for_day[i].Time + " | " + lesson_for_day[i].Subject + " | " + lesson_for_day[i].Teacher;
-                i++;
-            }
-            
-            /*button2.Text = lesson_for_day[1].Time + " | " + lesson_for_day[1].Subject + " | " + lesson_for_day[1].Teacher;
-            button3.Text = lesson_for_day[2].Time + " | " + lesson_for_day[2].Subject + " | " + lesson_for_day[2].Teacher;
-            button4.Text = lesson_for_day[3].Time + " | " + lesson_for_day[3].Subject + " | " + lesson_for_day[3].Teacher;
-            button5.Text = lesson_for_day[4].Time + " | " + lesson_for_day[4].Subject + " | " + lesson_for_day[4].Teacher;
-            button6.Text = lesson_for_day[5].Time + " | " + lesson_for_day[5].Subject + " | " + lesson_for_day[5].Teacher;*/
-        }
+        
         private void cbCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadFromDBRegion();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MoreLesson f2 = new MoreLesson(this, sqliteQ, 1);
-            f2.StartPosition = FormStartPosition.CenterParent;
-            f2.StartPosition = FormStartPosition.Manual;  // чтобы позиция была как у Form1
-            f2.Location = this.Location;                  // ставим точно поверх Form1
-
-            f2.Show();        // показываем
-            f2.BringToFront(); // поднимаем вверх
-            f2.Activate();     // делаем активной
-            this.Hide();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            MoreLesson f2 = new MoreLesson(this, sqliteQ, 2);
-            f2.StartPosition = FormStartPosition.CenterParent;
-            f2.StartPosition = FormStartPosition.Manual;
-            f2.Location = this.Location;
-
-            f2.Show();
-            f2.BringToFront();
-            f2.Activate();
-            this.Hide();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            MoreLesson f2 = new MoreLesson(this, sqliteQ, 3);
-            f2.StartPosition = FormStartPosition.CenterParent;
-            f2.StartPosition = FormStartPosition.Manual;
-            f2.Location = this.Location;
-
-            f2.Show();
-            f2.BringToFront();
-            f2.Activate();
-            this.Hide();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            MoreLesson f2 = new MoreLesson(this, sqliteQ, 4);
-            f2.StartPosition = FormStartPosition.CenterParent;
-            f2.StartPosition = FormStartPosition.Manual;
-            f2.Location = this.Location;
-
-            f2.Show();
-            f2.BringToFront();
-            f2.Activate();
-            this.Hide();
-        }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            MoreLesson f2 = new MoreLesson(this, sqliteQ, 5);
-            f2.StartPosition = FormStartPosition.CenterParent;
-            f2.StartPosition = FormStartPosition.Manual;
-            f2.Location = this.Location;
-
-            f2.Show();
-            f2.BringToFront();
-            f2.Activate();
-            this.Hide();
-        }
-        private void button6_Click(object sender, EventArgs e)
-        {
-            MoreLesson f2 = new MoreLesson(this, sqliteQ, 6);
-            f2.StartPosition = FormStartPosition.CenterParent;
-            f2.StartPosition = FormStartPosition.Manual;
-            f2.Location = this.Location;
-
-            f2.Show();
-            f2.BringToFront();
-            f2.Activate();
-            this.Hide();
-        }
+        
         private void button9_Click(object sender, EventArgs e)
         {
             SettingsForm1 settings = new SettingsForm1(this, sqliteQ);
             settings.ShowDialog();
         }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            if (sqliteQ == null)
+                return; // БД ещё не подключена
+
+            DateTime selectedDate = dateTimePicker1.Value.Date;
+
+            // Получаем уроки на выбранную дату
+            List<LessonInfo> lessons = sqliteQ.GetLessonsForDate(selectedDate);
+
+            // Отображаем кнопками
+            ShowLessonsAsButtons(lessons);
+        }
     }
 }
