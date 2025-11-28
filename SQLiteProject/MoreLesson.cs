@@ -24,7 +24,7 @@ namespace SQLiteProject
         private SQLiteQueries sqliteQ;
 
         //private int z;
-
+        //Дима
         public MoreLesson(Form1 parentForm, SQLiteQueries db, int lessonId)
         {
             InitializeComponent();
