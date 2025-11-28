@@ -23,20 +23,10 @@ namespace SQLiteProject
         public List<string> listSchedules;
         public List<string> listLessons;
 
-        public Dictionary<string, int> dictCountry = new Dictionary<string, int>();
-
-        public class InfoRegion
-        {
-            public int region_id { get; set; }
-            public string region_name { get; set; }
-        }
-        private List<InfoRegion> listInfoRegion;
-
         public Form1()
         {
             InitializeComponent();
         }
-
 
         private void connectToDB()
         {
@@ -67,6 +57,19 @@ namespace SQLiteProject
                 //Если БД была новая, то заполним ее тестовыми данными
                 saveDataToDB();
             }
+            var lesson = sqliteQ.GetLessonById(1);
+            button1.Text = lesson.Time;
+            lesson = sqliteQ.GetLessonById(2);
+            button2.Text = lesson.Time;
+            lesson = sqliteQ.GetLessonById(3);
+            button3.Text = lesson.Time;
+            lesson = sqliteQ.GetLessonById(4);
+            button4.Text = lesson.Time;
+            lesson = sqliteQ.GetLessonById(5);
+            button5.Text = lesson.Time;
+            lesson = sqliteQ.GetLessonById(6);
+            button6.Text = lesson.Time;
+            label1.Text = DateTime.Now.DayOfWeek.ToString() + ", " + DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString();
         }
 
         private void saveDataToDB()
@@ -113,7 +116,6 @@ namespace SQLiteProject
 
             int errLessons = sqliteQ.AddLessons(listLessons);
             MessageBox.Show($"Обработано уроков: {listLessons.Count}, ошибок: {errLessons}");
-
         }
 
         public void RefreshAllSchedulesData()
@@ -134,6 +136,74 @@ namespace SQLiteProject
                     cbCountry.SelectedIndex = 0;
             }
 
+            int timetable_type = cbCountry.SelectedIndex;
+            MessageBox.Show(timetable_type.ToString());
+            if (timetable_type == 0)
+            {
+                var lesson = sqliteQ.GetLessonById(1);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(2);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(3);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(4);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(5);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(6);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+            }
+            if (timetable_type == 1)
+            {
+                var lesson = sqliteQ.GetLessonById(1);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(2);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(3);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(4);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(5);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(6);
+                if (lesson.WeekNumber == timetable_type + 1)
+                    button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+            }
+            if (timetable_type == 2)
+            {
+                timetable_type = timetable_type + 1;
+                var lesson = sqliteQ.GetLessonById(1);
+                if (lesson.WeekNumber == timetable_type)
+                    button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(2);
+                if (lesson.WeekNumber == timetable_type)
+                    button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(3);
+                if (lesson.WeekNumber == timetable_type)
+                    button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(4);
+                if (lesson.WeekNumber == timetable_type)
+                    button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(5);
+                if (lesson.WeekNumber == timetable_type)
+                    button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                lesson = sqliteQ.GetLessonById(6);
+                if (lesson.WeekNumber == timetable_type)
+                    button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+            }
+
+            label1.Text = DateTime.Now.DayOfWeek.ToString() + " " + DateTime.Now.Day.ToString() + " " + DateTime.Now.Month.ToString();
             // 2. Можно добавить сюда обновление любых других контролов,
             // которые зависят от расписаний
         }
@@ -190,7 +260,65 @@ namespace SQLiteProject
 
         private void button2_Click(object sender, EventArgs e)
         {
+            MoreLesson f2 = new MoreLesson(this, sqliteQ, 2);
+            f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = this.Location;
 
+            f2.Show();
+            f2.BringToFront();
+            f2.Activate();
+            this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MoreLesson f2 = new MoreLesson(this, sqliteQ, 3);
+            f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = this.Location;
+
+            f2.Show();
+            f2.BringToFront();
+            f2.Activate();
+            this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MoreLesson f2 = new MoreLesson(this, sqliteQ, 4);
+            f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = this.Location;
+
+            f2.Show();
+            f2.BringToFront();
+            f2.Activate();
+            this.Hide();
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MoreLesson f2 = new MoreLesson(this, sqliteQ, 5);
+            f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = this.Location;
+
+            f2.Show();
+            f2.BringToFront();
+            f2.Activate();
+            this.Hide();
+        }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MoreLesson f2 = new MoreLesson(this, sqliteQ, 6);
+            f2.StartPosition = FormStartPosition.CenterParent;
+            f2.StartPosition = FormStartPosition.Manual;
+            f2.Location = this.Location;
+
+            f2.Show();
+            f2.BringToFront();
+            f2.Activate();
+            this.Hide();
         }
         private void button9_Click(object sender, EventArgs e)
         {
