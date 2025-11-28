@@ -274,6 +274,104 @@ namespace mySQLite
 
         }
 
+        public List<LessonInfo> GetLessonsForDate(DateTime date)
+        {
+            int scheduleID = 1; // ты писал — всегда работаем с 1
+
+            // День недели (1–7)
+            int day = (int)date.DayOfWeek;
+            if (day == 0) day = 7;
+
+            //Получаем базовые уроки для этого дня
+            DataTable dtBase = _sqlt.FetchByColumn(
+                "Lessons",
+                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime",
+                $"ScheduleID = {scheduleID} AND DayOfWeek = {day}",
+                "ORDER BY LessonNumber"
+            );
+
+            List<LessonInfo> baseLessons = new List<LessonInfo>();
+            foreach (DataRow row in dtBase.Rows)
+            {
+                LessonInfo li = new LessonInfo()
+                {
+                    LessonID = Convert.ToInt32(row["LessonID"]),
+                    WeekNumber = Convert.ToInt32(row["WeekNumber"]),
+                    DayOfWeek = Convert.ToInt32(row["DayOfWeek"]),
+                    LessonNumber = Convert.ToInt32(row["LessonNumber"]),
+                    Subject = row["Subject"].ToString(),
+                    Teacher = row["Teacher"].ToString(),
+                    Location = row["Location"].ToString(),
+                    StartTime = row["StartTime"].ToString(),
+                    EndTime = row["EndTime"].ToString(),
+                    Time = $"{row["StartTime"]}-{row["EndTime"]}"
+                };
+
+                baseLessons.Add(li);
+            }
+
+            //Берём все активные изменения на эту дату
+            string dateStr = date.ToString("yyyy-MM-dd");
+
+            DataTable dtOverrides = _sqlt.FetchByColumn(
+                "LessonOverrides",
+                "*",
+                $"OverrideDate = '{dateStr}' AND IsActive = 1",
+                ""
+            );
+
+            // Копируем чтобы можно было менять
+            List<LessonInfo> finalList = new List<LessonInfo>(baseLessons);
+
+            foreach (DataRow row in dtOverrides.Rows)
+            {
+                int lessonId = Convert.ToInt32(row["LessonID"]);
+                string newStart = row["NewStartTime"]?.ToString();
+                string newEnd = row["NewEndTime"]?.ToString();
+                string newLoc = row["NewLocation"]?.ToString();
+
+                // Если все новые поля пустые → это отмена пары
+                if (string.IsNullOrEmpty(newStart) && string.IsNullOrEmpty(newEnd) && string.IsNullOrEmpty(newLoc))
+                {
+                    finalList.RemoveAll(x => x.LessonID == lessonId);
+                    continue;
+                }
+
+                //Перенос/изменение пары
+                LessonInfo baseLesson = baseLessons.FirstOrDefault(x => x.LessonID == lessonId);
+                if (baseLesson == null) continue;
+
+                LessonInfo changed = new LessonInfo()
+                {
+                    LessonID = baseLesson.LessonID,
+                    WeekNumber = baseLesson.WeekNumber,
+                    DayOfWeek = baseLesson.DayOfWeek,
+                    LessonNumber = baseLesson.LessonNumber,
+                    Subject = baseLesson.Subject,
+                    Teacher = baseLesson.Teacher,
+                    Location = string.IsNullOrEmpty(newLoc) ? baseLesson.Location : newLoc,
+
+                    StartTime = string.IsNullOrEmpty(newStart) ? baseLesson.StartTime : newStart,
+                    EndTime = string.IsNullOrEmpty(newEnd) ? baseLesson.EndTime : newEnd
+                };
+
+                changed.Time = $"{changed.StartTime}-{changed.EndTime}";
+
+                // удаляем оригинальную пару
+                finalList.RemoveAll(x => x.LessonID == lessonId);
+
+                // добавляем изменённую
+                finalList.Add(changed);
+            }
+
+            // Сортируем по StartTime
+            finalList = finalList
+                .OrderBy(x => TimeSpan.Parse(x.StartTime))
+                .ToList();
+
+            return finalList;
+        }
+
         #region Добавление расписания
         public int AddSchedules(List<string> listSchedules)
         {
