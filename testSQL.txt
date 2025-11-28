@@ -188,3 +188,10 @@
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 14:32:30 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time FROM Lessons WHERE ScheduleID = 1 AND WeekNumber = 0 ORDER BY DayOfWeek, LessonNumber
+SQL logic error or missing database
+no such column: Time

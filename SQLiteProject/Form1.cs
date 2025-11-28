@@ -57,18 +57,16 @@ namespace SQLiteProject
                 //Если БД была новая, то заполним ее тестовыми данными
                 saveDataToDB();
             }
-            var lesson = sqliteQ.GetLessonById(1);
-            button1.Text = lesson.Time;
-            lesson = sqliteQ.GetLessonById(2);
-            button2.Text = lesson.Time;
-            lesson = sqliteQ.GetLessonById(3);
-            button3.Text = lesson.Time;
-            lesson = sqliteQ.GetLessonById(4);
-            button4.Text = lesson.Time;
-            lesson = sqliteQ.GetLessonById(5);
-            button5.Text = lesson.Time;
-            lesson = sqliteQ.GetLessonById(6);
-            button6.Text = lesson.Time;
+            List<LessonInfo> lessons = sqliteQ.getOneWeekLessons(1);
+            /*foreach (LessonInfo lesson in  lessons)
+            {
+                button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+                button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
+            }*/
             label1.Text = DateTime.Now.DayOfWeek.ToString() + ", " + DateTime.Now.Day.ToString() + "." + DateTime.Now.Month.ToString();
         }
 
@@ -137,8 +135,7 @@ namespace SQLiteProject
             }
 
             int timetable_type = cbCountry.SelectedIndex;
-            MessageBox.Show(timetable_type.ToString());
-            if (timetable_type == 0)
+            /*if (timetable_type == 0)
             {
                 var lesson = sqliteQ.GetLessonById(1);
                 if (lesson.WeekNumber == timetable_type + 1)
@@ -201,7 +198,7 @@ namespace SQLiteProject
                 lesson = sqliteQ.GetLessonById(6);
                 if (lesson.WeekNumber == timetable_type)
                     button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-            }
+            }*/
 
             label1.Text = DateTime.Now.DayOfWeek.ToString() + " " + DateTime.Now.Day.ToString() + " " + DateTime.Now.Month.ToString();
             // 2. Можно добавить сюда обновление любых других контролов,
