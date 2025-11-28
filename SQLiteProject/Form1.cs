@@ -359,5 +359,6 @@ namespace SQLiteProject
             Form2 settingsForm = new Form2(this, sqliteQ);
             settingsForm.ShowDialog();
         }
+
     }
 }

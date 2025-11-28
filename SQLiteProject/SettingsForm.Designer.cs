@@ -98,7 +98,7 @@ namespace SQLiteProject
 
             return button;
         }
-
+        /*
         private void HandleSettingsClick(string settingType)
         {
             switch (settingType)
@@ -119,8 +119,8 @@ namespace SQLiteProject
                     OpenScheduleSettings();
                     break;
             }
-        }
-
+        }*/
+        /*
         private void DownloadSchedule()
         {
             using (System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog())
@@ -190,8 +190,7 @@ namespace SQLiteProject
                     }
                 }
             }
-        }
-
+        }*/        /*
         private void UploadSchedule()
         {
             using (System.Windows.Forms.Form inputForm = new System.Windows.Forms.Form())
@@ -271,7 +270,7 @@ namespace SQLiteProject
                     System.Windows.Forms.MessageBox.Show($"Ошибка при загрузке расписания: {ex.Message}");
                 }
             }
-        }
+        }*/
 
         private void OpenHolidaysSettings()
         {
