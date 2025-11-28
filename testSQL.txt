@@ -615,3 +615,1061 @@ table Schedules already exists!
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 00:33:02 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:01:37 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:01:37 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:03:05 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:03:05 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:03:05 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:03:05 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:03:05 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:03:06 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:03:06 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:04:07 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:04:07 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:04:07 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:04:07 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:04:07 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:11:25 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:11:25 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:11:25 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:11:25 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:11:25 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:14:02 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:14:02 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:16:13 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:16:13 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:16:13 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:16:13 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:16:13 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:16:48 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:20:01 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:20:01 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:20:01 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:20:01 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:20:01 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:20:18 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:20:18 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:20:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:20:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:20:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:20:38 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:20:38 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:20:47 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:20:47 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:25:18 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:25:18 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:25:18 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:25:18 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:25:18 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:25:37 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:25:37 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:26:47 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:26:47 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:26:47 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:26:47 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:26:47 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:32:55 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:32:55 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:32:55 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:32:55 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:32:55 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:33:40 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:33:40 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:38:05 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:38:05 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:38:05 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:38:05 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:38:05 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:39:38 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:43:21 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:43:22 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:43:22 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:43:22 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:43:22 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:43:35 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:52:48 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:52:48 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:52:48 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:52:48 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:52:48 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:53:44 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:53:44 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:55:20 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:55:20 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:55:20 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:55:20 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:55:20 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 02:56:03 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 02:59:50 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:59:50 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:59:50 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 02:59:50 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 02:59:50 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:00:55 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:00:55 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:07:11 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:07:11 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:07:11 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:07:11 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:07:11 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:08:21 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:08:21 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:13:20 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:13:20 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:13:20 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:13:20 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:13:20 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:13:42 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:13:42 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:14:53 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:14:53 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:14:53 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:14:53 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:14:53 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:15:18 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:15:18 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:16:13 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:16:13 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:16:13 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:16:13 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:16:13 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:17:43 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:18:12 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:18:12 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:18:12 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:18:12 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:18:12 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:18:14 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:18:14 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:46:19 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:46:19 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:46:19 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:46:19 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:46:19 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:46:26 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:46:26 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 03:51:50 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:51:50 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:51:50 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:51:50 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:51:50 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:57:29 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:57:30 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:57:30 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:57:30 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:57:30 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 03:58:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:58:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:58:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 03:58:04 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 03:58:04 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 04:01:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 04:01:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 04:01:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 04:01:04 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 04:01:04 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 04:05:43 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 04:05:43 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 04:05:43 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 04:05:43 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 04:05:43 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 04:05:48 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 04:05:48 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 21:57:28 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 21:57:28 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 21:57:28 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+28.ноя.2025 21:57:28 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+28.ноя.2025 21:57:28 SQL 
+База данных задач успешно инициализирована
+
+28.ноя.2025 22:34:50 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+28.ноя.2025 22:34:50 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 00:10:28 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:10:28 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:10:28 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:10:28 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+29.ноя.2025 00:10:28 SQL 
+База данных задач успешно инициализирована
+
+29.ноя.2025 00:10:43 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 00:10:43 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 00:44:27 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:44:27 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:44:27 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:44:27 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+29.ноя.2025 00:44:27 SQL 
+База данных задач успешно инициализирована
+
+29.ноя.2025 00:45:12 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 00:57:24 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:57:24 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:57:24 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:57:24 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+29.ноя.2025 00:57:24 SQL 
+База данных задач успешно инициализирована
+
+29.ноя.2025 00:57:24 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 00:57:24 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 00:58:10 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:58:10 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:58:10 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 00:58:10 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+29.ноя.2025 00:58:10 SQL 
+База данных задач успешно инициализирована
+
+29.ноя.2025 01:00:42 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 01:00:42 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 01:00:42 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+29.ноя.2025 01:00:42 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+29.ноя.2025 01:00:42 SQL 
+База данных задач успешно инициализирована
+
+29.ноя.2025 01:00:58 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 01:00:58 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".

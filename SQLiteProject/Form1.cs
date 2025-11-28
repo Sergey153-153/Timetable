@@ -18,7 +18,8 @@ namespace SQLiteProject
     public partial class Form1 : Form
     {
         SQLiteQueries sqliteQ;
-        
+        private DbFacadeSQLite _tasksDatabase;
+
         private const int COUNT_TABLES_IN_DB = 4; //кол-во таблиц в БД
         public List<string> listSchedules;
         public List<string> listLessons;
@@ -134,6 +135,24 @@ namespace SQLiteProject
                 //Если БД была новая, то заполним ее тестовыми данными
                 saveDataToDB();
             }
+            
+            // подключение к бд заданий
+            InitializeTasksDatabase();
+        }
+
+        //подлкючение к бд заданий
+        private void InitializeTasksDatabase()
+        {
+            _tasksDatabase = new DbFacadeSQLite("tasks_database.sqlite");
+
+            if (_tasksDatabase.Open())
+            {
+                _tasksDatabase.InitializeTaskDatabase();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка подключения к базе данных заданий!");
+            }
         }
 
         private void saveDataToDB()
@@ -238,7 +257,8 @@ namespace SQLiteProject
         private void button7_Click(object sender, EventArgs e)
         {
             Tasks tasksForm = new Tasks();
-            tasksForm.ShowDialog();
+            tasksForm.SetConnection(_tasksDatabase.connect); // передача подключеия
+            tasksForm.Show();
         }
     }
 }

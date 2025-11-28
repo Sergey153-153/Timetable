@@ -277,5 +277,11 @@ namespace SQLiteProject
                 MessageBox.Show("Расписание успешно заменено!");
             }
         }
+
+        private void btnAddHomework_Click(object sender, EventArgs e)
+        {
+            Add_task addTaskForm = new Add_task();
+            addTaskForm.ShowDialog();
+        }
     }
 }

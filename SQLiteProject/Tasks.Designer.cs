@@ -42,14 +42,14 @@
             this.screen_tasks.Controls.Add(this.label_task);
             this.screen_tasks.Location = new System.Drawing.Point(12, 17);
             this.screen_tasks.Name = "screen_tasks";
-            this.screen_tasks.Size = new System.Drawing.Size(487, 78);
+            this.screen_tasks.Size = new System.Drawing.Size(514, 78);
             this.screen_tasks.TabIndex = 0;
             // 
             // label_task
             // 
             this.label_task.AutoSize = true;
             this.label_task.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_task.Location = new System.Drawing.Point(174, 23);
+            this.label_task.Location = new System.Drawing.Point(198, 23);
             this.label_task.Name = "label_task";
             this.label_task.Size = new System.Drawing.Size(116, 37);
             this.label_task.TabIndex = 0;
@@ -95,7 +95,7 @@
             this.content_block.Location = new System.Drawing.Point(12, 114);
             this.content_block.Margin = new System.Windows.Forms.Padding(10);
             this.content_block.Name = "content_block";
-            this.content_block.Size = new System.Drawing.Size(487, 771);
+            this.content_block.Size = new System.Drawing.Size(514, 771);
             this.content_block.TabIndex = 4;
             // 
             // Tasks

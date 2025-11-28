@@ -37,9 +37,9 @@
             this.HomeTask = new System.Windows.Forms.RadioButton();
             this.Lesson_type = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.Add_files = new System.Windows.Forms.Button();
             this.back_tasks = new System.Windows.Forms.Button();
+            this.textBox_description = new System.Windows.Forms.TextBox();
             this.screen_tasks.SuspendLayout();
             this.Task_type.SuspendLayout();
             this.SuspendLayout();
@@ -135,30 +135,24 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(25, 500);
+            this.dateTimePicker1.Location = new System.Drawing.Point(24, 360);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(487, 26);
             this.dateTimePicker1.TabIndex = 4;
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(25, 314);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(486, 165);
-            this.panel1.TabIndex = 5;
-            // 
             // Add_files
             // 
-            this.Add_files.Location = new System.Drawing.Point(25, 545);
+            this.Add_files.Location = new System.Drawing.Point(24, 480);
             this.Add_files.Name = "Add_files";
             this.Add_files.Size = new System.Drawing.Size(487, 57);
             this.Add_files.TabIndex = 6;
             this.Add_files.Text = "Добавить файлы";
             this.Add_files.UseVisualStyleBackColor = true;
+            this.Add_files.Click += new System.EventHandler(this.Add_files_Click);
             // 
             // back_tasks
             // 
-            this.back_tasks.Location = new System.Drawing.Point(174, 627);
+            this.back_tasks.Location = new System.Drawing.Point(162, 579);
             this.back_tasks.Name = "back_tasks";
             this.back_tasks.Size = new System.Drawing.Size(211, 44);
             this.back_tasks.TabIndex = 7;
@@ -166,14 +160,21 @@
             this.back_tasks.UseVisualStyleBackColor = true;
             this.back_tasks.Click += new System.EventHandler(this.back_tasks_Click);
             // 
+            // textBox_description
+            // 
+            this.textBox_description.Location = new System.Drawing.Point(24, 314);
+            this.textBox_description.Name = "textBox_description";
+            this.textBox_description.Size = new System.Drawing.Size(486, 26);
+            this.textBox_description.TabIndex = 8;
+            // 
             // Add_task
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 698);
+            this.ClientSize = new System.Drawing.Size(538, 639);
+            this.Controls.Add(this.textBox_description);
             this.Controls.Add(this.back_tasks);
             this.Controls.Add(this.Add_files);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.Lesson_type);
             this.Controls.Add(this.Task_type);
@@ -185,6 +186,7 @@
             this.Task_type.ResumeLayout(false);
             this.Task_type.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -199,8 +201,8 @@
         private System.Windows.Forms.RadioButton HomeTask;
         private System.Windows.Forms.ComboBox Lesson_type;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button Add_files;
         private System.Windows.Forms.Button back_tasks;
+        private System.Windows.Forms.TextBox textBox_description;
     }
 }
