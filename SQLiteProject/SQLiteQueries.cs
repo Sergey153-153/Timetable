@@ -331,7 +331,7 @@ namespace mySQLite
         public List<LessonInfo> getOneWeekLessons(int scheduleID)
         {
             DataTable dt = _sqlt.FetchByColumn("Lessons",
-                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
+                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime",
                 "ScheduleID = " + scheduleID + " AND WeekNumber = 0",
                 "ORDER BY DayOfWeek, LessonNumber");
 
@@ -346,7 +346,11 @@ namespace mySQLite
                 li.Subject = row["Subject"].ToString();
                 li.Teacher = row["Teacher"].ToString();
                 li.Location = row["Location"].ToString();
-                li.Time = row["Time"].ToString();
+
+                string startTime = row["StartTime"].ToString();
+                string endTime = row["EndTime"].ToString();
+                li.Time = $"{startTime}-{endTime}"; 
+
                 lessons.Add(li);
             }
 
@@ -399,6 +403,8 @@ namespace mySQLite
         public string Teacher;
         public string Location;
         public string Time;
+        public string StartTime;
+        public string EndTime;
     }
 
     #endregion
