@@ -44,8 +44,21 @@ namespace mySQLite
 
         public int CreateTables(string dbName, bool isTransact = true)
         {
-            ClearDB();
-            string sqlCmd = @"CREATE TABLE Schedules (
+            // ClearDB();
+
+            string sqlCmd = @"CREATE TABLE IF NOT EXISTS Users (
+            [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
+            [PhoneNumber] TEXT NOT NULL UNIQUE
+            );";
+
+            sqlCmd += @"CREATE TABLE IF NOT EXISTS Schedules (
+            [ScheduleID] INTEGER PRIMARY KEY,
+            [Code] TEXT NOT NULL UNIQUE,
+            [Name] TEXT,
+            [Type] INTEGER NOT NULL
+            );";
+
+            sqlCmd = @"CREATE TABLE Schedules (
                     [ScheduleID] INTEGER PRIMARY KEY,
                     [Code] TEXT NOT NULL UNIQUE,
                     [Name] TEXT,
@@ -261,6 +274,104 @@ namespace mySQLite
 
         }
 
+        public List<LessonInfo> GetLessonsForDate(DateTime date)
+        {
+            int scheduleID = 1; // ты писал — всегда работаем с 1
+
+            // День недели (1–7)
+            int day = (int)date.DayOfWeek;
+            if (day == 0) day = 7;
+
+            //Получаем базовые уроки для этого дня
+            DataTable dtBase = _sqlt.FetchByColumn(
+                "Lessons",
+                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime",
+                $"ScheduleID = {scheduleID} AND DayOfWeek = {day}",
+                "ORDER BY LessonNumber"
+            );
+
+            List<LessonInfo> baseLessons = new List<LessonInfo>();
+            foreach (DataRow row in dtBase.Rows)
+            {
+                LessonInfo li = new LessonInfo()
+                {
+                    LessonID = Convert.ToInt32(row["LessonID"]),
+                    WeekNumber = Convert.ToInt32(row["WeekNumber"]),
+                    DayOfWeek = Convert.ToInt32(row["DayOfWeek"]),
+                    LessonNumber = Convert.ToInt32(row["LessonNumber"]),
+                    Subject = row["Subject"].ToString(),
+                    Teacher = row["Teacher"].ToString(),
+                    Location = row["Location"].ToString(),
+                    StartTime = row["StartTime"].ToString(),
+                    EndTime = row["EndTime"].ToString(),
+                    Time = $"{row["StartTime"]}-{row["EndTime"]}"
+                };
+
+                baseLessons.Add(li);
+            }
+
+            //Берём все активные изменения на эту дату
+            string dateStr = date.ToString("yyyy-MM-dd");
+
+            DataTable dtOverrides = _sqlt.FetchByColumn(
+                "LessonOverrides",
+                "*",
+                $"OverrideDate = '{dateStr}' AND IsActive = 1",
+                ""
+            );
+
+            // Копируем чтобы можно было менять
+            List<LessonInfo> finalList = new List<LessonInfo>(baseLessons);
+
+            foreach (DataRow row in dtOverrides.Rows)
+            {
+                int lessonId = Convert.ToInt32(row["LessonID"]);
+                string newStart = row["NewStartTime"]?.ToString();
+                string newEnd = row["NewEndTime"]?.ToString();
+                string newLoc = row["NewLocation"]?.ToString();
+
+                // Если все новые поля пустые → это отмена пары
+                if (string.IsNullOrEmpty(newStart) && string.IsNullOrEmpty(newEnd) && string.IsNullOrEmpty(newLoc))
+                {
+                    finalList.RemoveAll(x => x.LessonID == lessonId);
+                    continue;
+                }
+
+                //Перенос/изменение пары
+                LessonInfo baseLesson = baseLessons.FirstOrDefault(x => x.LessonID == lessonId);
+                if (baseLesson == null) continue;
+
+                LessonInfo changed = new LessonInfo()
+                {
+                    LessonID = baseLesson.LessonID,
+                    WeekNumber = baseLesson.WeekNumber,
+                    DayOfWeek = baseLesson.DayOfWeek,
+                    LessonNumber = baseLesson.LessonNumber,
+                    Subject = baseLesson.Subject,
+                    Teacher = baseLesson.Teacher,
+                    Location = string.IsNullOrEmpty(newLoc) ? baseLesson.Location : newLoc,
+
+                    StartTime = string.IsNullOrEmpty(newStart) ? baseLesson.StartTime : newStart,
+                    EndTime = string.IsNullOrEmpty(newEnd) ? baseLesson.EndTime : newEnd
+                };
+
+                changed.Time = $"{changed.StartTime}-{changed.EndTime}";
+
+                // удаляем оригинальную пару
+                finalList.RemoveAll(x => x.LessonID == lessonId);
+
+                // добавляем изменённую
+                finalList.Add(changed);
+            }
+
+            // Сортируем по StartTime
+            finalList = finalList
+                .OrderBy(x => TimeSpan.Parse(x.StartTime))
+                .ToList();
+
+            return finalList;
+        }
+
         #region Добавление расписания
         public int AddSchedules(List<string> listSchedules)
         {
@@ -311,7 +422,83 @@ namespace mySQLite
             return cntErr; // количество ошибок
         }
         #endregion
+        #region Работа с пользователями
 
+        public void CreateUsersTable()
+        {
+            try
+            {
+                string createTableQuery = @"
+            CREATE TABLE IF NOT EXISTS Users (
+                UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+                PhoneNumber TEXT NOT NULL UNIQUE
+            )";
+
+                _sqlt.ExecuteNonQuery(createTableQuery);
+            }
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка CreateUsersTable: " + ex.Message);
+            }
+        }
+
+        public void AddUser(string phoneNumber)
+        {
+            try
+            {
+                string createTableQuery = @"CREATE TABLE IF NOT EXISTS Users (
+                [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                [PhoneNumber] TEXT NOT NULL UNIQUE
+            )";
+                _sqlt.ExecuteNonQuery(createTableQuery);
+
+                string insertQuery = "INSERT OR IGNORE INTO Users (PhoneNumber) VALUES (@phoneNumber)";
+
+                using (var connection = new SQLiteConnection(_sqlt.connect.ConnectionString))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(insertQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@phoneNumber", phoneNumber);
+                        command.ExecuteNonQuery(); // Просто выполняем, не проверяем результат
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка AddUser: " + ex.Message);
+            }
+        }
+
+        public bool CheckUserExists(string phoneNumber)
+        {
+            try
+            {
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Users",
+                    "COUNT(1) as UserCount",
+                    "PhoneNumber = '" + phoneNumber + "'",
+                    ""
+                );
+
+                // ДОБАВЬ ПРОВЕРКУ НА NULL:
+                if (dt == null || dt.Rows.Count == 0)
+                    return false;
+
+                object userCount = dt.Rows[0]["UserCount"];
+                if (userCount == null || userCount == DBNull.Value)
+                    return false;
+
+                return Convert.ToInt32(userCount) > 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка CheckUserExists: " + ex.Message);
+                return false;
+            }
+        }
+
+        #endregion
         #region Получение расписания
 
         public ScheduleInfo getScheduleByCode(string code)
@@ -331,7 +518,7 @@ namespace mySQLite
         public List<LessonInfo> getOneWeekLessons(int scheduleID)
         {
             DataTable dt = _sqlt.FetchByColumn("Lessons",
-                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
+                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime",
                 "ScheduleID = " + scheduleID + " AND WeekNumber = 0",
                 "ORDER BY DayOfWeek, LessonNumber");
 
@@ -346,7 +533,11 @@ namespace mySQLite
                 li.Subject = row["Subject"].ToString();
                 li.Teacher = row["Teacher"].ToString();
                 li.Location = row["Location"].ToString();
-                li.Time = row["Time"].ToString();
+
+                string startTime = row["StartTime"].ToString();
+                string endTime = row["EndTime"].ToString();
+                li.Time = $"{startTime}-{endTime}"; 
+
                 lessons.Add(li);
             }
 
@@ -399,6 +590,8 @@ namespace mySQLite
         public string Teacher;
         public string Location;
         public string Time;
+        public string StartTime;
+        public string EndTime;
     }
 
     #endregion

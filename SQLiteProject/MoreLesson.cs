@@ -24,7 +24,7 @@ namespace SQLiteProject
         private SQLiteQueries sqliteQ;
 
         //private int z;
-
+        //Дима
         public MoreLesson(Form1 parentForm, SQLiteQueries db, int lessonId)
         {
             InitializeComponent();
@@ -63,7 +63,7 @@ namespace SQLiteProject
                 lblTime.Text = $"{lesson.WeekNumber} неделя, {dayText}: {lesson.Time}";
         }
 
-        private string GetDayName(int day)
+        public string GetDayName(int day)
         {
             switch (day)
             {
