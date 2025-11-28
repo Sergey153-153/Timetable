@@ -55,7 +55,7 @@ namespace SQLiteProject
                 sqliteQ.CreateTables(dbName);
 
                 //Если БД была новая, то заполним ее тестовыми данными
-                saveDataToDB();
+                saveDataToDB();//ggg
             }
             List<LessonInfo> lessons = sqliteQ.getOneWeekLessons(1);
             /*foreach (LessonInfo lesson in  lessons)
