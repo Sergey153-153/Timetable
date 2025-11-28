@@ -41,3 +41,7 @@ table Schedules already exists!
 28.ноя.2025 22:37:35 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
+
+28.ноя.2025 23:17:44 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
