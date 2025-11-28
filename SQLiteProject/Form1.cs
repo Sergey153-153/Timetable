@@ -234,5 +234,11 @@ namespace SQLiteProject
         {
             return;
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Tasks tasksForm = new Tasks();
+            tasksForm.ShowDialog();
+        }
     }
 }

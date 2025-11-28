@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Add_task.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_task.Designer.cs">
+      <DependentUpon>Add_task.cs</DependentUpon>
+    </Compile>
     <Compile Include="DbFacadeSQLite.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -77,6 +83,16 @@
       <DependentUpon>SettingsForm1.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteQueries.cs" />
+    <Compile Include="TaskItem.cs" />
+    <Compile Include="Tasks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tasks.Designer.cs">
+      <DependentUpon>Tasks.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Add_task.resx">
+      <DependentUpon>Add_task.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +112,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tasks.resx">
+      <DependentUpon>Tasks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm1.resx">
       <DependentUpon>SettingsForm1.cs</DependentUpon>
     </EmbeddedResource>
