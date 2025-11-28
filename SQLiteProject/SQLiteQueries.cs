@@ -44,8 +44,21 @@ namespace mySQLite
 
         public int CreateTables(string dbName, bool isTransact = true)
         {
-            ClearDB();
-            string sqlCmd = @"CREATE TABLE Schedules (
+            // ClearDB();
+
+            string sqlCmd = @"CREATE TABLE IF NOT EXISTS Users (
+            [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
+            [PhoneNumber] TEXT NOT NULL UNIQUE
+            );";
+
+            sqlCmd += @"CREATE TABLE IF NOT EXISTS Schedules (
+            [ScheduleID] INTEGER PRIMARY KEY,
+            [Code] TEXT NOT NULL UNIQUE,
+            [Name] TEXT,
+            [Type] INTEGER NOT NULL
+            );";
+
+            sqlCmd = @"CREATE TABLE Schedules (
                     [ScheduleID] INTEGER PRIMARY KEY,
                     [Code] TEXT NOT NULL UNIQUE,
                     [Name] TEXT,
@@ -311,7 +324,83 @@ namespace mySQLite
             return cntErr; // количество ошибок
         }
         #endregion
+        #region Работа с пользователями
 
+        public void CreateUsersTable()
+        {
+            try
+            {
+                string createTableQuery = @"
+            CREATE TABLE IF NOT EXISTS Users (
+                UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+                PhoneNumber TEXT NOT NULL UNIQUE
+            )";
+
+                _sqlt.ExecuteNonQuery(createTableQuery);
+            }
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка CreateUsersTable: " + ex.Message);
+            }
+        }
+
+        public void AddUser(string phoneNumber)
+        {
+            try
+            {
+                string createTableQuery = @"CREATE TABLE IF NOT EXISTS Users (
+                [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                [PhoneNumber] TEXT NOT NULL UNIQUE
+            )";
+                _sqlt.ExecuteNonQuery(createTableQuery);
+
+                string insertQuery = "INSERT OR IGNORE INTO Users (PhoneNumber) VALUES (@phoneNumber)";
+
+                using (var connection = new SQLiteConnection(_sqlt.connect.ConnectionString))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(insertQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@phoneNumber", phoneNumber);
+                        command.ExecuteNonQuery(); // Просто выполняем, не проверяем результат
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка AddUser: " + ex.Message);
+            }
+        }
+
+        public bool CheckUserExists(string phoneNumber)
+        {
+            try
+            {
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Users",
+                    "COUNT(1) as UserCount",
+                    "PhoneNumber = '" + phoneNumber + "'",
+                    ""
+                );
+
+                // ДОБАВЬ ПРОВЕРКУ НА NULL:
+                if (dt == null || dt.Rows.Count == 0)
+                    return false;
+
+                object userCount = dt.Rows[0]["UserCount"];
+                if (userCount == null || userCount == DBNull.Value)
+                    return false;
+
+                return Convert.ToInt32(userCount) > 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog("Ошибка CheckUserExists: " + ex.Message);
+                return false;
+            }
+        }
+
+        #endregion
         #region Получение расписания
 
         public ScheduleInfo getScheduleByCode(string code)
