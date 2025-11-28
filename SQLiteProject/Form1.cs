@@ -356,8 +356,8 @@ namespace SQLiteProject
         }
         private void button9_Click(object sender, EventArgs e)
         {
-            Form2 settingsForm = new Form2(this, sqliteQ);
-            settingsForm.ShowDialog();
+            SettingsForm1 settings = new SettingsForm1(this, sqliteQ);
+            settings.ShowDialog();
         }
 
     }

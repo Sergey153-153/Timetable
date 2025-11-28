@@ -1,104 +1,30 @@
-﻿using System;
+﻿using mySQLite;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SQLiteProject
 {
-    partial class Form2
+    public partial class SettingsForm1 : Form
     {
-        private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.TableLayoutPanel mainTableLayout;
-        private System.Windows.Forms.Button btnDownloadSchedule;
-        private System.Windows.Forms.Button btnUploadSchedule;
-        private System.Windows.Forms.Button btnHolidays;
-        private System.Windows.Forms.Button btnTasks;
-        private System.Windows.Forms.Button btnScheduleSettings;
+        private Form1 form1;
+        private SQLiteQueries sqliteQ;
 
-        protected override void Dispose(bool disposing)
+        //private int z;
+
+        public SettingsForm1(Form1 parentForm, SQLiteQueries db)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
+            InitializeComponent();
+
+            form1 = parentForm;
+            sqliteQ = db;
         }
-
-        #region Windows Form Designer generated code
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 450);
-            this.Text = "Настройки";
-            this.BackColor = System.Drawing.Color.White;
-            this.Padding = new System.Windows.Forms.Padding(20);
-
-            InitializeControls();
-            this.ResumeLayout(false);
-        }
-
-        #endregion
-
-        private void InitializeControls()
-        {
-            mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            mainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            mainTableLayout.ColumnCount = 1;
-            mainTableLayout.RowCount = 5;
-            mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-
-            btnDownloadSchedule = CreateSettingsButton("Скачать расписание", 0);
-
-            btnUploadSchedule = CreateSettingsButton("Закачать расписание", 1);
-
-            btnHolidays = CreateSettingsButton("Список праздников", 2);
-
-            btnTasks = CreateSettingsButton("Задания", 3);
-
-            btnScheduleSettings = CreateSettingsButton("Расписание", 4);
-
-            mainTableLayout.Controls.Add(btnDownloadSchedule, 0, 0);
-            mainTableLayout.Controls.Add(btnUploadSchedule, 0, 1);
-            mainTableLayout.Controls.Add(btnHolidays, 0, 2);
-            mainTableLayout.Controls.Add(btnTasks, 0, 3);
-            mainTableLayout.Controls.Add(btnScheduleSettings, 0, 4);
-
-            this.Controls.Add(mainTableLayout);
-        }
-
-        private System.Windows.Forms.Button CreateSettingsButton(string text, int row)
-        {
-            var button = new System.Windows.Forms.Button();
-            button.Dock = System.Windows.Forms.DockStyle.Fill;
-            button.Text = text;
-            button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            button.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            button.FlatAppearance.BorderSize = 0;
-            button.BackColor = System.Drawing.Color.White;
-            button.ForeColor = System.Drawing.Color.Black;
-            button.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            button.Height = 70;
-            button.Margin = new System.Windows.Forms.Padding(0);
-
-            button.MouseEnter += (s, e) => {
-                button.BackColor = System.Drawing.Color.LightGray;
-            };
-            button.MouseLeave += (s, e) => {
-                button.BackColor = System.Drawing.Color.White;
-            };
-
-            button.Click += (s, e) => HandleSettingsClick(text);
-
-            return button;
-        }
-        /*
         private void HandleSettingsClick(string settingType)
         {
             switch (settingType)
@@ -109,7 +35,7 @@ namespace SQLiteProject
                 case "Закачать расписание":
                     UploadSchedule();
                     break;
-                case "Список праздников":
+                /*case "Список праздников":
                     OpenHolidaysSettings();
                     break;
                 case "Задания":
@@ -117,10 +43,10 @@ namespace SQLiteProject
                     break;
                 case "Расписание":
                     OpenScheduleSettings();
-                    break;
+                    break;*/
             }
-        }*/
-        /*
+        }
+
         private void DownloadSchedule()
         {
             using (System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog())
@@ -190,7 +116,8 @@ namespace SQLiteProject
                     }
                 }
             }
-        }*/        /*
+        }
+
         private void UploadSchedule()
         {
             using (System.Windows.Forms.Form inputForm = new System.Windows.Forms.Form())
@@ -263,31 +190,39 @@ namespace SQLiteProject
                     }
 
                     System.Windows.Forms.MessageBox.Show("Расписание успешно загружено!");
-                    mainForm.RefreshAllSchedulesData();
+                    //mainForm.RefreshAllSchedulesData();
                 }
                 catch (Exception ex)
                 {
                     System.Windows.Forms.MessageBox.Show($"Ошибка при загрузке расписания: {ex.Message}");
                 }
             }
-        }*/
-
-        private void OpenHolidaysSettings()
-        {
-            System.Windows.Forms.MessageBox.Show("Функция 'Список праздников' в разработке", "Внимание",
-                          System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
         }
 
-        private void OpenTaskSettings()
+        private void button1_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Функция 'задания' в разработке", "Внимание",
-                          System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            DownloadSchedule();
         }
 
-        private void OpenScheduleSettings()
+        private void button2_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Функция 'расписание' в разработке", "Внимание",
-                          System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            UploadSchedule();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Дима лентяй");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Даша работай лучше пж");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            form1.Show();
+            this.Close();
         }
     }
 }
