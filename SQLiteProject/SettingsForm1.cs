@@ -189,6 +189,9 @@ namespace SQLiteProject
                         return;
                     }
 
+                    // Очищаем таблицу LessonOverrides
+                    sqliteQ.ClearLessonOverrides();
+
                     System.Windows.Forms.MessageBox.Show("Расписание успешно загружено!");
                     //mainForm.RefreshAllSchedulesData();
                 }
@@ -197,6 +200,7 @@ namespace SQLiteProject
                     System.Windows.Forms.MessageBox.Show($"Ошибка при загрузке расписания: {ex.Message}");
                 }
             }
+
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SQLite;
 using System.IO;
 using System.Linq;
@@ -141,6 +142,27 @@ namespace mySQLite
 
             return maxId + 1;
         }
+
+        public int ClearLessonOverrides()
+        {
+            try
+            {
+                _sqlt.BeginTransaction();
+
+                // Очистка всей таблицы LessonOverrides
+                _sqlt.ExecuteNonQuery("DELETE FROM LessonOverrides;");
+
+                _sqlt.CommitTransaction();
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                _sqlt.RollBackTransaction();
+                SaveLog("Ошибка ClearLessonOverrides: " + ex.Message);
+                return 0;
+            }
+        }
+
 
         public int CopySchedule(int oldScheduleID, int newScheduleID)
         {
