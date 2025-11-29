@@ -284,7 +284,7 @@ namespace SQLiteProject
             //saveDataToDB();
             loadFromDBCountry();
             List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(DateTime.Today);
-            MessageBox.Show($"Найдено уроков: {todaysLessons.Count}");
+            //MessageBox.Show($"Найдено уроков: {todaysLessons.Count}");
             ShowLessonsAsButtons(todaysLessons);
 
         }

@@ -153,6 +153,11 @@ namespace SQLiteProject
                 List<string> listOverrides = new List<string>() { line };
                 int err = sqliteQ.AddLessonOverrides(listOverrides);
 
+                // Отмена пары
+                string line1 = $"{LessonId};{DateTime.Today:yyyy-MM-dd};0;;;;";
+                List<string> listOverrides1 = new List<string>() { line1 };
+                int err1 = sqliteQ.AddLessonOverrides(listOverrides1);
+
                 if (err == 0)
                     MessageBox.Show($"Пара успешно перенесена!\n{startTime:dd.MM.yyyy HH:mm} - {endTime:HH:mm}");
                 else

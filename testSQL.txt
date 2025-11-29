@@ -102,3 +102,91 @@ table Schedules already exists!
 29.ноя.2025 00:11:21 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
+
+29.ноя.2025 01:33:32 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 01:50:45 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:06:50 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:08:33 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:14:01 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:18:28 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:19:29 ERR 
+Ошибка при вставке новой записи в таблицу LessonOverrides!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
+database is locked
+database is locked
+
+29.ноя.2025 02:20:13 ERR 
+Ошибка при вставке новой записи в таблицу LessonOverrides!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
+database is locked
+database is locked
+
+29.ноя.2025 02:20:55 ERR 
+Ошибка при вставке новой записи в таблицу LessonOverrides!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
+database is locked
+database is locked
+
+29.ноя.2025 02:21:36 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:23:04 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:24:00 ERR 
+Ошибка при вставке новой записи в таблицу LessonOverrides!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
+database is locked
+database is locked
+
+29.ноя.2025 02:26:23 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:34:50 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:36:24 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 02:59:55 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 03:05:50 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 03:07:10 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 03:09:39 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
