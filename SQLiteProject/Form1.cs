@@ -83,7 +83,7 @@ namespace SQLiteProject
             this.Hide();
         }
 
-        public int GetDayNumber(string day)
+        /*public int GetDayNumber(string day)
         {
             switch (day)
             {
@@ -93,9 +93,15 @@ namespace SQLiteProject
                 case "Thursday": return 4;
                 case "Friday": return 5;
                 case "Saturday": return 6;
+                case "Понедельник": return 1;
+                case "Вторник": return 2;
+                case "Среда": return 3;
+                case "Четверг": return 4;
+                case "Пятница": return 5;
+                case "Суббота": return 6;
                 default: return 0;
             }
-        }
+        }*/
 
         private void connectToDB()
         {
