@@ -38,6 +38,7 @@ namespace SQLiteProject
             List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(SelectedDate1);
             ShowLessonsAsButtons(todaysLessons);
             label1Info();
+            scrollButtonsInfo(SelectedDate1);
         }
 
         public void ShowLessonsAsButtons(List<LessonInfo> lessons)
@@ -85,25 +86,27 @@ namespace SQLiteProject
             this.Hide();
         }
 
-        /*public int GetDayNumber(string day)
+        public string DayOfWeekShortRu(string day)
         {
             switch (day)
             {
-                case "Monday": return 1;
-                case "Tuesday": return 2;
-                case "Wednesday": return 3;
-                case "Thursday": return 4;
-                case "Friday": return 5;
-                case "Saturday": return 6;
-                case "Понедельник": return 1;
-                case "Вторник": return 2;
-                case "Среда": return 3;
-                case "Четверг": return 4;
-                case "Пятница": return 5;
-                case "Суббота": return 6;
-                default: return 0;
+                case "Monday": return "Пн";
+                case "Tuesday": return "Вт";
+                case "Wednesday": return "Ср";
+                case "Thursday": return "Чт";
+                case "Friday": return "Пт";
+                case "Saturday": return "Сб";
+                case "Sunday": return "Вс";
+                case "Понедельник": return "Пн";
+                case "Вторник": return "Вт";
+                case "Среда": return "Ср";
+                case "Четверг": return "Чт";
+                case "Пятница": return "Пт";
+                case "Суббота": return "Сб";
+                case "Воскресенье": return "Вс";
+                default: return "";
             }
-        }*/
+        }
 
         private void connectToDB()
         {
@@ -187,6 +190,7 @@ namespace SQLiteProject
             List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(DateTime.Today);
             ShowLessonsAsButtons(todaysLessons);
             label1Info();
+            scrollButtonsInfo(DateTime.Today);
         }
 
         private void buttonSettings_Click(object sender, EventArgs e)
@@ -204,6 +208,7 @@ namespace SQLiteProject
             List<LessonInfo> lessons = sqliteQ.GetLessonsForDate(selectedDate);
             ShowLessonsAsButtons(lessons);
             label1Info();
+            scrollButtonsInfo(selectedDate);
         }
 
         private void label1Info()
@@ -225,6 +230,35 @@ namespace SQLiteProject
             }
         }
 
+        private void scrollButtonsInfo(DateTime date)
+        {
+            button2.BackColor = Color.LightGray;
+            button3.BackColor = Color.LightGray;
+            button4.BackColor = Color.LightGray;
+            button5.BackColor = Color.LightGray;
+            button6.BackColor = Color.LightGray;
+            button7.BackColor = Color.LightGray;
+            DateTime localMonday = date.AddDays((1-(int)date.DayOfWeek));
+            button2.Text = DayOfWeekShortRu(localMonday.DayOfWeek.ToString()) + "," + localMonday.Day.ToString();
+            button3.Text = DayOfWeekShortRu(localMonday.AddDays(1).DayOfWeek.ToString()) + "," + localMonday.AddDays(1).Day.ToString();
+            button4.Text = DayOfWeekShortRu(localMonday.AddDays(2).DayOfWeek.ToString()) + "," + localMonday.AddDays(2).Day.ToString();
+            button5.Text = DayOfWeekShortRu(localMonday.AddDays(3).DayOfWeek.ToString()) + "," + localMonday.AddDays(3).Day.ToString();
+            button6.Text = DayOfWeekShortRu(localMonday.AddDays(4).DayOfWeek.ToString()) + "," + localMonday.AddDays(4).Day.ToString();
+            button7.Text = DayOfWeekShortRu(localMonday.AddDays(5).DayOfWeek.ToString()) + "," + localMonday.AddDays(5).Day.ToString();
+            if (sqliteQ.GetLessonsForDate(localMonday).FirstOrDefault() != null)
+                button2.BackColor = Color.GreenYellow;
+            if (sqliteQ.GetLessonsForDate(localMonday.AddDays(1)).FirstOrDefault() != null)
+                button3.BackColor = Color.GreenYellow;
+            if (sqliteQ.GetLessonsForDate(localMonday.AddDays(2)).FirstOrDefault() != null)
+                button4.BackColor = Color.GreenYellow;
+            if (sqliteQ.GetLessonsForDate(localMonday.AddDays(3)).FirstOrDefault() != null)
+                button5.BackColor = Color.GreenYellow;
+            if (sqliteQ.GetLessonsForDate(localMonday.AddDays(4)).FirstOrDefault() != null)
+                button6.BackColor = Color.GreenYellow;
+            if (sqliteQ.GetLessonsForDate(localMonday.AddDays(5)).FirstOrDefault() != null)
+                button7.BackColor = Color.GreenYellow;
+        }
+
         private void buttonTasks_Click(object sender, EventArgs e)
         {
             return;
@@ -233,6 +267,60 @@ namespace SQLiteProject
         private void buttonAddLesson_Click(object sender, EventArgs e)
         {
             return;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = dateTimePicker1.Value.AddDays(-7);
+            dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = dateTimePicker1.Value.AddDays(7);
+            dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DateTime localMonday = dateTimePicker1.Value.AddDays((1 - (int)dateTimePicker1.Value.DayOfWeek));
+            dateTimePicker1.Value = localMonday;
+            dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DateTime localTuesday = dateTimePicker1.Value.AddDays((2 - (int)dateTimePicker1.Value.DayOfWeek));
+            dateTimePicker1.Value = localTuesday;
+            dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DateTime localWednesday = dateTimePicker1.Value.AddDays((3 - (int)dateTimePicker1.Value.DayOfWeek));
+            dateTimePicker1.Value = localWednesday;
+            dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DateTime localTuesday = dateTimePicker1.Value.AddDays((4 - (int)dateTimePicker1.Value.DayOfWeek));
+            dateTimePicker1.Value = localTuesday;
+            dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DateTime localFriday = dateTimePicker1.Value.AddDays((5 - (int)dateTimePicker1.Value.DayOfWeek));
+            dateTimePicker1.Value = localFriday;
+            dateTimePicker1_ValueChanged(sender, e);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DateTime localSaturday = dateTimePicker1.Value.AddDays((6 - (int)dateTimePicker1.Value.DayOfWeek));
+            dateTimePicker1.Value = localSaturday;
+            dateTimePicker1_ValueChanged(sender, e);
         }
     }
 }
