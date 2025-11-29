@@ -309,11 +309,19 @@ namespace mySQLite
             int day = (int)date.DayOfWeek;
             if (day == 0) day = 7;
 
-            // ВАЖНО: WeekNumber = 0 → показывать всегда
+            bool isOneWeek = !_sqlt.FetchByColumn(
+                "Lessons", "WeekNumber",
+                $"ScheduleID = {scheduleID} AND WeekNumber > 0", ""
+            ).AsEnumerable().Any();
+
+            string weekFilter = isOneWeek
+                ? ""                                                           // однонедельное → пары всегда показываем
+                : $" AND (WeekNumber = 0 OR WeekNumber = {weekNumber})";        // двухнедельное
+
             DataTable dtBase = _sqlt.FetchByColumn(
                 "Lessons",
                 "LessonID, ScheduleID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime",
-                $"ScheduleID = {scheduleID} AND DayOfWeek = {day} AND (WeekNumber = 0 OR WeekNumber = {weekNumber})",
+                $"ScheduleID = {scheduleID} AND DayOfWeek = {day}{weekFilter}",
                 "ORDER BY LessonNumber"
             );
 
@@ -397,6 +405,15 @@ namespace mySQLite
 
             // Удаляем отменённые
             finalList.RemoveAll(x => canceledIds.Contains(x.LessonID));
+
+            foreach (var les in finalList)
+            {
+                // Если расписание однонедельное → всегда 0
+                if (isOneWeek)
+                    les.WeekNumber = 0;
+                else
+                    les.WeekNumber = weekNumber; // 1 или 2
+            }
 
             // Сортировка по времени
             finalList = finalList.OrderBy(x => TimeSpan.Parse(x.StartTime)).ToList();

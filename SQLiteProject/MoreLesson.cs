@@ -162,7 +162,6 @@ namespace SQLiteProject
                 List<string> listOverrides1 = new List<string>() { line1 };
                 int err1 = sqliteQ.AddLessonOverrides(listOverrides1);
 
-
                 if (err == 0)
                     MessageBox.Show($"Пара успешно перенесена!\n{startTime:dd.MM.yyyy HH:mm} - {endTime:HH:mm}");
                 else
