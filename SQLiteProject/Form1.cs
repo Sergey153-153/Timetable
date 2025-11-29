@@ -34,7 +34,8 @@ namespace SQLiteProject
         private void Form1_Activated(object sender, EventArgs e)
         {
             if (sqliteQ == null) return; // ничего не делаем, пока БД не подключена
-            List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(DateTime.Today);
+            DateTime SelectedDate1 = dateTimePicker1.Value.Date;
+            List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(SelectedDate1);
             ShowLessonsAsButtons(todaysLessons);
             label1Info();
         }
@@ -73,6 +74,7 @@ namespace SQLiteProject
 
             // открываем форму MoreLesson
             MoreLesson f2 = new MoreLesson(this, sqliteQ, lessonId);
+            f2.SelectedDate = dateTimePicker1.Value.Date;
             f2.StartPosition = FormStartPosition.CenterParent;
             f2.StartPosition = FormStartPosition.Manual;
             f2.Location = this.Location;

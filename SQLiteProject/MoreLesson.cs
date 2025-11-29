@@ -22,6 +22,8 @@ namespace SQLiteProject
         private Form1 form1;
         private int LessonId;
         private SQLiteQueries sqliteQ;
+        public DateTime SelectedDate { get; set; }
+
 
         //private int z;
         //Дима
@@ -154,9 +156,12 @@ namespace SQLiteProject
                 int err = sqliteQ.AddLessonOverrides(listOverrides);
 
                 // Отмена пары
-                string line1 = $"{LessonId};{DateTime.Today:yyyy-MM-dd};0;;;;";
+                string dateStr = SelectedDate.ToString("yyyy-MM-dd");
+
+                string line1 = $"{LessonId};{dateStr};0;;;;";
                 List<string> listOverrides1 = new List<string>() { line1 };
                 int err1 = sqliteQ.AddLessonOverrides(listOverrides1);
+
 
                 if (err == 0)
                     MessageBox.Show($"Пара успешно перенесена!\n{startTime:dd.MM.yyyy HH:mm} - {endTime:HH:mm}");
@@ -187,16 +192,19 @@ namespace SQLiteProject
 
                 if (deleteForm.DialogResult == DialogResult.Yes)
                 {
-                    // Удаление только на сегодня
-                    string line = $"{LessonId};{DateTime.Today:yyyy-MM-dd};0;;;;";
+                    // Удаление только на выбранный день
+                    string dateStr = SelectedDate.ToString("yyyy-MM-dd");
+
+                    string line = $"{LessonId};{dateStr};0;;;;";
                     List<string> listOverrides = new List<string>() { line };
                     int err = sqliteQ.AddLessonOverrides(listOverrides);
 
                     if (err == 0)
-                        MessageBox.Show("Пара удалена только на сегодня!");
+                        MessageBox.Show("Пара удалена только на выбранный день!");
                     else
-                        MessageBox.Show("Ошибка удаления пары на сегодня.");
+                        MessageBox.Show("Ошибка удаления пары на выбранный день.");
                 }
+
                 else if (deleteForm.DialogResult == DialogResult.OK)
                 {
                     // Удаление навсегда
