@@ -37,9 +37,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(62, 96);
+            this.button1.Location = new System.Drawing.Point(11, 78);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(447, 53);
+            this.button1.Size = new System.Drawing.Size(337, 43);
             this.button1.TabIndex = 0;
             this.button1.Text = "Скачать расписание";
             this.button1.UseVisualStyleBackColor = true;
@@ -47,9 +48,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(62, 187);
+            this.button2.Location = new System.Drawing.Point(11, 152);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(447, 53);
+            this.button2.Size = new System.Drawing.Size(337, 43);
             this.button2.TabIndex = 1;
             this.button2.Text = "Закачать расписание";
             this.button2.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(62, 278);
+            this.button3.Location = new System.Drawing.Point(11, 226);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(447, 53);
+            this.button3.Size = new System.Drawing.Size(337, 43);
             this.button3.TabIndex = 2;
             this.button3.Text = "Список праздников";
             this.button3.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(135, 520);
+            this.button4.Location = new System.Drawing.Point(64, 480);
+            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 72);
+            this.button4.Size = new System.Drawing.Size(77, 58);
             this.button4.TabIndex = 3;
             this.button4.Text = "Задания";
             this.button4.UseVisualStyleBackColor = true;
@@ -77,9 +81,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(361, 520);
+            this.button5.Location = new System.Drawing.Point(233, 480);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 72);
+            this.button5.Size = new System.Drawing.Size(77, 58);
             this.button5.TabIndex = 4;
             this.button5.Text = "Расписание";
             this.button5.UseVisualStyleBackColor = true;
@@ -87,14 +92,15 @@
             // 
             // SettingsForm1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 640);
+            this.ClientSize = new System.Drawing.Size(359, 628);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SettingsForm1";
             this.Text = "Настройки";
             this.ResumeLayout(false);
