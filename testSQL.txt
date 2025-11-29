@@ -483,3 +483,7 @@ table Schedules already exists!
 Ошибка при закрытии подключения к базе данных Timetable.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 13:02:30 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
