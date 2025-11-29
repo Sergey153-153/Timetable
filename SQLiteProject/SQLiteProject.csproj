@@ -77,6 +77,20 @@
       <DependentUpon>SettingsForm1.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteQueries.cs" />
+<<<<<<< HEAD
+    <Compile Include="SubjectItem.cs" />
+    <Compile Include="TaskItem.cs" />
+    <Compile Include="Tasks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tasks.Designer.cs">
+      <DependentUpon>Tasks.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Add_task.resx">
+      <DependentUpon>Add_task.cs</DependentUpon>
+    </EmbeddedResource>
+=======
+>>>>>>> parent of ed809d3 (Добавлены экраны "ДЗ и КР", "Добавить задание", добавлены связи для перехода к этим экранам с главного)
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
