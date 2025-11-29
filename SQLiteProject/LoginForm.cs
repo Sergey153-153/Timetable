@@ -56,7 +56,6 @@ namespace SQLiteProject
                               MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Form1 mainForm = new Form1();
-                mainForm.FormClosed += (s, args) => this.Close(); // закроем LoginForm при закрытии Form1
                 mainForm.Show();
                 this.Hide();
             }

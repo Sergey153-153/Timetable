@@ -25,6 +25,27 @@ namespace SQLiteProject
             form1 = parentForm;
             sqliteQ = db;
         }
+        private void HandleSettingsClick(string settingType)
+        {
+            switch (settingType)
+            {
+                case "Скачать расписание":
+                    DownloadSchedule();
+                    break;
+                case "Закачать расписание":
+                    UploadSchedule();
+                    break;
+                /*case "Список праздников":
+                    OpenHolidaysSettings();
+                    break;
+                case "Задания":
+                    OpenTaskSettings();
+                    break;
+                case "Расписание":
+                    OpenScheduleSettings();
+                    break;*/
+            }
+        }
 
         private void DownloadSchedule()
         {
@@ -168,17 +189,14 @@ namespace SQLiteProject
                         return;
                     }
 
-                    // Очищаем таблицу LessonOverrides
-                    sqliteQ.ClearLessonOverrides();
-
                     System.Windows.Forms.MessageBox.Show("Расписание успешно загружено!");
+                    //mainForm.RefreshAllSchedulesData();
                 }
                 catch (Exception ex)
                 {
                     System.Windows.Forms.MessageBox.Show($"Ошибка при загрузке расписания: {ex.Message}");
                 }
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
