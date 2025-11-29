@@ -38,10 +38,10 @@
             // 
             // buttonTasks
             // 
-            this.buttonTasks.Location = new System.Drawing.Point(48, 662);
+            this.buttonTasks.Location = new System.Drawing.Point(46, 662);
             this.buttonTasks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonTasks.Name = "buttonTasks";
-            this.buttonTasks.Size = new System.Drawing.Size(75, 71);
+            this.buttonTasks.Size = new System.Drawing.Size(105, 71);
             this.buttonTasks.TabIndex = 8;
             this.buttonTasks.Text = "Задания";
             this.buttonTasks.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             // 
             // buttonAddLesson
             // 
-            this.buttonAddLesson.Location = new System.Drawing.Point(203, 662);
+            this.buttonAddLesson.Location = new System.Drawing.Point(202, 662);
             this.buttonAddLesson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAddLesson.Name = "buttonAddLesson";
             this.buttonAddLesson.Size = new System.Drawing.Size(75, 71);
@@ -60,10 +60,10 @@
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(356, 662);
+            this.buttonSettings.Location = new System.Drawing.Point(325, 662);
             this.buttonSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(75, 71);
+            this.buttonSettings.Size = new System.Drawing.Size(105, 71);
             this.buttonSettings.TabIndex = 10;
             this.buttonSettings.Text = "Настройки";
             this.buttonSettings.UseVisualStyleBackColor = true;
@@ -108,6 +108,7 @@
             this.Controls.Add(this.buttonTasks);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);

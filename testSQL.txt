@@ -337,3 +337,126 @@ table Schedules already exists!
 Ошибка при закрытии подключения к базе данных Timetable.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:25:35 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:29:36 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:34:03 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:34:28 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:34:28 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:38:12 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:40:59 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:41:52 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:42:00 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:42:19 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:43:51 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:43:51 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:44:41 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:55:49 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:55:49 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 11:55:53 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 11:56:08 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 12:00:26 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 12:00:42 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 12:00:42 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 12:00:49 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 12:00:59 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 12:01:32 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 12:01:32 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 12:05:39 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 12:06:39 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 12:06:39 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
