@@ -163,7 +163,6 @@ namespace SQLiteProject
                 else
                     MessageBox.Show("Ошибка при переносе пары.");
 
-                form1.RefreshAllSchedulesData();
             }
         }
 
@@ -207,7 +206,6 @@ namespace SQLiteProject
                         MessageBox.Show("Ошибка удаления пары навсегда.");
                 }
 
-                form1.RefreshAllSchedulesData();
             }
         }
 
@@ -270,7 +268,6 @@ namespace SQLiteProject
                 }
 
                 MessageBox.Show("Расписание успешно заменено!");
-                form1.RefreshAllSchedulesData();
             }
         }
     }

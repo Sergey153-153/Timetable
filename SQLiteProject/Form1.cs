@@ -27,6 +27,33 @@ namespace SQLiteProject
         {
             InitializeComponent();
             panelLessons.AutoScroll = true;
+
+            this.Activated += Form1_Activated;
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            if (sqliteQ == null) return; // ничего не делаем, пока БД не подключена
+
+            if (cbCountry != null)
+            {
+                cbCountry.Items.Clear();
+                DataTable dt = sqliteQ._sqlt.FetchByColumn("Schedules", "ScheduleID, Name", "", "ORDER BY ScheduleID");
+                foreach (DataRow row in dt.Rows)
+                {
+                    cbCountry.Items.Add(new KeyValuePair<int, string>(
+                        int.Parse(row["ScheduleID"].ToString()),
+                        row["Name"].ToString()
+                    ));
+                }
+                if (cbCountry.Items.Count > 0)
+                    cbCountry.SelectedIndex = 0;
+            }
+
+            int timetable_type = cbCountry.SelectedIndex;
+
+            List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(DateTime.Today);
+            ShowLessonsAsButtons(todaysLessons);
         }
 
         public void ShowLessonsAsButtons(List<LessonInfo> lessons)
@@ -162,95 +189,6 @@ namespace SQLiteProject
 
             int errLessons = sqliteQ.AddLessons(listLessons);
             MessageBox.Show($"Обработано уроков: {listLessons.Count}, ошибок: {errLessons}");
-        }
-
-
-
-        public void RefreshAllSchedulesData()
-        {
-            // 1. Обновляем ComboBox с расписаниями
-            if (cbCountry != null)
-            {
-                cbCountry.Items.Clear();
-                DataTable dt = sqliteQ._sqlt.FetchByColumn("Schedules", "ScheduleID, Name", "", "ORDER BY ScheduleID");
-                foreach (DataRow row in dt.Rows)
-                {
-                    cbCountry.Items.Add(new KeyValuePair<int, string>(
-                        int.Parse(row["ScheduleID"].ToString()),
-                        row["Name"].ToString()
-                    ));
-                }
-                if (cbCountry.Items.Count > 0)
-                    cbCountry.SelectedIndex = 0;
-            }
-
-            int timetable_type = cbCountry.SelectedIndex;
-            /*if (timetable_type == 0)
-            {
-                var lesson = sqliteQ.GetLessonById(1);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(2);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(3);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(4);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(5);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(6);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-            }
-            if (timetable_type == 1)
-            {
-                var lesson = sqliteQ.GetLessonById(1);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(2);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(3);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(4);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(5);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(6);
-                if (lesson.WeekNumber == timetable_type + 1)
-                    button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-            }
-            if (timetable_type == 2)
-            {
-                timetable_type = timetable_type + 1;
-                var lesson = sqliteQ.GetLessonById(1);
-                if (lesson.WeekNumber == timetable_type)
-                    button1.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(2);
-                if (lesson.WeekNumber == timetable_type)
-                    button2.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(3);
-                if (lesson.WeekNumber == timetable_type)
-                    button3.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(4);
-                if (lesson.WeekNumber == timetable_type)
-                    button4.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(5);
-                if (lesson.WeekNumber == timetable_type)
-                    button5.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-                lesson = sqliteQ.GetLessonById(6);
-                if (lesson.WeekNumber == timetable_type)
-                    button6.Text = lesson.Time + " | " + lesson.Subject + " | " + lesson.Teacher;
-            }*/
-            // 2. Можно добавить сюда обновление любых других контролов,
-            // которые зависят от расписаний
         }
 
         private void loadFromDBCountry()
