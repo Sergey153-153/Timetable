@@ -28,97 +28,100 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbCountry = new System.Windows.Forms.ComboBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.buttonTasks = new System.Windows.Forms.Button();
+            this.buttonAddLesson = new System.Windows.Forms.Button();
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panelLessons = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cbCountry
+            // buttonTasks
             // 
-            this.cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCountry.FormattingEnabled = true;
-            this.cbCountry.Location = new System.Drawing.Point(221, 11);
-            this.cbCountry.Name = "cbCountry";
-            this.cbCountry.Size = new System.Drawing.Size(127, 21);
-            this.cbCountry.TabIndex = 0;
-            this.cbCountry.SelectedIndexChanged += new System.EventHandler(this.cbCountry_SelectedIndexChanged);
+            this.buttonTasks.Location = new System.Drawing.Point(48, 662);
+            this.buttonTasks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonTasks.Name = "buttonTasks";
+            this.buttonTasks.Size = new System.Drawing.Size(75, 71);
+            this.buttonTasks.TabIndex = 8;
+            this.buttonTasks.Text = "Задания";
+            this.buttonTasks.UseVisualStyleBackColor = true;
+            this.buttonTasks.Click += new System.EventHandler(this.buttonTasks_Click);
             // 
-            // button7
+            // buttonAddLesson
             // 
-            this.button7.Location = new System.Drawing.Point(36, 538);
-            this.button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(56, 58);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "Задания";
-            this.button7.UseVisualStyleBackColor = true;
+            this.buttonAddLesson.Location = new System.Drawing.Point(203, 662);
+            this.buttonAddLesson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAddLesson.Name = "buttonAddLesson";
+            this.buttonAddLesson.Size = new System.Drawing.Size(75, 71);
+            this.buttonAddLesson.TabIndex = 9;
+            this.buttonAddLesson.Text = "+";
+            this.buttonAddLesson.UseVisualStyleBackColor = true;
+            this.buttonAddLesson.Click += new System.EventHandler(this.buttonAddLesson_Click);
             // 
-            // button8
+            // buttonSettings
             // 
-            this.button8.Location = new System.Drawing.Point(152, 538);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(56, 58);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "+";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(267, 538);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(56, 58);
-            this.button9.TabIndex = 10;
-            this.button9.Text = "Настройки";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.buttonSettings.Location = new System.Drawing.Point(356, 662);
+            this.buttonSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(75, 71);
+            this.buttonSettings.TabIndex = 10;
+            this.buttonSettings.Text = "Настройки";
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(10, 13);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Location = new System.Drawing.Point(13, 16);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(151, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 13;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // panelLessons
             // 
-            this.panelLessons.Location = new System.Drawing.Point(10, 98);
+            this.panelLessons.Location = new System.Drawing.Point(13, 121);
+            this.panelLessons.Margin = new System.Windows.Forms.Padding(4);
             this.panelLessons.Name = "panelLessons";
-            this.panelLessons.Size = new System.Drawing.Size(338, 411);
+            this.panelLessons.Size = new System.Drawing.Size(451, 506);
             this.panelLessons.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(309, 16);
+            this.label1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 20);
+            this.label1.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 609);
+            this.ClientSize = new System.Drawing.Size(479, 750);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panelLessons);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.cbCountry);
+            this.Controls.Add(this.buttonSettings);
+            this.Controls.Add(this.buttonAddLesson);
+            this.Controls.Add(this.buttonTasks);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox cbCountry;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button buttonTasks;
+        private System.Windows.Forms.Button buttonAddLesson;
+        private System.Windows.Forms.Button buttonSettings;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Panel panelLessons;
+        private System.Windows.Forms.Label label1;
     }
 }
 

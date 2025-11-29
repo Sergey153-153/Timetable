@@ -34,26 +34,9 @@ namespace SQLiteProject
         private void Form1_Activated(object sender, EventArgs e)
         {
             if (sqliteQ == null) return; // ничего не делаем, пока БД не подключена
-
-            if (cbCountry != null)
-            {
-                cbCountry.Items.Clear();
-                DataTable dt = sqliteQ._sqlt.FetchByColumn("Schedules", "ScheduleID, Name", "", "ORDER BY ScheduleID");
-                foreach (DataRow row in dt.Rows)
-                {
-                    cbCountry.Items.Add(new KeyValuePair<int, string>(
-                        int.Parse(row["ScheduleID"].ToString()),
-                        row["Name"].ToString()
-                    ));
-                }
-                if (cbCountry.Items.Count > 0)
-                    cbCountry.SelectedIndex = 0;
-            }
-
-            int timetable_type = cbCountry.SelectedIndex;
-
             List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(DateTime.Today);
             ShowLessonsAsButtons(todaysLessons);
+            label1Info();
         }
 
         public void ShowLessonsAsButtons(List<LessonInfo> lessons)
@@ -190,51 +173,15 @@ namespace SQLiteProject
             int errLessons = sqliteQ.AddLessons(listLessons);
             MessageBox.Show($"Обработано уроков: {listLessons.Count}, ошибок: {errLessons}");
         }
-
-        private void loadFromDBCountry()
-        {
-            cbCountry.Items.Clear();
-            DataTable dt = sqliteQ._sqlt.FetchByColumn("Schedules", "ScheduleID, Name", "", "ORDER BY ScheduleID");
-
-            foreach (DataRow row in dt.Rows)
-            {
-                cbCountry.Items.Add(new KeyValuePair<int, string>(
-                    int.Parse(row["ScheduleID"].ToString()),
-                    row["Name"].ToString()
-                ));
-            }
-
-            if (cbCountry.Items.Count > 0)
-                cbCountry.SelectedIndex = 0;
-        }
-
-        private void loadFromDBRegion()
-        {
-            string curCountry = cbCountry.SelectedItem == null ? "" : cbCountry.SelectedItem.ToString();
-
-            //listInfoRegion = sqliteQ.getListRegion(curCountry);
-            //dgvRegion.DataSource = listInfoRegion;
-        }
-
         private void Form1_Shown(object sender, EventArgs e)
         {
             connectToDB();
-            //saveDataToDB();
-            loadFromDBCountry();
             List<LessonInfo> todaysLessons = sqliteQ.GetLessonsForDate(DateTime.Today);
-            //MessageBox.Show($"Найдено уроков: {todaysLessons.Count}");
             ShowLessonsAsButtons(todaysLessons);
-
+            label1Info();
         }
 
-        
-        private void cbCountry_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadFromDBRegion();
-        }
-
-        
-        private void button9_Click(object sender, EventArgs e)
+        private void buttonSettings_Click(object sender, EventArgs e)
         {
             SettingsForm1 settings = new SettingsForm1(this, sqliteQ);
             settings.ShowDialog();
@@ -243,15 +190,41 @@ namespace SQLiteProject
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             if (sqliteQ == null)
-                return; // БД ещё не подключена
+                return;
 
             DateTime selectedDate = dateTimePicker1.Value.Date;
-
-            // Получаем уроки на выбранную дату
             List<LessonInfo> lessons = sqliteQ.GetLessonsForDate(selectedDate);
-
-            // Отображаем кнопками
             ShowLessonsAsButtons(lessons);
+            label1Info();
+        }
+
+        private void label1Info()
+        {
+            if (sqliteQ == null) return;
+            DateTime selectedDate = dateTimePicker1.Value.Date;
+            List<LessonInfo> lessons = sqliteQ.GetLessonsForDate(selectedDate);
+            LessonInfo lesson = lessons.FirstOrDefault();
+            if (lesson == null)
+            {
+                return;
+            }
+            else
+            {
+                if (lesson.WeekNumber == 1)
+                    label1.Text = "Нечётная неделя";
+                if (lesson.WeekNumber == 2)
+                    label1.Text = "Чётная неделя";
+            }
+        }
+
+        private void buttonTasks_Click(object sender, EventArgs e)
+        {
+            return;
+        }
+
+        private void buttonAddLesson_Click(object sender, EventArgs e)
+        {
+            return;
         }
     }
 }
