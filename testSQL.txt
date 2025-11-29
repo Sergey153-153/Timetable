@@ -103,152 +103,98 @@ table Schedules already exists!
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 01:33:32 ERR 
+29.ноя.2025 01:54:01 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 01:50:45 ERR 
+29.ноя.2025 01:55:49 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 02:06:50 ERR 
+29.ноя.2025 08:59:40 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 02:08:33 ERR 
+29.ноя.2025 09:03:09 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 02:14:01 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 02:18:28 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 02:19:29 ERR 
-Ошибка при вставке новой записи в таблицу LessonOverrides!
-Метод: Insert(string tablename, ParametersCollection parameters)
-Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
-database is locked
-database is locked
-
-29.ноя.2025 02:20:13 ERR 
-Ошибка при вставке новой записи в таблицу LessonOverrides!
-Метод: Insert(string tablename, ParametersCollection parameters)
-Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
-database is locked
-database is locked
-
-29.ноя.2025 02:20:55 ERR 
-Ошибка при вставке новой записи в таблицу LessonOverrides!
-Метод: Insert(string tablename, ParametersCollection parameters)
-Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
-database is locked
-database is locked
-
-29.ноя.2025 02:21:36 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 02:23:04 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 02:24:00 ERR 
-Ошибка при вставке новой записи в таблицу LessonOverrides!
-Метод: Insert(string tablename, ParametersCollection parameters)
-Текст запроса: INSERT INTO LessonOverrides (LessonID,OverrideDate,IsActive,NewStartTime,NewEndTime,NewLocation) VALUES (@LessonID,@OverrideDate,@IsActive,@NewStartTime,@NewEndTime,@NewLocation)
-database is locked
-database is locked
-
-29.ноя.2025 02:26:23 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 02:34:50 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 02:36:24 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 02:59:55 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:05:50 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:07:10 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:09:39 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:26:01 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:26:11 ERR 
-Ошибка при закрытии подключения к базе данных Timetable.db
-Доступ к ликвидированному объекту невозможен.
-Имя объекта: "SQLiteConnection".
-
-29.ноя.2025 03:32:31 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:34:50 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:37:42 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:43:37 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 03:43:53 ERR 
+29.ноя.2025 09:03:41 ERR 
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
 
-29.ноя.2025 03:43:53 ERR 
+29.ноя.2025 09:03:41 ERR 
 Ошибка при закрытии подключения к базе данных Timetable.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
 
-29.ноя.2025 03:46:08 ERR 
+29.ноя.2025 09:07:06 ERR 
 Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
 table Schedules already exists!
 
-29.ноя.2025 03:47:55 ERR 
-Ошибка при закрытии подключения к базе данных Timetable.db
-Доступ к ликвидированному объекту невозможен.
-Имя объекта: "SQLiteConnection".
-
-29.ноя.2025 03:56:49 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 04:04:31 ERR 
-Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
-table Schedules already exists!
-
-29.ноя.2025 04:07:17 ERR 
+29.ноя.2025 09:07:32 ERR 
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
 
-29.ноя.2025 04:07:17 ERR 
+29.ноя.2025 09:07:32 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:18:34 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 09:19:23 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:19:23 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:20:34 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 09:20:59 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:20:59 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:26:23 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 09:26:53 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:26:53 ERR 
+Ошибка при закрытии подключения к базе данных Timetable.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:28:17 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+29.ноя.2025 09:28:29 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+29.ноя.2025 09:28:29 ERR 
 Ошибка при закрытии подключения к базе данных Timetable.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
