@@ -296,19 +296,24 @@ namespace mySQLite
 
         }
 
+        public DateTime SemesterStart = new DateTime(2024, 9, 1); // точка отсчёта
+
         public List<LessonInfo> GetLessonsForDate(DateTime date)
         {
-            int scheduleID = 1; // всегда работаем с 1
+            int scheduleID = 1;
+
+            // Текущая учебная неделя: 1 или 2
+            int weekNumber = ((int)((date - SemesterStart).TotalDays / 7) % 2) + 1;
 
             // День недели (1–7)
             int day = (int)date.DayOfWeek;
             if (day == 0) day = 7;
 
-            // Получаем базовые уроки для этого дня
+            // ВАЖНО: WeekNumber = 0 → показывать всегда
             DataTable dtBase = _sqlt.FetchByColumn(
                 "Lessons",
                 "LessonID, ScheduleID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, StartTime, EndTime",
-                $"ScheduleID = {scheduleID} AND DayOfWeek = {day}",
+                $"ScheduleID = {scheduleID} AND DayOfWeek = {day} AND (WeekNumber = 0 OR WeekNumber = {weekNumber})",
                 "ORDER BY LessonNumber"
             );
 
@@ -330,19 +335,13 @@ namespace mySQLite
                 });
             }
 
-            // Берём все изменения на эту дату
+            // Берём override
             string dateStr = date.ToString("yyyy-MM-dd");
-            DataTable dtOverrides = _sqlt.FetchByColumn(
-                "LessonOverrides",
-                "*",
-                $"OverrideDate = '{dateStr}'",
-                ""
-            );
+            DataTable dtOverrides = _sqlt.FetchByColumn("LessonOverrides", "*", $"OverrideDate = '{dateStr}'", "");
 
             // Копируем базовые уроки
             List<LessonInfo> finalList = new List<LessonInfo>(baseLessons);
 
-            // Список для отменённых уроков
             List<int> canceledIds = new List<int>();
 
             foreach (DataRow row in dtOverrides.Rows)
@@ -353,26 +352,25 @@ namespace mySQLite
                 string newEnd = row["NewEndTime"]?.ToString();
                 string newLoc = row["NewLocation"]?.ToString();
 
-                // Получаем ScheduleID урока из таблицы Lessons
+                // Берём исходный урок
                 DataTable lessonRowDt = _sqlt.FetchByColumn("Lessons", "*", $"LessonID = {lessonId}", "");
-                if (lessonRowDt.Rows.Count == 0) continue; // урок не найден
+                if (lessonRowDt.Rows.Count == 0) continue;
                 DataRow lessonRow = lessonRowDt.Rows[0];
+
+                // Проверка расписания
                 int lessonScheduleID = Convert.ToInt32(lessonRow["ScheduleID"]);
-                if (lessonScheduleID != scheduleID) continue; // не наше расписание — пропускаем
+                if (lessonScheduleID != scheduleID) continue;
 
                 if (isActive == 0)
                 {
-                    // отмена: добавляем в список для удаления
                     canceledIds.Add(lessonId);
                     continue;
                 }
 
-                // перенос/изменение
                 LessonInfo baseLesson = finalList.FirstOrDefault(x => x.LessonID == lessonId);
 
                 if (baseLesson != null)
                 {
-                    // меняем существующую пару
                     baseLesson.StartTime = string.IsNullOrEmpty(newStart) ? baseLesson.StartTime : newStart;
                     baseLesson.EndTime = string.IsNullOrEmpty(newEnd) ? baseLesson.EndTime : newEnd;
                     baseLesson.Location = string.IsNullOrEmpty(newLoc) ? baseLesson.Location : newLoc;
@@ -380,7 +378,6 @@ namespace mySQLite
                 }
                 else
                 {
-                    // пары не было в расписании на этот день → добавляем новую
                     LessonInfo newLesson = new LessonInfo()
                     {
                         LessonID = lessonId,
@@ -394,15 +391,14 @@ namespace mySQLite
                         EndTime = string.IsNullOrEmpty(newEnd) ? lessonRow["EndTime"].ToString() : newEnd
                     };
                     newLesson.Time = $"{newLesson.StartTime}-{newLesson.EndTime}";
-
                     finalList.Add(newLesson);
                 }
             }
 
-            // Удаляем отменённые пары
+            // Удаляем отменённые
             finalList.RemoveAll(x => canceledIds.Contains(x.LessonID));
 
-            // Сортируем по StartTime
+            // Сортировка по времени
             finalList = finalList.OrderBy(x => TimeSpan.Parse(x.StartTime)).ToList();
 
             return finalList;
