@@ -22,11 +22,9 @@ namespace SQLiteProject
         private Form1 form1;
         private int LessonId;
         private SQLiteQueries sqliteQ;
+
         public DateTime SelectedDate { get; set; }
 
-
-        //private int z;
-        //Дима
         public MoreLesson(Form1 parentForm, SQLiteQueries db, int lessonId)
         {
             InitializeComponent();

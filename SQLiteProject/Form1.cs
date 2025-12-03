@@ -221,6 +221,10 @@ namespace SQLiteProject
             {
                 return;
             }
+            if (lesson != null && lesson.WeekNumber == 0)
+            {
+                label1.Text = " ";
+            }
             else
             {
                 if (lesson.WeekNumber == 1)
