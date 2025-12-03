@@ -48,16 +48,16 @@ namespace mySQLite
             // ClearDB();
 
             string sqlCmd = @"CREATE TABLE IF NOT EXISTS Users (
-            [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
-            [PhoneNumber] TEXT NOT NULL UNIQUE
-            );";
+                    [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                    [PhoneNumber] TEXT NOT NULL UNIQUE
+                    );";
 
             sqlCmd += @"CREATE TABLE IF NOT EXISTS Schedules (
-            [ScheduleID] INTEGER PRIMARY KEY,
-            [Code] TEXT NOT NULL UNIQUE,
-            [Name] TEXT,
-            [Type] INTEGER NOT NULL
-            );";
+                    [ScheduleID] INTEGER PRIMARY KEY,
+                    [Code] TEXT NOT NULL UNIQUE,
+                    [Name] TEXT,
+                    [Type] INTEGER NOT NULL
+                    );";
 
             sqlCmd = @"CREATE TABLE Schedules (
                     [ScheduleID] INTEGER PRIMARY KEY,
