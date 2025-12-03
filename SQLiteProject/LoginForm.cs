@@ -19,17 +19,14 @@ namespace SQLiteProject
         public LoginForm()
         {
             InitializeComponent();
-            _sqlQueries = new SQLiteQueries("Timetable.db");
+            _sqlQueries = new SQLiteQueries("User.db");
 
             try
             {
-                _sqlQueries.CreateTables("Timetable.db");
+                _sqlQueries.CreateTables_u("User.db");
                
-
                 _sqlQueries.AddUser("1234567890");
-
-                // ДОБАВЬ ПРОВЕРКУ СРАЗУ:
-                bool check = _sqlQueries.CheckUserExists("1234567890");
+                _sqlQueries.AddUser("1");
                
             }
             catch (Exception ex)

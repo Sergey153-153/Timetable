@@ -52,13 +52,6 @@ namespace mySQLite
                     [PhoneNumber] TEXT NOT NULL UNIQUE
                     );";
 
-            sqlCmd += @"CREATE TABLE IF NOT EXISTS Schedules (
-                    [ScheduleID] INTEGER PRIMARY KEY,
-                    [Code] TEXT NOT NULL UNIQUE,
-                    [Name] TEXT,
-                    [Type] INTEGER NOT NULL
-                    );";
-
             sqlCmd = @"CREATE TABLE Schedules (
                     [ScheduleID] INTEGER PRIMARY KEY,
                     [Code] TEXT NOT NULL UNIQUE,
@@ -90,6 +83,52 @@ namespace mySQLite
                     [NewLocation] TEXT,
                     FOREIGN KEY ([LessonID]) REFERENCES Lessons([LessonID])
                     );";
+
+            if (isTransact)
+                _sqlt.BeginTransaction();
+
+            ConnectionState previousConnectionState = ConnectionState.Closed;
+            try
+            {
+                previousConnectionState = _sqlt.connect.State;
+                if (_sqlt.connect.State == ConnectionState.Closed)
+                {
+                    _sqlt.connect.Open();
+                }
+                _sqlt.command = new SQLiteCommand(_sqlt.connect);
+                _sqlt.command.CommandText = sqlCmd;
+                _sqlt.command.ExecuteNonQuery();
+            }
+            catch (Exception error)
+            {
+                _sqlt.SaveLog(1, string.Format("Ошибка при генерации таблиц новой базы данных: {0}!", error.Message));
+                if (isTransact)
+                    _sqlt.RollBackTransaction();
+                return 0;
+            }
+            finally
+            {
+                if (previousConnectionState == ConnectionState.Closed)
+                {
+                    _sqlt.connect.Close();
+                }
+            }
+
+            if (isTransact)
+                _sqlt.CommitTransaction();
+            return 1;
+        }
+
+        public int CreateTables_u(string dbName, bool isTransact = true)
+        {
+            // ClearDB();
+
+            string sqlCmd = @"CREATE TABLE IF NOT EXISTS Users (
+                    [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                    [PhoneNumber] TEXT NOT NULL UNIQUE,
+                    [DeviceToken] TEXT
+                    );";
+
 
             if (isTransact)
                 _sqlt.BeginTransaction();
@@ -498,7 +537,8 @@ namespace mySQLite
             {
                 string createTableQuery = @"CREATE TABLE IF NOT EXISTS Users (
                 [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
-                [PhoneNumber] TEXT NOT NULL UNIQUE
+                [PhoneNumber] TEXT NOT NULL UNIQUE,
+                [DeviceToken] TEXT
             )";
                 _sqlt.ExecuteNonQuery(createTableQuery);
 
