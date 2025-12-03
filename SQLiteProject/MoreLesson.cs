@@ -92,6 +92,10 @@ namespace SQLiteProject
                 pickDateTime.Height = 200;
                 pickDateTime.Text = "Выберите дату и время пары";
 
+                pickDateTime.StartPosition = FormStartPosition.CenterParent;
+                pickDateTime.FormBorderStyle = FormBorderStyle.FixedDialog;
+                pickDateTime.ControlBox = false;
+
                 // Метки и контролы
                 Label lblStart = new Label() { Text = "Начало:", Left = 10, Top = 10, Width = 80 };
                 DateTimePicker dtStart = new DateTimePicker()
@@ -176,6 +180,10 @@ namespace SQLiteProject
                 deleteForm.Height = 200;
                 deleteForm.Text = "Удаление пары";
 
+                deleteForm.StartPosition = FormStartPosition.CenterParent;
+                deleteForm.FormBorderStyle = FormBorderStyle.FixedDialog;
+                deleteForm.ControlBox = false;
+
                 Button btnDay = new Button() { Text = "Удалить только в этот день", Left = 20, Top = 20, Width = 250, DialogResult = DialogResult.Yes };
                 Button btnForever = new Button() { Text = "Удалить навсегда", Left = 20, Top = 60, Width = 250, DialogResult = DialogResult.OK };
                 Button btnCancel = new Button() { Text = "Отмена", Left = 20, Top = 100, Width = 250, DialogResult = DialogResult.Cancel };
@@ -214,66 +222,5 @@ namespace SQLiteProject
             }
         }
 
-        private void btnReplaceSchedule_Click(object sender, EventArgs e)
-        {
-            // Создаем форму для ввода кода
-            using (Form inputForm = new Form())
-            {
-                inputForm.Width = 400;
-                inputForm.Height = 150;
-                inputForm.Text = "Замена расписания";
-                inputForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-                inputForm.StartPosition = FormStartPosition.CenterParent;
-                inputForm.MinimizeBox = false;
-                inputForm.MaximizeBox = false;
-
-                Label lbl = new Label() { Left = 10, Top = 10, Text = "Введите код расписания:", AutoSize = true };
-                TextBox txt = new TextBox() { Left = 10, Top = 40, Width = 360 };
-                Button btnOk = new Button() { Text = "OK", Left = 200, Width = 80, Top = 70, DialogResult = DialogResult.OK };
-                Button btnCancel = new Button() { Text = "Отмена", Left = 290, Width = 80, Top = 70, DialogResult = DialogResult.Cancel };
-
-                inputForm.Controls.Add(lbl);
-                inputForm.Controls.Add(txt);
-                inputForm.Controls.Add(btnOk);
-                inputForm.Controls.Add(btnCancel);
-
-                inputForm.AcceptButton = btnOk;
-                inputForm.CancelButton = btnCancel;
-
-                if (inputForm.ShowDialog() != DialogResult.OK)
-                    return;
-
-                string code = txt.Text;
-
-                if (string.IsNullOrWhiteSpace(code))
-                    return;
-
-                var info = sqliteQ.getScheduleByCode(code);
-
-                if (info == null)
-                {
-                    MessageBox.Show("Расписание с таким кодом не найдено!");
-                    return;
-                }
-
-                int targetID = 1;
-
-                if (sqliteQ.DeleteSchedule(targetID) == 0)
-                {
-                    MessageBox.Show("Ошибка удаления старого расписания!");
-                    return;
-                }
-
-                int res = sqliteQ.CopySchedule(info.ScheduleID, targetID);
-
-                if (res == 0)
-                {
-                    MessageBox.Show("Ошибка копирования нового расписания!");
-                    return;
-                }
-
-                MessageBox.Show("Расписание успешно заменено!");
-            }
-        }
     }
 }
