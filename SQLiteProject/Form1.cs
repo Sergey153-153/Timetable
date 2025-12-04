@@ -265,7 +265,8 @@ namespace SQLiteProject
 
         private void buttonTasks_Click(object sender, EventArgs e)
         {
-            return;
+            Tasks tasksForm = new Tasks();
+            tasksForm.ShowDialog();
         }
 
         private void buttonAddLesson_Click(object sender, EventArgs e)

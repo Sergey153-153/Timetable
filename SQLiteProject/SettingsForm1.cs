@@ -198,7 +198,9 @@ namespace SQLiteProject
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Даша работай лучше пж");
+            Tasks tasksForm = new Tasks();
+            tasksForm.ShowDialog();
+            this.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)

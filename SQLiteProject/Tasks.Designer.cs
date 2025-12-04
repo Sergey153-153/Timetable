@@ -42,6 +42,7 @@
             this.buttonSchelude.TabIndex = 1;
             this.buttonSchelude.Text = "Расписание";
             this.buttonSchelude.UseVisualStyleBackColor = true;
+            this.buttonSchelude.Click += new System.EventHandler(this.buttonSchelude_Click);
             // 
             // buttonSetting
             // 
@@ -51,6 +52,7 @@
             this.buttonSetting.TabIndex = 2;
             this.buttonSetting.Text = "Настройки";
             this.buttonSetting.UseVisualStyleBackColor = true;
+            this.buttonSetting.Click += new System.EventHandler(this.buttonSetting_Click);
             // 
             // buttonAddTask
             // 
