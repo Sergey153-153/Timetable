@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace SQLiteProject
 {
@@ -31,6 +31,8 @@ namespace SQLiteProject
             this.Size = new Size(375, 700);
             this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+       
 
         private void DisplayTasks()
         {

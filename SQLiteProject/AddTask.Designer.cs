@@ -34,12 +34,13 @@
             this.radioButtonKR = new System.Windows.Forms.RadioButton();
             this.radioButtonDZ = new System.Windows.Forms.RadioButton();
             this.labelSubject = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerDeadline = new System.Windows.Forms.DateTimePicker();
             this.labelDate = new System.Windows.Forms.Label();
             this.textBoxAbout = new System.Windows.Forms.TextBox();
             this.labelAbout = new System.Windows.Forms.Label();
             this.buttonAddFile = new System.Windows.Forms.Button();
             this.buttonAddTask = new System.Windows.Forms.Button();
+            this.comboBoxSubjects = new System.Windows.Forms.ComboBox();
             this.groupBoxTaskType.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,12 +110,12 @@
             this.labelSubject.TabIndex = 2;
             this.labelSubject.Text = "Выберите предмет:";
             // 
-            // dateTimePicker1
+            // dateTimePickerDeadline
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 263);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(363, 26);
-            this.dateTimePicker1.TabIndex = 3;
+            this.dateTimePickerDeadline.Location = new System.Drawing.Point(12, 263);
+            this.dateTimePickerDeadline.Name = "dateTimePickerDeadline";
+            this.dateTimePickerDeadline.Size = new System.Drawing.Size(363, 26);
+            this.dateTimePickerDeadline.TabIndex = 3;
             // 
             // labelDate
             // 
@@ -159,18 +160,28 @@
             this.buttonAddTask.TabIndex = 8;
             this.buttonAddTask.Text = "Добавить задание";
             this.buttonAddTask.UseVisualStyleBackColor = true;
+            this.buttonAddTask.Click += new System.EventHandler(this.buttonAddTask_Click);
+            // 
+            // comboBoxSubjects
+            // 
+            this.comboBoxSubjects.FormattingEnabled = true;
+            this.comboBoxSubjects.Location = new System.Drawing.Point(12, 199);
+            this.comboBoxSubjects.Name = "comboBoxSubjects";
+            this.comboBoxSubjects.Size = new System.Drawing.Size(363, 28);
+            this.comboBoxSubjects.TabIndex = 9;
             // 
             // AddTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 731);
+            this.Controls.Add(this.comboBoxSubjects);
             this.Controls.Add(this.buttonAddTask);
             this.Controls.Add(this.buttonAddFile);
             this.Controls.Add(this.labelAbout);
             this.Controls.Add(this.textBoxAbout);
             this.Controls.Add(this.labelDate);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateTimePickerDeadline);
             this.Controls.Add(this.labelSubject);
             this.Controls.Add(this.groupBoxTaskType);
             this.Name = "AddTask";
@@ -190,11 +201,12 @@
         private System.Windows.Forms.RadioButton radioButtonKR;
         private System.Windows.Forms.RadioButton radioButtonDZ;
         private System.Windows.Forms.Label labelSubject;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDeadline;
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.TextBox textBoxAbout;
         private System.Windows.Forms.Label labelAbout;
         private System.Windows.Forms.Button buttonAddFile;
         private System.Windows.Forms.Button buttonAddTask;
+        private System.Windows.Forms.ComboBox comboBoxSubjects;
     }
 }
