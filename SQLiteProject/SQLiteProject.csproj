@@ -83,6 +83,7 @@
       <DependentUpon>SettingsForm1.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLiteQueries.cs" />
+    <Compile Include="TaskItem.cs" />
     <Compile Include="Tasks.cs">
       <SubType>Form</SubType>
     </Compile>

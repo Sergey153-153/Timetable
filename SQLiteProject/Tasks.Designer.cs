@@ -31,7 +31,7 @@
             this.buttonSchelude = new System.Windows.Forms.Button();
             this.buttonSetting = new System.Windows.Forms.Button();
             this.buttonAddTask = new System.Windows.Forms.Button();
-            this.panelTasks = new System.Windows.Forms.Panel();
+            this.content_block = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // buttonSchelude
@@ -64,19 +64,19 @@
             this.buttonAddTask.Text = "+";
             this.buttonAddTask.UseVisualStyleBackColor = true;
             // 
-            // panelTasks
+            // content_block
             // 
-            this.panelTasks.Location = new System.Drawing.Point(9, 11);
-            this.panelTasks.Name = "panelTasks";
-            this.panelTasks.Size = new System.Drawing.Size(518, 789);
-            this.panelTasks.TabIndex = 4;
+            this.content_block.Location = new System.Drawing.Point(9, 11);
+            this.content_block.Name = "content_block";
+            this.content_block.Size = new System.Drawing.Size(518, 789);
+            this.content_block.TabIndex = 4;
             // 
             // Tasks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(538, 937);
-            this.Controls.Add(this.panelTasks);
+            this.Controls.Add(this.content_block);
             this.Controls.Add(this.buttonAddTask);
             this.Controls.Add(this.buttonSetting);
             this.Controls.Add(this.buttonSchelude);
@@ -90,6 +90,6 @@
         private System.Windows.Forms.Button buttonSchelude;
         private System.Windows.Forms.Button buttonSetting;
         private System.Windows.Forms.Button buttonAddTask;
-        private System.Windows.Forms.Panel panelTasks;
+        private System.Windows.Forms.Panel content_block;
     }
 }

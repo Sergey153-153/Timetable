@@ -199,13 +199,13 @@ namespace SQLiteProject
         private void button4_Click(object sender, EventArgs e)
         {
             Tasks tasksForm = new Tasks();
+            this.Hide();
             tasksForm.ShowDialog();
             this.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            form1.Show();
             this.Close();
         }
     }
