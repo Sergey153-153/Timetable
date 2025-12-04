@@ -20,6 +20,7 @@ namespace mySQLite
         public SQLiteQueries(string dbName)
         {
             _sqlt = new DbFacadeSQLite(dbName);
+            CreateTasksTables(); // Исправленное название метода
         }
 
 
@@ -627,7 +628,7 @@ namespace mySQLite
 
                 string startTime = row["StartTime"].ToString();
                 string endTime = row["EndTime"].ToString();
-                li.Time = $"{startTime}-{endTime}"; 
+                li.Time = $"{startTime}-{endTime}";
 
                 lessons.Add(li);
             }
@@ -661,6 +662,398 @@ namespace mySQLite
         }
 
         #endregion
+
+        #region Создание таблиц для задач
+
+        // Исправленное название метода
+        private void CreateTasksTables()
+        {
+            try
+            {
+                // Создаем таблицу для задач
+                string createTasksTable = @"
+                    CREATE TABLE IF NOT EXISTS Tasks (
+                        TaskID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Title TEXT NOT NULL,
+                        Description TEXT,
+                        Deadline TEXT NOT NULL,
+                        Type TEXT NOT NULL,
+                        Subject TEXT,
+                        FilePath TEXT,
+                        IsCompleted INTEGER DEFAULT 0,
+                        CreatedDate TEXT DEFAULT CURRENT_TIMESTAMP
+                    )";
+
+                // Создаем таблицу для предметов
+                string createSubjectsTable = @"
+                    CREATE TABLE IF NOT EXISTS Subjects (
+                        SubjectID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Name TEXT NOT NULL UNIQUE,
+                        CreatedDate TEXT DEFAULT CURRENT_TIMESTAMP
+                    )";
+
+                _sqlt.ExecuteNonQuery(createTasksTable);
+                _sqlt.ExecuteNonQuery(createSubjectsTable);
+
+                // Добавляем основные предметы, если таблица пуста
+                AddDefaultSubjects();
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка создания таблиц: {ex.Message}");
+            }
+        }
+
+        private void AddDefaultSubjects()
+        {
+            try
+            {
+                // Проверяем, есть ли предметы
+                DataTable dt = _sqlt.Execute("SELECT COUNT(*) as Count FROM Subjects");
+                if (dt.Rows.Count > 0 && Convert.ToInt32(dt.Rows[0]["Count"]) == 0)
+                {
+                    string[] defaultSubjects = {
+                        "Математика", "Физика", "Химия", "История", "Литература",
+                        "Программирование", "Английский язык", "Биология", "География"
+                    };
+
+                    foreach (var subject in defaultSubjects)
+                    {
+                        var parameters = new ParametersCollection();
+                        parameters.Add("Name", subject, DbType.String);
+                        _sqlt.Insert("Subjects", parameters);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка добавления предметов по умолчанию: {ex.Message}");
+            }
+        }
+
+        #endregion
+
+        #region Методы для работы с задачами
+
+        // 1. Добавление новой задачи
+        public int AddTask(TaskItem task)
+        {
+            try
+            {
+                var parameters = new ParametersCollection();
+                parameters.Add("Title", task.Title, DbType.String);
+                parameters.Add("Description", task.Description, DbType.String);
+                parameters.Add("Deadline", task.Deadline.ToString("yyyy-MM-dd HH:mm:ss"), DbType.String);
+                parameters.Add("Type", task.Type, DbType.String);
+                parameters.Add("IsCompleted", task.IsCompleted ? 1 : 0, DbType.Int32);
+
+                int result = _sqlt.Insert("Tasks", parameters);
+
+                if (result > 0)
+                {
+                    // Получаем ID созданной задачи
+                    DataTable dt = _sqlt.Execute("SELECT last_insert_rowid() as TaskID");
+                    if (dt.Rows.Count > 0)
+                    {
+                        return Convert.ToInt32(dt.Rows[0]["TaskID"]);
+                    }
+                }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка AddTask: {ex.Message}");
+                return 0;
+            }
+        }
+
+        // Упрощенная версия AddTask для формы
+        public int AddSimpleTask(string title, string description, DateTime deadline, string type, string subject, string filePath = null)
+        {
+            TaskItem task = new TaskItem
+            {
+                Title = title,
+                Description = description,
+                Deadline = deadline,
+                Type = type,
+                IsCompleted = false
+            };
+
+            return AddTask(task);
+        }
+
+        // 2. Получение всех задач
+        public List<TaskItem> GetAllTasks()
+        {
+            List<TaskItem> tasks = new List<TaskItem>();
+
+            try
+            {
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Tasks",
+                    "*",
+                    "",
+                    "ORDER BY Deadline ASC"
+                );
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    TaskItem task = new TaskItem
+                    {
+                        Id = Convert.ToInt32(row["TaskID"]),
+                        Title = row["Title"].ToString(),
+                        Description = row["Description"].ToString(),
+                        Deadline = DateTime.Parse(row["Deadline"].ToString()),
+                        Type = row["Type"].ToString(),
+                        IsCompleted = Convert.ToBoolean(row["IsCompleted"])
+                    };
+
+                    tasks.Add(task);
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка GetAllTasks: {ex.Message}");
+            }
+
+            return tasks;
+        }
+
+        // 3. Получение задач по фильтру (исправленная версия без параметров)
+        public List<TaskItem> GetTasksByFilter(string subject = null, string type = null, bool? isCompleted = null)
+        {
+            List<TaskItem> tasks = new List<TaskItem>();
+
+            try
+            {
+                string whereClause = "1=1";
+
+                if (!string.IsNullOrEmpty(subject))
+                {
+                    whereClause += $" AND Subject = '{subject.Replace("'", "''")}'";
+                }
+
+                if (!string.IsNullOrEmpty(type))
+                {
+                    whereClause += $" AND Type = '{type.Replace("'", "''")}'";
+                }
+
+                if (isCompleted.HasValue)
+                {
+                    whereClause += $" AND IsCompleted = {(isCompleted.Value ? 1 : 0)}";
+                }
+
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Tasks",
+                    "*",
+                    whereClause,
+                    "ORDER BY Deadline ASC"
+                );
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    TaskItem task = new TaskItem
+                    {
+                        Id = Convert.ToInt32(row["TaskID"]),
+                        Title = row["Title"].ToString(),
+                        Description = row["Description"].ToString(),
+                        Deadline = DateTime.Parse(row["Deadline"].ToString()),
+                        Type = row["Type"].ToString(),
+                        IsCompleted = Convert.ToBoolean(row["IsCompleted"])
+                    };
+
+                    tasks.Add(task);
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка GetTasksByFilter: {ex.Message}");
+            }
+
+            return tasks;
+        }
+
+        // 4. Обновление задачи
+        public bool UpdateTask(TaskItem task)
+        {
+            try
+            {
+                var parameters = new ParametersCollection();
+                parameters.Add("Title", task.Title, DbType.String);
+                parameters.Add("Description", task.Description, DbType.String);
+                parameters.Add("Deadline", task.Deadline.ToString("yyyy-MM-dd HH:mm:ss"), DbType.String);
+                parameters.Add("Type", task.Type, DbType.String);
+                parameters.Add("IsCompleted", task.IsCompleted ? 1 : 0, DbType.Int32);
+                parameters.Add("TaskID", task.Id, DbType.Int32);
+
+                string whereClause = "TaskID = @TaskID";
+                int result = _sqlt.Update("Tasks", parameters, whereClause);
+
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка UpdateTask: {ex.Message}");
+                return false;
+            }
+        }
+
+        // 5. Удаление задачи
+        public bool DeleteTask(int taskId)
+        {
+            try
+            {
+                var parameters = new ParametersCollection();
+                parameters.Add("TaskID", taskId, DbType.Int32);
+
+                string whereClause = "TaskID = @TaskID";
+                int result = _sqlt.Delete("Tasks", whereClause, parameters);
+
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка DeleteTask: {ex.Message}");
+                return false;
+            }
+        }
+
+        // 6. Изменение статуса выполнения
+        public bool ToggleTaskCompletion(int taskId, bool isCompleted)
+        {
+            try
+            {
+                var parameters = new ParametersCollection();
+                parameters.Add("IsCompleted", isCompleted ? 1 : 0, DbType.Int32);
+                parameters.Add("TaskID", taskId, DbType.Int32);
+
+                string whereClause = "TaskID = @TaskID";
+                int result = _sqlt.Update("Tasks", parameters, whereClause);
+
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка ToggleTaskCompletion: {ex.Message}");
+                return false;
+            }
+        }
+
+        // 7. Получение задачи по ID (исправленная без параметров)
+        public TaskItem GetTaskById(int taskId)
+        {
+            try
+            {
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Tasks",
+                    "*",
+                    $"TaskID = {taskId}",
+                    ""
+                );
+
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+                    return new TaskItem
+                    {
+                        Id = Convert.ToInt32(row["TaskID"]),
+                        Title = row["Title"].ToString(),
+                        Description = row["Description"].ToString(),
+                        Deadline = DateTime.Parse(row["Deadline"].ToString()),
+                        Type = row["Type"].ToString(),
+                        IsCompleted = Convert.ToBoolean(row["IsCompleted"])
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка GetTaskById: {ex.Message}");
+            }
+
+            return null;
+        }
+
+        #endregion
+
+        #region Методы для работы с предметами
+
+        // 1. Получение всех предметов
+        public List<string> GetAllSubjects()
+        {
+            List<string> subjects = new List<string>();
+
+            try
+            {
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Subjects",
+                    "Name",
+                    "",
+                    "ORDER BY Name ASC"
+                );
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    subjects.Add(row["Name"].ToString());
+                }
+
+                // Если таблица пуста, возвращаем базовый список
+                if (subjects.Count == 0)
+                {
+                    subjects.AddRange(new[] { "Математика", "Физика", "Химия", "История", "Литература" });
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка GetAllSubjects: {ex.Message}");
+                // Возвращаем базовый список
+                subjects.AddRange(new[] { "Математика", "Физика", "Химия", "История", "Литература" });
+            }
+
+            return subjects;
+        }
+
+        // 2. Добавление нового предмета
+        public bool AddSubject(string subjectName)
+        {
+            try
+            {
+                var parameters = new ParametersCollection();
+                parameters.Add("Name", subjectName, DbType.String);
+
+                int result = _sqlt.Insert("Subjects", parameters);
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка AddSubject: {ex.Message}");
+                return false;
+            }
+        }
+
+        // 3. Проверка существования предмета
+        public bool SubjectExists(string subjectName)
+        {
+            try
+            {
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Subjects",
+                    "COUNT(*) as Count",
+                    $"Name = '{subjectName.Replace("'", "''")}'",
+                    ""
+                );
+
+                return dt.Rows.Count > 0 && Convert.ToInt32(dt.Rows[0]["Count"]) > 0;
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка SubjectExists: {ex.Message}");
+                return false;
+            }
+        }
+
+        #endregion
+
     }
 
     #region Классы для хранения информации

@@ -1,6 +1,6 @@
 ﻿namespace SQLiteProject
 {
-    partial class AddTask
+    partial class Add_task
     {
         /// <summary>
         /// Required designer variable.
@@ -28,166 +28,163 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBoxTaskType = new System.Windows.Forms.GroupBox();
-            this.radioButtonExam = new System.Windows.Forms.RadioButton();
-            this.radioButtonTest = new System.Windows.Forms.RadioButton();
-            this.radioButtonKR = new System.Windows.Forms.RadioButton();
-            this.radioButtonDZ = new System.Windows.Forms.RadioButton();
-            this.labelSubject = new System.Windows.Forms.Label();
-            this.dateTimePickerDeadline = new System.Windows.Forms.DateTimePicker();
-            this.labelDate = new System.Windows.Forms.Label();
-            this.textBoxAbout = new System.Windows.Forms.TextBox();
-            this.labelAbout = new System.Windows.Forms.Label();
-            this.buttonAddFile = new System.Windows.Forms.Button();
-            this.buttonAddTask = new System.Windows.Forms.Button();
-            this.comboBoxSubjects = new System.Windows.Forms.ComboBox();
-            this.groupBoxTaskType.SuspendLayout();
+            this.screen_tasks = new System.Windows.Forms.Panel();
+            this.label_add_task = new System.Windows.Forms.Label();
+            this.Task_type = new System.Windows.Forms.GroupBox();
+            this.Exam = new System.Windows.Forms.RadioButton();
+            this.Test = new System.Windows.Forms.RadioButton();
+            this.Control = new System.Windows.Forms.RadioButton();
+            this.HomeTask = new System.Windows.Forms.RadioButton();
+            this.Lesson_type = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.Add_files = new System.Windows.Forms.Button();
+            this.back_tasks = new System.Windows.Forms.Button();
+            this.textBox_description = new System.Windows.Forms.TextBox();
+            this.screen_tasks.SuspendLayout();
+            this.Task_type.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBoxTaskType
+            // screen_tasks
             // 
-            this.groupBoxTaskType.Controls.Add(this.radioButtonExam);
-            this.groupBoxTaskType.Controls.Add(this.radioButtonTest);
-            this.groupBoxTaskType.Controls.Add(this.radioButtonKR);
-            this.groupBoxTaskType.Controls.Add(this.radioButtonDZ);
-            this.groupBoxTaskType.Location = new System.Drawing.Point(12, 12);
-            this.groupBoxTaskType.Name = "groupBoxTaskType";
-            this.groupBoxTaskType.Size = new System.Drawing.Size(363, 146);
-            this.groupBoxTaskType.TabIndex = 0;
-            this.groupBoxTaskType.TabStop = false;
-            this.groupBoxTaskType.Text = "Выберите тип задания:";
+            this.screen_tasks.Controls.Add(this.label_add_task);
+            this.screen_tasks.Location = new System.Drawing.Point(24, 12);
+            this.screen_tasks.Name = "screen_tasks";
+            this.screen_tasks.Size = new System.Drawing.Size(487, 78);
+            this.screen_tasks.TabIndex = 1;
             // 
-            // radioButtonExam
+            // label_add_task
             // 
-            this.radioButtonExam.AutoSize = true;
-            this.radioButtonExam.Location = new System.Drawing.Point(6, 113);
-            this.radioButtonExam.Name = "radioButtonExam";
-            this.radioButtonExam.Size = new System.Drawing.Size(100, 24);
-            this.radioButtonExam.TabIndex = 3;
-            this.radioButtonExam.TabStop = true;
-            this.radioButtonExam.Text = "Экзамен";
-            this.radioButtonExam.UseVisualStyleBackColor = true;
+            this.label_add_task.AutoSize = true;
+            this.label_add_task.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_add_task.Location = new System.Drawing.Point(115, 21);
+            this.label_add_task.Name = "label_add_task";
+            this.label_add_task.Size = new System.Drawing.Size(258, 37);
+            this.label_add_task.TabIndex = 0;
+            this.label_add_task.Text = "Добавить задание";
             // 
-            // radioButtonTest
+            // Task_type
             // 
-            this.radioButtonTest.AutoSize = true;
-            this.radioButtonTest.Location = new System.Drawing.Point(6, 85);
-            this.radioButtonTest.Name = "radioButtonTest";
-            this.radioButtonTest.Size = new System.Drawing.Size(81, 24);
-            this.radioButtonTest.TabIndex = 2;
-            this.radioButtonTest.TabStop = true;
-            this.radioButtonTest.Text = "Зачет";
-            this.radioButtonTest.UseVisualStyleBackColor = true;
+            this.Task_type.Controls.Add(this.Exam);
+            this.Task_type.Controls.Add(this.Test);
+            this.Task_type.Controls.Add(this.Control);
+            this.Task_type.Controls.Add(this.HomeTask);
+            this.Task_type.Location = new System.Drawing.Point(24, 96);
+            this.Task_type.Name = "Task_type";
+            this.Task_type.Size = new System.Drawing.Size(487, 165);
+            this.Task_type.TabIndex = 2;
+            this.Task_type.TabStop = false;
+            this.Task_type.Text = "Выберите тип задания:";
             // 
-            // radioButtonKR
+            // Exam
             // 
-            this.radioButtonKR.AutoSize = true;
-            this.radioButtonKR.Location = new System.Drawing.Point(6, 55);
-            this.radioButtonKR.Name = "radioButtonKR";
-            this.radioButtonKR.Size = new System.Drawing.Size(54, 24);
-            this.radioButtonKR.TabIndex = 1;
-            this.radioButtonKR.TabStop = true;
-            this.radioButtonKR.Text = "КР";
-            this.radioButtonKR.UseVisualStyleBackColor = true;
+            this.Exam.AutoSize = true;
+            this.Exam.Location = new System.Drawing.Point(6, 127);
+            this.Exam.Name = "Exam";
+            this.Exam.Size = new System.Drawing.Size(100, 24);
+            this.Exam.TabIndex = 3;
+            this.Exam.TabStop = true;
+            this.Exam.Text = "Экзамен";
+            this.Exam.UseVisualStyleBackColor = true;
             // 
-            // radioButtonDZ
+            // Test
             // 
-            this.radioButtonDZ.AutoSize = true;
-            this.radioButtonDZ.Location = new System.Drawing.Point(6, 25);
-            this.radioButtonDZ.Name = "radioButtonDZ";
-            this.radioButtonDZ.Size = new System.Drawing.Size(57, 24);
-            this.radioButtonDZ.TabIndex = 0;
-            this.radioButtonDZ.TabStop = true;
-            this.radioButtonDZ.Text = "ДЗ";
-            this.radioButtonDZ.UseVisualStyleBackColor = true;
+            this.Test.AutoSize = true;
+            this.Test.Location = new System.Drawing.Point(6, 97);
+            this.Test.Name = "Test";
+            this.Test.Size = new System.Drawing.Size(81, 24);
+            this.Test.TabIndex = 2;
+            this.Test.TabStop = true;
+            this.Test.Text = "Зачет";
+            this.Test.UseVisualStyleBackColor = true;
             // 
-            // labelSubject
+            // Control
             // 
-            this.labelSubject.AutoSize = true;
-            this.labelSubject.Location = new System.Drawing.Point(12, 176);
-            this.labelSubject.Name = "labelSubject";
-            this.labelSubject.Size = new System.Drawing.Size(160, 20);
-            this.labelSubject.TabIndex = 2;
-            this.labelSubject.Text = "Выберите предмет:";
+            this.Control.AutoSize = true;
+            this.Control.Location = new System.Drawing.Point(6, 67);
+            this.Control.Name = "Control";
+            this.Control.Size = new System.Drawing.Size(54, 24);
+            this.Control.TabIndex = 1;
+            this.Control.TabStop = true;
+            this.Control.Text = "КР";
+            this.Control.UseVisualStyleBackColor = true;
             // 
-            // dateTimePickerDeadline
+            // HomeTask
             // 
-            this.dateTimePickerDeadline.Location = new System.Drawing.Point(12, 263);
-            this.dateTimePickerDeadline.Name = "dateTimePickerDeadline";
-            this.dateTimePickerDeadline.Size = new System.Drawing.Size(363, 26);
-            this.dateTimePickerDeadline.TabIndex = 3;
+            this.HomeTask.AutoSize = true;
+            this.HomeTask.Location = new System.Drawing.Point(6, 37);
+            this.HomeTask.Name = "HomeTask";
+            this.HomeTask.Size = new System.Drawing.Size(57, 24);
+            this.HomeTask.TabIndex = 0;
+            this.HomeTask.TabStop = true;
+            this.HomeTask.Text = "ДЗ";
+            this.HomeTask.UseVisualStyleBackColor = true;
             // 
-            // labelDate
+            // Lesson_type
             // 
-            this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(12, 240);
-            this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(100, 20);
-            this.labelDate.TabIndex = 4;
-            this.labelDate.Text = "Срок сдачи:";
+            this.Lesson_type.FormattingEnabled = true;
+            this.Lesson_type.Items.AddRange(new object[] {
+            "Мат. анализ",
+            "ТРПО",
+            "АИС",
+            "ТОК",
+            "История"});
+            this.Lesson_type.Location = new System.Drawing.Point(24, 267);
+            this.Lesson_type.Name = "Lesson_type";
+            this.Lesson_type.Size = new System.Drawing.Size(486, 28);
+            this.Lesson_type.TabIndex = 3;
             // 
-            // textBoxAbout
+            // dateTimePicker1
             // 
-            this.textBoxAbout.Location = new System.Drawing.Point(12, 331);
-            this.textBoxAbout.Name = "textBoxAbout";
-            this.textBoxAbout.Size = new System.Drawing.Size(362, 26);
-            this.textBoxAbout.TabIndex = 5;
+            this.dateTimePicker1.Location = new System.Drawing.Point(24, 360);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(487, 26);
+            this.dateTimePicker1.TabIndex = 4;
             // 
-            // labelAbout
+            // Add_files
             // 
-            this.labelAbout.AutoSize = true;
-            this.labelAbout.Location = new System.Drawing.Point(12, 308);
-            this.labelAbout.Name = "labelAbout";
-            this.labelAbout.Size = new System.Drawing.Size(87, 20);
-            this.labelAbout.TabIndex = 6;
-            this.labelAbout.Text = "Описание:";
+            this.Add_files.Location = new System.Drawing.Point(24, 480);
+            this.Add_files.Name = "Add_files";
+            this.Add_files.Size = new System.Drawing.Size(487, 57);
+            this.Add_files.TabIndex = 6;
+            this.Add_files.Text = "Добавить файлы";
+            this.Add_files.UseVisualStyleBackColor = true;
+            this.Add_files.Click += new System.EventHandler(this.Add_files_Click);
             // 
-            // buttonAddFile
+            // back_tasks
             // 
-            this.buttonAddFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddFile.Location = new System.Drawing.Point(12, 380);
-            this.buttonAddFile.Name = "buttonAddFile";
-            this.buttonAddFile.Size = new System.Drawing.Size(190, 48);
-            this.buttonAddFile.TabIndex = 7;
-            this.buttonAddFile.Text = "Прикрепить файл";
-            this.buttonAddFile.UseVisualStyleBackColor = true;
+            this.back_tasks.Location = new System.Drawing.Point(162, 579);
+            this.back_tasks.Name = "back_tasks";
+            this.back_tasks.Size = new System.Drawing.Size(211, 44);
+            this.back_tasks.TabIndex = 7;
+            this.back_tasks.Text = "Добавить задание";
+            this.back_tasks.UseVisualStyleBackColor = true;
+            this.back_tasks.Click += new System.EventHandler(this.back_tasks_Click);
             // 
-            // buttonAddTask
+            // textBox_description
             // 
-            this.buttonAddTask.Location = new System.Drawing.Point(151, 638);
-            this.buttonAddTask.Name = "buttonAddTask";
-            this.buttonAddTask.Size = new System.Drawing.Size(203, 50);
-            this.buttonAddTask.TabIndex = 8;
-            this.buttonAddTask.Text = "Добавить задание";
-            this.buttonAddTask.UseVisualStyleBackColor = true;
-            this.buttonAddTask.Click += new System.EventHandler(this.buttonAddTask_Click);
+            this.textBox_description.Location = new System.Drawing.Point(24, 314);
+            this.textBox_description.Name = "textBox_description";
+            this.textBox_description.Size = new System.Drawing.Size(486, 26);
+            this.textBox_description.TabIndex = 8;
             // 
-            // comboBoxSubjects
-            // 
-            this.comboBoxSubjects.FormattingEnabled = true;
-            this.comboBoxSubjects.Location = new System.Drawing.Point(12, 199);
-            this.comboBoxSubjects.Name = "comboBoxSubjects";
-            this.comboBoxSubjects.Size = new System.Drawing.Size(363, 28);
-            this.comboBoxSubjects.TabIndex = 9;
-            // 
-            // AddTask
+            // Add_task
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 731);
-            this.Controls.Add(this.comboBoxSubjects);
-            this.Controls.Add(this.buttonAddTask);
-            this.Controls.Add(this.buttonAddFile);
-            this.Controls.Add(this.labelAbout);
-            this.Controls.Add(this.textBoxAbout);
-            this.Controls.Add(this.labelDate);
-            this.Controls.Add(this.dateTimePickerDeadline);
-            this.Controls.Add(this.labelSubject);
-            this.Controls.Add(this.groupBoxTaskType);
-            this.Name = "AddTask";
-            this.Text = "AddTask";
-            this.groupBoxTaskType.ResumeLayout(false);
-            this.groupBoxTaskType.PerformLayout();
+            this.ClientSize = new System.Drawing.Size(538, 639);
+            this.Controls.Add(this.textBox_description);
+            this.Controls.Add(this.back_tasks);
+            this.Controls.Add(this.Add_files);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.Lesson_type);
+            this.Controls.Add(this.Task_type);
+            this.Controls.Add(this.screen_tasks);
+            this.Name = "Add_task";
+            this.Text = "Add_task";
+            this.screen_tasks.ResumeLayout(false);
+            this.screen_tasks.PerformLayout();
+            this.Task_type.ResumeLayout(false);
+            this.Task_type.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,18 +192,17 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBoxTaskType;
-        private System.Windows.Forms.RadioButton radioButtonExam;
-        private System.Windows.Forms.RadioButton radioButtonTest;
-        private System.Windows.Forms.RadioButton radioButtonKR;
-        private System.Windows.Forms.RadioButton radioButtonDZ;
-        private System.Windows.Forms.Label labelSubject;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDeadline;
-        private System.Windows.Forms.Label labelDate;
-        private System.Windows.Forms.TextBox textBoxAbout;
-        private System.Windows.Forms.Label labelAbout;
-        private System.Windows.Forms.Button buttonAddFile;
-        private System.Windows.Forms.Button buttonAddTask;
-        private System.Windows.Forms.ComboBox comboBoxSubjects;
+        private System.Windows.Forms.Panel screen_tasks;
+        private System.Windows.Forms.Label label_add_task;
+        private System.Windows.Forms.GroupBox Task_type;
+        private System.Windows.Forms.RadioButton Exam;
+        private System.Windows.Forms.RadioButton Test;
+        private System.Windows.Forms.RadioButton Control;
+        private System.Windows.Forms.RadioButton HomeTask;
+        private System.Windows.Forms.ComboBox Lesson_type;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button Add_files;
+        private System.Windows.Forms.Button back_tasks;
+        private System.Windows.Forms.TextBox textBox_description;
     }
 }

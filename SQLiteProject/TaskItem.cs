@@ -12,10 +12,13 @@ namespace SQLiteProject
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Deadline { get; set; }
-        public string Type { get; set; } // "ДЗ" или "КР"
+        public string Type { get; set; }
         public bool IsCompleted { get; set; }
 
-        //отображение срока сдачи задания
+        public string SubjectName { get; set; }
+        public string FilePath { get; set; }
+
+        // Для отображения только даты 
         public string DeadlineDate => Deadline.ToString("dd.MM.yyyy");
         public string DeadlineDay => Deadline.ToString("dddd", new System.Globalization.CultureInfo("ru-RU"));
     }

@@ -224,8 +224,8 @@ namespace SQLiteProject
 
         private void btnAddHomework_Click(object sender, EventArgs e)
         {
-            AddTask addTaskForm = new AddTask();
-            addTaskForm.ShowDialog();
+            //AddTask addTaskForm = new AddTask();
+            //addTaskForm.ShowDialog();
         }
     }
 }
