@@ -15,6 +15,14 @@ namespace SQLiteProject
         public AddTask()
         {
             InitializeComponent();
+            InitializeCustomComponents();
         }
+        private void InitializeCustomComponents()
+        {
+            // Настройка формы
+            this.Text = "Добавить задачу";
+            this.Size = new Size(375, 500);
+        }
+
     }
 }
