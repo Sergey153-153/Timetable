@@ -121,5 +121,11 @@ namespace SQLiteProject
             settings.ShowDialog();
             this.Close();
         }
+
+        private void buttonAddTask_Click(object sender, EventArgs e)
+        {
+            AddTask addTaskForm = new AddTask();
+            addTaskForm.ShowDialog();
+        }
     }
 }

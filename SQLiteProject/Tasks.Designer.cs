@@ -63,6 +63,7 @@
             this.buttonAddTask.TabIndex = 3;
             this.buttonAddTask.Text = "+";
             this.buttonAddTask.UseVisualStyleBackColor = true;
+            this.buttonAddTask.Click += new System.EventHandler(this.buttonAddTask_Click);
             // 
             // content_block
             // 

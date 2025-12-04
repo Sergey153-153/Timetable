@@ -41,9 +41,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(134, 538);
+            this.button1.Location = new System.Drawing.Point(201, 828);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 58);
+            this.button1.Size = new System.Drawing.Size(136, 89);
             this.button1.TabIndex = 0;
             this.button1.Text = "расписание";
             this.button1.UseVisualStyleBackColor = true;
@@ -54,10 +55,11 @@
             this.lblSubject.AllowDrop = true;
             this.lblSubject.AutoSize = true;
             this.lblSubject.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblSubject.Location = new System.Drawing.Point(141, 17);
-            this.lblSubject.MaximumSize = new System.Drawing.Size(335, 0);
+            this.lblSubject.Location = new System.Drawing.Point(212, 26);
+            this.lblSubject.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSubject.MaximumSize = new System.Drawing.Size(502, 0);
             this.lblSubject.Name = "lblSubject";
-            this.lblSubject.Size = new System.Drawing.Size(59, 25);
+            this.lblSubject.Size = new System.Drawing.Size(89, 37);
             this.lblSubject.TabIndex = 1;
             this.lblSubject.Text = "АИС";
             this.lblSubject.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -67,9 +69,10 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTime.Location = new System.Drawing.Point(61, 75);
+            this.lblTime.Location = new System.Drawing.Point(92, 115);
+            this.lblTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(232, 20);
+            this.lblTime.Size = new System.Drawing.Size(343, 29);
             this.lblTime.TabIndex = 2;
             this.lblTime.Text = "1 неделя, суббота: 9:00–10:30";
             // 
@@ -77,9 +80,10 @@
             // 
             this.lblTeacher.AutoSize = true;
             this.lblTeacher.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTeacher.Location = new System.Drawing.Point(82, 104);
+            this.lblTeacher.Location = new System.Drawing.Point(123, 160);
+            this.lblTeacher.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTeacher.Name = "lblTeacher";
-            this.lblTeacher.Size = new System.Drawing.Size(192, 16);
+            this.lblTeacher.Size = new System.Drawing.Size(266, 25);
             this.lblTeacher.TabIndex = 3;
             this.lblTeacher.Text = "Пуцко Николай Николаевич";
             // 
@@ -87,36 +91,41 @@
             // 
             this.lblTasksTitle.AutoSize = true;
             this.lblTasksTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblTasksTitle.Location = new System.Drawing.Point(96, 143);
+            this.lblTasksTitle.Location = new System.Drawing.Point(144, 220);
+            this.lblTasksTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTasksTitle.Name = "lblTasksTitle";
-            this.lblTasksTitle.Size = new System.Drawing.Size(80, 20);
+            this.lblTasksTitle.Size = new System.Drawing.Size(115, 29);
             this.lblTasksTitle.TabIndex = 4;
             this.lblTasksTitle.Text = "ДЗ и Кр:";
             // 
             // btnAddHomework
             // 
-            this.btnAddHomework.Location = new System.Drawing.Point(200, 139);
+            this.btnAddHomework.Location = new System.Drawing.Point(300, 214);
+            this.btnAddHomework.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAddHomework.Name = "btnAddHomework";
-            this.btnAddHomework.Size = new System.Drawing.Size(30, 30);
+            this.btnAddHomework.Size = new System.Drawing.Size(45, 46);
             this.btnAddHomework.TabIndex = 5;
             this.btnAddHomework.Text = "+";
             this.btnAddHomework.UseVisualStyleBackColor = true;
+            this.btnAddHomework.Click += new System.EventHandler(this.btnAddHomework_Click);
             // 
             // flpTasks
             // 
             this.flpTasks.AutoScroll = true;
             this.flpTasks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpTasks.Location = new System.Drawing.Point(12, 190);
+            this.flpTasks.Location = new System.Drawing.Point(18, 292);
+            this.flpTasks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.flpTasks.Name = "flpTasks";
-            this.flpTasks.Size = new System.Drawing.Size(335, 325);
+            this.flpTasks.Size = new System.Drawing.Size(502, 500);
             this.flpTasks.TabIndex = 6;
             this.flpTasks.WrapContents = false;
             // 
             // btnMove
             // 
-            this.btnMove.Location = new System.Drawing.Point(34, 538);
+            this.btnMove.Location = new System.Drawing.Point(51, 828);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(79, 58);
+            this.btnMove.Size = new System.Drawing.Size(118, 89);
             this.btnMove.TabIndex = 7;
             this.btnMove.Text = "Перенести";
             this.btnMove.UseVisualStyleBackColor = true;
@@ -124,9 +133,10 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(244, 538);
+            this.btnDelete.Location = new System.Drawing.Point(366, 828);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(79, 58);
+            this.btnDelete.Size = new System.Drawing.Size(118, 89);
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "Удалить";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -134,9 +144,9 @@
             // 
             // MoreLesson
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 609);
+            this.ClientSize = new System.Drawing.Size(538, 937);
             this.ControlBox = false;
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnMove);
@@ -147,6 +157,7 @@
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblSubject);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MoreLesson";
             this.Text = "Экран пары";
             this.ResumeLayout(false);
