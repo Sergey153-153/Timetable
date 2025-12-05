@@ -40,30 +40,27 @@
             // screen_tasks
             // 
             this.screen_tasks.Controls.Add(this.label_task);
-            this.screen_tasks.Location = new System.Drawing.Point(8, 11);
-            this.screen_tasks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.screen_tasks.Location = new System.Drawing.Point(12, 17);
             this.screen_tasks.Name = "screen_tasks";
-            this.screen_tasks.Size = new System.Drawing.Size(343, 51);
+            this.screen_tasks.Size = new System.Drawing.Size(514, 78);
             this.screen_tasks.TabIndex = 0;
             // 
             // label_task
             // 
             this.label_task.AutoSize = true;
             this.label_task.Font = new System.Drawing.Font("Arial Narrow", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_task.Location = new System.Drawing.Point(132, 15);
-            this.label_task.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_task.Location = new System.Drawing.Point(198, 23);
             this.label_task.Name = "label_task";
-            this.label_task.Size = new System.Drawing.Size(80, 26);
+            this.label_task.Size = new System.Drawing.Size(116, 37);
             this.label_task.TabIndex = 0;
             this.label_task.Text = "ДЗ и КР";
             // 
             // task_schelude
             // 
             this.task_schelude.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.task_schelude.Location = new System.Drawing.Point(11, 562);
-            this.task_schelude.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.task_schelude.Location = new System.Drawing.Point(51, 828);
             this.task_schelude.Name = "task_schelude";
-            this.task_schelude.Size = new System.Drawing.Size(107, 36);
+            this.task_schelude.Size = new System.Drawing.Size(118, 89);
             this.task_schelude.TabIndex = 1;
             this.task_schelude.Text = "Расписание";
             this.task_schelude.UseVisualStyleBackColor = true;
@@ -72,10 +69,9 @@
             // task_add
             // 
             this.task_add.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.task_add.Location = new System.Drawing.Point(145, 562);
-            this.task_add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.task_add.Location = new System.Drawing.Point(228, 828);
             this.task_add.Name = "task_add";
-            this.task_add.Size = new System.Drawing.Size(77, 36);
+            this.task_add.Size = new System.Drawing.Size(84, 89);
             this.task_add.TabIndex = 2;
             this.task_add.Text = "+";
             this.task_add.UseVisualStyleBackColor = true;
@@ -84,10 +80,9 @@
             // task_settings
             // 
             this.task_settings.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.task_settings.Location = new System.Drawing.Point(241, 562);
-            this.task_settings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.task_settings.Location = new System.Drawing.Point(366, 828);
             this.task_settings.Name = "task_settings";
-            this.task_settings.Size = new System.Drawing.Size(107, 36);
+            this.task_settings.Size = new System.Drawing.Size(118, 89);
             this.task_settings.TabIndex = 3;
             this.task_settings.Text = "Настройки";
             this.task_settings.UseVisualStyleBackColor = true;
@@ -97,23 +92,22 @@
             // 
             this.content_block.AutoScroll = true;
             this.content_block.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.content_block.Location = new System.Drawing.Point(8, 74);
-            this.content_block.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.content_block.Location = new System.Drawing.Point(12, 114);
+            this.content_block.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.content_block.Name = "content_block";
-            this.content_block.Size = new System.Drawing.Size(343, 455);
+            this.content_block.Size = new System.Drawing.Size(514, 700);
             this.content_block.TabIndex = 4;
             // 
             // Tasks
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 609);
+            this.ClientSize = new System.Drawing.Size(538, 937);
             this.Controls.Add(this.screen_tasks);
             this.Controls.Add(this.content_block);
             this.Controls.Add(this.task_settings);
             this.Controls.Add(this.task_add);
             this.Controls.Add(this.task_schelude);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Tasks";
             this.Text = "Tasks";
             this.screen_tasks.ResumeLayout(false);
