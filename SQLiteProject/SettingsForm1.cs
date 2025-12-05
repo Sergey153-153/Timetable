@@ -196,7 +196,8 @@ namespace SQLiteProject
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Дима лентяй");
+            HolidaysForm holidaysForm = new HolidaysForm(this); // Передаем текущую форму как родительскую
+            holidaysForm.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
