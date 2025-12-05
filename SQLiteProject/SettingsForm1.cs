@@ -104,37 +104,107 @@ namespace SQLiteProject
         {
             using (System.Windows.Forms.Form inputForm = new System.Windows.Forms.Form())
             {
-                inputForm.Width = 400;
-                inputForm.Height = 180;
+                inputForm.Width = 450;
+                inputForm.Height = 350;
                 inputForm.Text = "Загрузка расписания";
                 inputForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
                 inputForm.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
                 inputForm.MinimizeBox = false;
                 inputForm.MaximizeBox = false;
 
-                System.Windows.Forms.Label lbl = new System.Windows.Forms.Label() { Left = 10, Top = 10, Text = "Введите код расписания:", AutoSize = true };
-                System.Windows.Forms.TextBox txt = new System.Windows.Forms.TextBox() { Left = 10, Top = 40, Width = 360 };
-                System.Windows.Forms.Button btnOk = new System.Windows.Forms.Button() { Text = "Загрузить", Left = 200, Width = 80, Top = 80, DialogResult = System.Windows.Forms.DialogResult.OK };
-                System.Windows.Forms.Button btnCancel = new System.Windows.Forms.Button() { Text = "Отмена", Left = 290, Width = 80, Top = 80, DialogResult = System.Windows.Forms.DialogResult.Cancel };
+                System.Windows.Forms.Label lbl = new System.Windows.Forms.Label()
+                {
+                    Left = 10,
+                    Top = 10,
+                    Text = "Выберите расписание из списка:",
+                    AutoSize = true
+                };
+
+                System.Windows.Forms.ListBox listBox = new System.Windows.Forms.ListBox()
+                {
+                    Left = 10,
+                    Top = 35,
+                    Width = 410,
+                    Height = 200
+                };
+
+                System.Windows.Forms.Button btnOk = new System.Windows.Forms.Button()
+                {
+                    Text = "Загрузить",
+                    Left = 240,
+                    Width = 80,
+                    Top = 250,
+                    DialogResult = System.Windows.Forms.DialogResult.OK
+                };
+
+                System.Windows.Forms.Button btnCancel = new System.Windows.Forms.Button()
+                {
+                    Text = "Отмена",
+                    Left = 330,
+                    Width = 80,
+                    Top = 250,
+                    DialogResult = System.Windows.Forms.DialogResult.Cancel
+                };
 
                 inputForm.Controls.Add(lbl);
-                inputForm.Controls.Add(txt);
+                inputForm.Controls.Add(listBox);
                 inputForm.Controls.Add(btnOk);
                 inputForm.Controls.Add(btnCancel);
 
                 inputForm.AcceptButton = btnOk;
                 inputForm.CancelButton = btnCancel;
 
+                // Загружаем список расписаний
+                try
+                {
+                    var schedules = sqliteQ.GetAllSchedules();
+
+                    if (schedules == null || schedules.Count == 0)
+                    {
+                        System.Windows.Forms.MessageBox.Show("В базе данных нет доступных расписаний!",
+                            "Ошибка",
+                            System.Windows.Forms.MessageBoxButtons.OK,
+                            System.Windows.Forms.MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    foreach (var schedule in schedules)
+                    {
+                        string displayText = $"{schedule.Code} - {schedule.Name}";
+                        listBox.Items.Add(new ScheduleListItem
+                        {
+                            DisplayText = displayText,
+                            ScheduleCode = schedule.Code,
+                            ScheduleID = schedule.ScheduleID
+                        });
+                    }
+
+                    // Выделяем первый элемент по умолчанию
+                    if (listBox.Items.Count > 0)
+                    {
+                        listBox.SelectedIndex = 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show($"Ошибка при загрузке списка расписаний: {ex.Message}",
+                        "Ошибка",
+                        System.Windows.Forms.MessageBoxButtons.OK,
+                        System.Windows.Forms.MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (inputForm.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                     return;
 
-                string code = txt.Text.Trim();
-
-                if (string.IsNullOrWhiteSpace(code))
+                if (listBox.SelectedItem == null)
                 {
-                    System.Windows.Forms.MessageBox.Show("Введите код расписания!");
+                    System.Windows.Forms.MessageBox.Show("Выберите расписание из списка!");
                     return;
                 }
+
+                ScheduleListItem selectedItem = (ScheduleListItem)listBox.SelectedItem;
+                string code = selectedItem.ScheduleCode;
 
                 try
                 {
@@ -147,7 +217,7 @@ namespace SQLiteProject
                     }
 
                     var result = System.Windows.Forms.MessageBox.Show(
-                        "Вы уверены, что хотите заменить текущее расписание? Это действие нельзя отменить.",
+                        $"Вы уверены, что хотите заменить текущее расписание на \"{info.Name}\" (код: {info.Code})? Это действие нельзя отменить.",
                         "Подтверждение замены",
                         System.Windows.Forms.MessageBoxButtons.YesNo,
                         System.Windows.Forms.MessageBoxIcon.Question);
@@ -181,7 +251,19 @@ namespace SQLiteProject
                     System.Windows.Forms.MessageBox.Show($"Ошибка при загрузке расписания: {ex.Message}");
                 }
             }
+        }
 
+        // Вспомогательный класс для хранения информации о расписании в ListBox
+        private class ScheduleListItem
+        {
+            public string DisplayText { get; set; }
+            public string ScheduleCode { get; set; }
+            public int ScheduleID { get; set; }
+
+            public override string ToString()
+            {
+                return DisplayText;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

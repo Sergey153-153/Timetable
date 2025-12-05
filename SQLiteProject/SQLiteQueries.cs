@@ -595,7 +595,7 @@ namespace mySQLite
 
         public ScheduleInfo getScheduleByCode(string code)
         {
-            DataTable dt = _sqlt.FetchByColumn("Schedules", "ScheduleID, Type", "Code = '" + code + "'", "");
+            DataTable dt = _sqlt.FetchByColumn("Schedules", "ScheduleID, Type, Code, Name", "Code = '" + code + "'", "");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -603,8 +603,41 @@ namespace mySQLite
             ScheduleInfo info = new ScheduleInfo();
             info.ScheduleID = int.Parse(dt.Rows[0]["ScheduleID"].ToString());
             info.Type = int.Parse(dt.Rows[0]["Type"].ToString());
+            info.Code = dt.Rows[0]["Code"].ToString();
+            info.Name = dt.Rows[0]["Name"]?.ToString() ?? "";
 
             return info;
+        }
+
+        public List<ScheduleInfo> GetAllSchedules()
+        {
+            List<ScheduleInfo> schedules = new List<ScheduleInfo>();
+
+            try
+            {
+                DataTable dt = _sqlt.FetchByColumn(
+                    "Schedules",
+                    "ScheduleID, Code, Name, Type",
+                    "",
+                    "ORDER BY ScheduleID"
+                );
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ScheduleInfo info = new ScheduleInfo();
+                    info.ScheduleID = int.Parse(row["ScheduleID"].ToString());
+                    info.Code = row["Code"].ToString();
+                    info.Name = row["Name"]?.ToString() ?? "";
+                    info.Type = int.Parse(row["Type"].ToString());
+                    schedules.Add(info);
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveLog($"Ошибка GetAllSchedules: {ex.Message}");
+            }
+
+            return schedules;
         }
 
         public List<LessonInfo> getOneWeekLessons(int scheduleID)
@@ -1062,6 +1095,8 @@ namespace mySQLite
     {
         public int ScheduleID;
         public int Type;
+        public string Code;
+        public string Name;
     }
 
     public class LessonInfo
