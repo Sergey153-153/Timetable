@@ -20,7 +20,7 @@ namespace mySQLite
         public SQLiteQueries(string dbName)
         {
             _sqlt = new DbFacadeSQLite(dbName);
-            CreateTasksTables(); // Исправленное название метода
+            
         }
 
 
@@ -49,12 +49,7 @@ namespace mySQLite
         {
             // ClearDB();
 
-            string sqlCmd = @"CREATE TABLE IF NOT EXISTS Users (
-                    [UserID] INTEGER PRIMARY KEY AUTOINCREMENT,
-                    [PhoneNumber] TEXT NOT NULL UNIQUE
-                    );";
-
-            sqlCmd = @"CREATE TABLE Schedules (
+            string sqlCmd = @"CREATE TABLE Schedules (
                     [ScheduleID] INTEGER PRIMARY KEY,
                     [Code] TEXT NOT NULL UNIQUE,
                     [Name] TEXT,
@@ -204,7 +199,6 @@ namespace mySQLite
             }
         }
 
-
         public int CopySchedule(int oldScheduleID, int newScheduleID)
         {
             DataTable sched = _sqlt.FetchByColumn("Schedules", "*", "ScheduleID = " + oldScheduleID, "");
@@ -337,7 +331,7 @@ namespace mySQLite
 
         }
 
-        public DateTime SemesterStart = new DateTime(2024, 9, 1); // точка отсчёта
+        public DateTime SemesterStart = new DateTime(2025, 9, 1); // точка отсчёта
 
         public List<LessonInfo> GetLessonsForDate(DateTime date)
         {
@@ -513,25 +507,8 @@ namespace mySQLite
             return cntErr; // количество ошибок
         }
         #endregion
+
         #region Работа с пользователями
-
-        public void CreateUsersTable()
-        {
-            try
-            {
-                string createTableQuery = @"
-            CREATE TABLE IF NOT EXISTS Users (
-                UserID INTEGER PRIMARY KEY AUTOINCREMENT,
-                PhoneNumber TEXT NOT NULL UNIQUE
-            )";
-
-                _sqlt.ExecuteNonQuery(createTableQuery);
-            }
-            catch (Exception ex)
-            {
-                SaveLog("Ошибка CreateUsersTable: " + ex.Message);
-            }
-        }
 
         public void AddUser(string phoneNumber)
         {
@@ -591,6 +568,7 @@ namespace mySQLite
         }
 
         #endregion
+
         #region Получение расписания
 
         public ScheduleInfo getScheduleByCode(string code)
@@ -669,75 +647,66 @@ namespace mySQLite
             return lessons;
         }
 
-        public List<LessonInfo> getTwoWeekLessons(int scheduleID, int weekNumber)
-        {
-            DataTable dt = _sqlt.FetchByColumn("Lessons",
-                "LessonID, WeekNumber, DayOfWeek, LessonNumber, Subject, Teacher, Location, Time",
-                "ScheduleID = " + scheduleID + " AND WeekNumber = " + weekNumber,
-                "ORDER BY DayOfWeek, LessonNumber");
-
-            List<LessonInfo> lessons = new List<LessonInfo>();
-            foreach (DataRow row in dt.Rows)
-            {
-                LessonInfo li = new LessonInfo();
-                li.LessonID = int.Parse(row["LessonID"].ToString());
-                li.WeekNumber = int.Parse(row["WeekNumber"].ToString());
-                li.DayOfWeek = int.Parse(row["DayOfWeek"].ToString());
-                li.LessonNumber = int.Parse(row["LessonNumber"].ToString());
-                li.Subject = row["Subject"].ToString();
-                li.Teacher = row["Teacher"].ToString();
-                li.Location = row["Location"].ToString();
-                li.Time = row["Time"].ToString();
-                lessons.Add(li);
-            }
-
-            return lessons;
-        }
-
         #endregion
 
         #region Создание таблиц для задач
 
         // Исправленное название метода
-        private void CreateTasksTables()
+        public int CreateTasksTables(string dbName, bool isTransact = true)
         {
+            string sqlCmd = @"CREATE TABLE IF NOT EXISTS Subjects (
+                                [SubjectID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                                [Name] TEXT NOT NULL UNIQUE,
+                                [CreatedDate] TEXT DEFAULT CURRENT_TIMESTAMP
+                            );
+
+                            CREATE TABLE IF NOT EXISTS Tasks (
+                                [TaskID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                                [Title] TEXT NOT NULL,
+                                [Description] TEXT,
+                                [Deadline] TEXT NOT NULL,
+                                [Type] TEXT NOT NULL,
+                                [SubjectName] TEXT NOT NULL,
+                                [FilePath] TEXT,
+                                [IsCompleted] INTEGER DEFAULT 0,
+                                [CreatedDate] TEXT DEFAULT CURRENT_TIMESTAMP,
+                                FOREIGN KEY (SubjectName) REFERENCES Subjects(Name)
+                            );
+                        ";
+
+            if (isTransact)
+                _sqlt.BeginTransaction();
+
+            ConnectionState previousConnectionState = ConnectionState.Closed;
             try
             {
-                // Создаем таблицу для задач
-                string createTasksTable = @"
-                    CREATE TABLE IF NOT EXISTS Tasks (
-                        TaskID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Title TEXT NOT NULL,
-                        Description TEXT,
-                        Deadline TEXT NOT NULL,
-                        Type TEXT NOT NULL,
-                        Subject TEXT,
-                        FilePath TEXT,
-                        IsCompleted INTEGER DEFAULT 0,
-                        CreatedDate TEXT DEFAULT CURRENT_TIMESTAMP
-                    )";
+                previousConnectionState = _sqlt.connect.State;
+                if (_sqlt.connect.State == ConnectionState.Closed)
+                    _sqlt.connect.Open();
 
-                // Создаем таблицу для предметов
-                string createSubjectsTable = @"
-                    CREATE TABLE IF NOT EXISTS Subjects (
-                        SubjectID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        Name TEXT NOT NULL UNIQUE,
-                        CreatedDate TEXT DEFAULT CURRENT_TIMESTAMP
-                    )";
-
-                _sqlt.ExecuteNonQuery(createTasksTable);
-                _sqlt.ExecuteNonQuery(createSubjectsTable);
-
-                // Добавляем основные предметы, если таблица пуста
-                AddDefaultSubjects();
+                _sqlt.command = new SQLiteCommand(_sqlt.connect)
+                {
+                    CommandText = sqlCmd
+                };
+                _sqlt.command.ExecuteNonQuery();
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                SaveLog($"Ошибка создания таблиц: {ex.Message}");
+                _sqlt.SaveLog(1, $"Ошибка при генерации таблиц: {error.Message}");
+                if (isTransact) _sqlt.RollBackTransaction();
+                return 0;
             }
+            finally
+            {
+                if (previousConnectionState == ConnectionState.Closed)
+                    _sqlt.connect.Close();
+            }
+
+            if (isTransact) _sqlt.CommitTransaction();
+            return 1;
         }
 
-        private void AddDefaultSubjects()
+        public void AddDefaultSubjects()
         {
             try
             {
@@ -778,20 +747,17 @@ namespace mySQLite
                 parameters.Add("Description", task.Description, DbType.String);
                 parameters.Add("Deadline", task.Deadline.ToString("yyyy-MM-dd HH:mm:ss"), DbType.String);
                 parameters.Add("Type", task.Type, DbType.String);
+                parameters.Add("SubjectName", task.SubjectName, DbType.String);
+                parameters.Add("FilePath", task.FilePath, DbType.String);
                 parameters.Add("IsCompleted", task.IsCompleted ? 1 : 0, DbType.Int32);
 
                 int result = _sqlt.Insert("Tasks", parameters);
-
                 if (result > 0)
                 {
-                    // Получаем ID созданной задачи
                     DataTable dt = _sqlt.Execute("SELECT last_insert_rowid() as TaskID");
                     if (dt.Rows.Count > 0)
-                    {
                         return Convert.ToInt32(dt.Rows[0]["TaskID"]);
-                    }
                 }
-
                 return 0;
             }
             catch (Exception ex)
@@ -802,7 +768,7 @@ namespace mySQLite
         }
 
         // Упрощенная версия AddTask для формы
-        public int AddSimpleTask(string title, string description, DateTime deadline, string type, string subject, string filePath = null)
+        public int AddSimpleTask(string title, string description, DateTime deadline, string type, string subjectName, string filePath = null)
         {
             TaskItem task = new TaskItem
             {
@@ -810,6 +776,8 @@ namespace mySQLite
                 Description = description,
                 Deadline = deadline,
                 Type = type,
+                SubjectName = subjectName,
+                FilePath = filePath,
                 IsCompleted = false
             };
 
@@ -820,41 +788,33 @@ namespace mySQLite
         public List<TaskItem> GetAllTasks()
         {
             List<TaskItem> tasks = new List<TaskItem>();
-
             try
             {
-                DataTable dt = _sqlt.FetchByColumn(
-                    "Tasks",
-                    "*",
-                    "",
-                    "ORDER BY Deadline ASC"
-                );
-
+                DataTable dt = _sqlt.FetchByColumn("Tasks", "*", "", "ORDER BY Deadline ASC");
                 foreach (DataRow row in dt.Rows)
                 {
-                    TaskItem task = new TaskItem
+                    tasks.Add(new TaskItem
                     {
                         Id = Convert.ToInt32(row["TaskID"]),
                         Title = row["Title"].ToString(),
                         Description = row["Description"].ToString(),
                         Deadline = DateTime.Parse(row["Deadline"].ToString()),
                         Type = row["Type"].ToString(),
+                        SubjectName = row["SubjectName"].ToString(),
+                        FilePath = row["FilePath"].ToString(),
                         IsCompleted = Convert.ToBoolean(row["IsCompleted"])
-                    };
-
-                    tasks.Add(task);
+                    });
                 }
             }
             catch (Exception ex)
             {
                 SaveLog($"Ошибка GetAllTasks: {ex.Message}");
             }
-
             return tasks;
         }
 
         // 3. Получение задач по фильтру (исправленная версия без параметров)
-        public List<TaskItem> GetTasksByFilter(string subject = null, string type = null, bool? isCompleted = null)
+        public List<TaskItem> GetTasksByFilter(string subjectName = null, string type = null, bool? isCompleted = null)
         {
             List<TaskItem> tasks = new List<TaskItem>();
 
@@ -862,9 +822,9 @@ namespace mySQLite
             {
                 string whereClause = "1=1";
 
-                if (!string.IsNullOrEmpty(subject))
+                if (!string.IsNullOrEmpty(subjectName))
                 {
-                    whereClause += $" AND Subject = '{subject.Replace("'", "''")}'";
+                    whereClause += $" AND SubjectName = '{subjectName.Replace("'", "''")}'";
                 }
 
                 if (!string.IsNullOrEmpty(type))
@@ -877,26 +837,21 @@ namespace mySQLite
                     whereClause += $" AND IsCompleted = {(isCompleted.Value ? 1 : 0)}";
                 }
 
-                DataTable dt = _sqlt.FetchByColumn(
-                    "Tasks",
-                    "*",
-                    whereClause,
-                    "ORDER BY Deadline ASC"
-                );
+                DataTable dt = _sqlt.FetchByColumn("Tasks", "*", whereClause, "ORDER BY Deadline ASC");
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    TaskItem task = new TaskItem
+                    tasks.Add(new TaskItem
                     {
                         Id = Convert.ToInt32(row["TaskID"]),
                         Title = row["Title"].ToString(),
                         Description = row["Description"].ToString(),
                         Deadline = DateTime.Parse(row["Deadline"].ToString()),
                         Type = row["Type"].ToString(),
+                        SubjectName = row["SubjectName"].ToString(),
+                        FilePath = row["FilePath"].ToString(),
                         IsCompleted = Convert.ToBoolean(row["IsCompleted"])
-                    };
-
-                    tasks.Add(task);
+                    });
                 }
             }
             catch (Exception ex)
@@ -917,12 +872,12 @@ namespace mySQLite
                 parameters.Add("Description", task.Description, DbType.String);
                 parameters.Add("Deadline", task.Deadline.ToString("yyyy-MM-dd HH:mm:ss"), DbType.String);
                 parameters.Add("Type", task.Type, DbType.String);
+                parameters.Add("SubjectName", task.SubjectName, DbType.String);
+                parameters.Add("FilePath", task.FilePath, DbType.String);
                 parameters.Add("IsCompleted", task.IsCompleted ? 1 : 0, DbType.Int32);
                 parameters.Add("TaskID", task.Id, DbType.Int32);
 
-                string whereClause = "TaskID = @TaskID";
-                int result = _sqlt.Update("Tasks", parameters, whereClause);
-
+                int result = _sqlt.Update("Tasks", parameters, "TaskID = @TaskID");
                 return result > 0;
             }
             catch (Exception ex)
@@ -939,10 +894,7 @@ namespace mySQLite
             {
                 var parameters = new ParametersCollection();
                 parameters.Add("TaskID", taskId, DbType.Int32);
-
-                string whereClause = "TaskID = @TaskID";
-                int result = _sqlt.Delete("Tasks", whereClause, parameters);
-
+                int result = _sqlt.Delete("Tasks", "TaskID = @TaskID", parameters);
                 return result > 0;
             }
             catch (Exception ex)
@@ -995,6 +947,8 @@ namespace mySQLite
                         Description = row["Description"].ToString(),
                         Deadline = DateTime.Parse(row["Deadline"].ToString()),
                         Type = row["Type"].ToString(),
+                        SubjectName = row["SubjectName"].ToString(),
+                        FilePath = row["FilePath"].ToString(),
                         IsCompleted = Convert.ToBoolean(row["IsCompleted"])
                     };
                 }
@@ -1012,48 +966,41 @@ namespace mySQLite
         #region Методы для работы с предметами
 
         // 1. Получение всех предметов
-        public List<string> GetAllSubjects()
+        public List<SubjectItem> GetAllSubjects()
         {
-            List<string> subjects = new List<string>();
-
+            List<SubjectItem> subjects = new List<SubjectItem>();
             try
             {
-                DataTable dt = _sqlt.FetchByColumn(
-                    "Subjects",
-                    "Name",
-                    "",
-                    "ORDER BY Name ASC"
-                );
-
+                DataTable dt = _sqlt.FetchByColumn("Subjects", "*", "", "ORDER BY Name ASC");
                 foreach (DataRow row in dt.Rows)
                 {
-                    subjects.Add(row["Name"].ToString());
+                    subjects.Add(new SubjectItem
+                    {
+                        Id = Convert.ToInt32(row["SubjectID"]),
+                        Name = row["Name"].ToString()
+                    });
                 }
 
-                // Если таблица пуста, возвращаем базовый список
-                if (subjects.Count == 0)
+                if (subjects.Count == 0) // базовые предметы
                 {
-                    subjects.AddRange(new[] { "Математика", "Физика", "Химия", "История", "Литература" });
+                    string[] defaultSubjects = { "Математика", "Физика", "Химия", "История", "Литература" };
+                    subjects.AddRange(defaultSubjects.Select(s => new SubjectItem { Name = s }));
                 }
             }
             catch (Exception ex)
             {
                 SaveLog($"Ошибка GetAllSubjects: {ex.Message}");
-                // Возвращаем базовый список
-                subjects.AddRange(new[] { "Математика", "Физика", "Химия", "История", "Литература" });
             }
-
             return subjects;
         }
 
-        // 2. Добавление нового предмета
+        // Добавление нового предмета
         public bool AddSubject(string subjectName)
         {
             try
             {
                 var parameters = new ParametersCollection();
                 parameters.Add("Name", subjectName, DbType.String);
-
                 int result = _sqlt.Insert("Subjects", parameters);
                 return result > 0;
             }
@@ -1064,18 +1011,12 @@ namespace mySQLite
             }
         }
 
-        // 3. Проверка существования предмета
+        // Проверка существования предмета
         public bool SubjectExists(string subjectName)
         {
             try
             {
-                DataTable dt = _sqlt.FetchByColumn(
-                    "Subjects",
-                    "COUNT(*) as Count",
-                    $"Name = '{subjectName.Replace("'", "''")}'",
-                    ""
-                );
-
+                DataTable dt = _sqlt.FetchByColumn("Subjects", "COUNT(*) as Count", $"Name = '{subjectName.Replace("'", "''")}'", "");
                 return dt.Rows.Count > 0 && Convert.ToInt32(dt.Rows[0]["Count"]) > 0;
             }
             catch (Exception ex)

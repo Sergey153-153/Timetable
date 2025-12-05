@@ -284,7 +284,7 @@ namespace SQLiteProject
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Tasks tasksForm = new Tasks();
+            Tasks tasksForm = new Tasks(sqliteQ);
             this.Hide();
             tasksForm.ShowDialog();
             this.Close();

@@ -1,14 +1,11 @@
 ﻿using mySQLite;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SQLiteProject
@@ -16,31 +13,19 @@ namespace SQLiteProject
     public partial class Tasks : Form
     {
         private List<TaskItem> _tasks;
-        private SQLiteConnection _connection;
+        private SQLiteQueries _db;
 
-        public Tasks()
+        public Tasks(SQLiteQueries db)
         {
             InitializeComponent();
-            InitializeCustomComponents();
-            SetConnection(_connection);
-        }
-
-        public void SetConnection(SQLiteConnection connection)
-        {
-            _connection = connection;
+            _db = db;
             LoadTasksFromDatabase();
             DisplayTasks();
         }
 
-        private void InitializeCustomComponents()
-        {
-            this.Text = "Задачи";
-            this.StartPosition = FormStartPosition.CenterScreen;
-        }
-
         private void LoadTasksFromDatabase()
         {
-            if (_connection == null)
+            if (_db == null)
             {
                 LoadTestData();
                 return;
@@ -48,30 +33,8 @@ namespace SQLiteProject
 
             try
             {
-                _tasks = new List<TaskItem>();
-                string sql = @"SELECT t.*, s.Name as SubjectName 
-                              FROM Tasks t 
-                              LEFT JOIN Subjects s ON t.SubjectId = s.Id 
-                              WHERE t.IsCompleted = 0 
-                              ORDER BY t.Deadline ASC";
-
-                using (var command = new SQLiteCommand(sql, _connection))
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        _tasks.Add(new TaskItem
-                        {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            Title = reader["Title"].ToString(),
-                            Description = reader["Description"].ToString(),
-                            Deadline = Convert.ToDateTime(reader["Deadline"]),
-                            Type = reader["Type"].ToString(),
-                            SubjectName = reader["SubjectName"].ToString(),
-                            FilePath = reader["FilePath"]?.ToString() ?? ""
-                        });
-                    }
-                }
+                // Получаем только невыполненные задачи
+                _tasks = _db.GetTasksByFilter(isCompleted: false);
             }
             catch (Exception ex)
             {
@@ -95,11 +58,13 @@ namespace SQLiteProject
 
             if (_tasks == null || _tasks.Count == 0)
             {
-                Label noTasksLabel = new Label();
-                noTasksLabel.Text = "Заданий нет";
-                noTasksLabel.Font = new Font("Arial", 12);
-                noTasksLabel.TextAlign = ContentAlignment.MiddleCenter;
-                noTasksLabel.Dock = DockStyle.Fill;
+                Label noTasksLabel = new Label
+                {
+                    Text = "Заданий нет",
+                    Font = new Font("Arial", 12),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill
+                };
                 content_block.Controls.Add(noTasksLabel);
                 return;
             }
@@ -130,16 +95,20 @@ namespace SQLiteProject
 
         private Panel CreateDatePanel(DateTime date, int yPosition)
         {
-            Panel panel = new Panel();
-            panel.Size = new Size(content_block.Width - 30, 40);
-            panel.Location = new Point(5, yPosition);
+            Panel panel = new Panel
+            {
+                Size = new Size(content_block.Width - 30, 40),
+                Location = new Point(5, yPosition)
+            };
 
-            Label dateLabel = new Label();
-            dateLabel.Text = $"{date:dd.MM.yyyy} - {date:dddd}";
-            dateLabel.Font = new Font("Arial", 12, FontStyle.Bold);
-            dateLabel.Dock = DockStyle.Fill;
-            dateLabel.TextAlign = ContentAlignment.MiddleLeft;
-            dateLabel.Padding = new Padding(10, 0, 0, 0);
+            Label dateLabel = new Label
+            {
+                Text = $"{date:dd.MM.yyyy} - {date:dddd}",
+                Font = new Font("Arial", 12, FontStyle.Bold),
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Padding = new Padding(10, 0, 0, 0)
+            };
 
             panel.Controls.Add(dateLabel);
             return panel;
@@ -147,41 +116,49 @@ namespace SQLiteProject
 
         private Panel CreateTaskPanel(TaskItem task, int yPosition)
         {
-            Panel panel = new Panel();
-            panel.Size = new Size(content_block.Width - 30, 70);
-            panel.Location = new Point(5, yPosition);
-            panel.BorderStyle = BorderStyle.FixedSingle;
+            Panel panel = new Panel
+            {
+                Size = new Size(content_block.Width - 30, 70),
+                Location = new Point(5, yPosition),
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
             // Заголовок задачи
-            Label titleLabel = new Label();
-            titleLabel.Text = $"{task.Type}: {task.SubjectName}";
-            titleLabel.Font = new Font("Arial", 11, FontStyle.Bold);
-            titleLabel.Location = new Point(10, 10);
-            titleLabel.AutoSize = true;
+            Label titleLabel = new Label
+            {
+                Text = $"{task.Type}: {task.SubjectName}",
+                Font = new Font("Arial", 11, FontStyle.Bold),
+                Location = new Point(10, 10),
+                AutoSize = true
+            };
 
             // Описание задачи
-            Label descLabel = new Label();
-            descLabel.Text = task.Description;
-            descLabel.Font = new Font("Arial", 9);
-            descLabel.Location = new Point(10, 35);
-            descLabel.AutoSize = true;
-
-            // флаг если есть прикрепленный файл
-            if (!string.IsNullOrEmpty(task.FilePath))
+            Label descLabel = new Label
             {
-                Label fileIcon = new Label();
-                fileIcon.Text = "!!";
-                fileIcon.Font = new Font("Arial", 10, FontStyle.Bold);
-                fileIcon.Location = new Point(panel.Width - 30, 10);
-                fileIcon.AutoSize = true;
-                fileIcon.Cursor = Cursors.Hand;
-                fileIcon.Tag = task;
-                fileIcon.Click += FileIcon_Click;
-                panel.Controls.Add(fileIcon);
-            }
+                Text = task.Description,
+                Font = new Font("Arial", 9),
+                Location = new Point(10, 35),
+                AutoSize = true
+            };
 
             panel.Controls.Add(titleLabel);
             panel.Controls.Add(descLabel);
+
+            // Файл
+            if (!string.IsNullOrEmpty(task.FilePath))
+            {
+                Label fileIcon = new Label
+                {
+                    Text = "!!",
+                    Font = new Font("Arial", 10, FontStyle.Bold),
+                    Location = new Point(panel.Width - 30, 10),
+                    AutoSize = true,
+                    Cursor = Cursors.Hand,
+                    Tag = task
+                };
+                fileIcon.Click += FileIcon_Click;
+                panel.Controls.Add(fileIcon);
+            }
 
             // Обработчик клика по задаче
             panel.Click += (s, e) => ShowTaskDetails(task);
@@ -210,76 +187,81 @@ namespace SQLiteProject
                 detailsForm.MaximizeBox = false;
                 detailsForm.MinimizeBox = false;
 
-                // Основная панель
-                Panel mainPanel = new Panel();
-                mainPanel.Dock = DockStyle.Fill;
-                mainPanel.Padding = new Padding(20);
-                mainPanel.AutoScroll = true;
+                Panel mainPanel = new Panel { Dock = DockStyle.Fill, Padding = new Padding(20), AutoScroll = true };
 
-                // Тип и предмет
-                Label typeLabel = new Label();
-                typeLabel.Text = $"{task.Type}: {task.SubjectName}";
-                typeLabel.Font = new Font("Arial", 14, FontStyle.Bold);
-                typeLabel.Location = new Point(0, 0);
-                typeLabel.AutoSize = true;
+                Label typeLabel = new Label
+                {
+                    Text = $"{task.Type}: {task.SubjectName}",
+                    Font = new Font("Arial", 14, FontStyle.Bold),
+                    Location = new Point(0, 0),
+                    AutoSize = true
+                };
                 mainPanel.Controls.Add(typeLabel);
 
-                // Дедлайн
-                Label deadlineLabel = new Label();
-                deadlineLabel.Text = $"Срок сдачи: {task.Deadline:dd.MM.yyyy} ({task.Deadline:dddd})";
-                deadlineLabel.Font = new Font("Arial", 11);
-                deadlineLabel.Location = new Point(0, 40);
-                deadlineLabel.AutoSize = true;
+                Label deadlineLabel = new Label
+                {
+                    Text = $"Срок сдачи: {task.Deadline:dd.MM.yyyy} ({task.Deadline:dddd})",
+                    Font = new Font("Arial", 11),
+                    Location = new Point(0, 40),
+                    AutoSize = true
+                };
                 mainPanel.Controls.Add(deadlineLabel);
 
-                // Описание
-                Label descTitleLabel = new Label();
-                descTitleLabel.Text = "Описание:";
-                descTitleLabel.Font = new Font("Arial", 11, FontStyle.Bold);
-                descTitleLabel.Location = new Point(0, 80);
-                descTitleLabel.AutoSize = true;
+                Label descTitleLabel = new Label
+                {
+                    Text = "Описание:",
+                    Font = new Font("Arial", 11, FontStyle.Bold),
+                    Location = new Point(0, 80),
+                    AutoSize = true
+                };
                 mainPanel.Controls.Add(descTitleLabel);
 
-                TextBox descriptionBox = new TextBox();
-                descriptionBox.Text = task.Description;
-                descriptionBox.Multiline = true;
-                descriptionBox.ScrollBars = ScrollBars.Vertical;
-                descriptionBox.Location = new Point(0, 105);
-                descriptionBox.Size = new Size(440, 100);
-                descriptionBox.ReadOnly = true;
-                descriptionBox.BorderStyle = BorderStyle.FixedSingle;
-                descriptionBox.BackColor = SystemColors.Window;
+                TextBox descriptionBox = new TextBox
+                {
+                    Text = task.Description,
+                    Multiline = true,
+                    ScrollBars = ScrollBars.Vertical,
+                    Location = new Point(0, 105),
+                    Size = new Size(440, 100),
+                    ReadOnly = true,
+                    BorderStyle = BorderStyle.FixedSingle,
+                    BackColor = SystemColors.Window
+                };
                 mainPanel.Controls.Add(descriptionBox);
 
-                // Файл
                 int currentY = 220;
 
                 if (!string.IsNullOrEmpty(task.FilePath))
                 {
-                    Label fileTitleLabel = new Label();
-                    fileTitleLabel.Text = "Прикрепленный файл:";
-                    fileTitleLabel.Font = new Font("Arial", 11, FontStyle.Bold);
-                    fileTitleLabel.Location = new Point(0, currentY);
-                    fileTitleLabel.AutoSize = true;
+                    Label fileTitleLabel = new Label
+                    {
+                        Text = "Прикрепленный файл:",
+                        Font = new Font("Arial", 11, FontStyle.Bold),
+                        Location = new Point(0, currentY),
+                        AutoSize = true
+                    };
                     mainPanel.Controls.Add(fileTitleLabel);
 
-                    Button downloadButton = new Button();
-                    downloadButton.Text = $" Скачать: {Path.GetFileName(task.FilePath)}";
-                    downloadButton.Font = new Font("Arial", 10);
-                    downloadButton.Location = new Point(0, currentY + 30);
-                    downloadButton.Size = new Size(300, 35);
+                    Button downloadButton = new Button
+                    {
+                        Text = $" Скачать: {Path.GetFileName(task.FilePath)}",
+                        Font = new Font("Arial", 10),
+                        Location = new Point(0, currentY + 30),
+                        Size = new Size(300, 35)
+                    };
                     downloadButton.Click += (s, e) => DownloadFile(task.FilePath);
                     mainPanel.Controls.Add(downloadButton);
 
                     currentY += 80;
                 }
 
-                // Кнопка закрытия
-                Button closeButton = new Button();
-                closeButton.Text = "Закрыть";
-                closeButton.Font = new Font("Arial", 10);
-                closeButton.Location = new Point(0, currentY + 20);
-                closeButton.Size = new Size(100, 30);
+                Button closeButton = new Button
+                {
+                    Text = "Закрыть",
+                    Font = new Font("Arial", 10),
+                    Location = new Point(0, currentY + 20),
+                    Size = new Size(100, 30)
+                };
                 closeButton.Click += (s, e) => detailsForm.Close();
                 mainPanel.Controls.Add(closeButton);
 
@@ -351,8 +333,7 @@ namespace SQLiteProject
 
         private void task_add_Click(object sender, EventArgs e)
         {
-            Add_task addTaskForm = new Add_task();
-            addTaskForm.SetConnection(_connection);
+            Add_task addTaskForm = new Add_task(_db);
             if (addTaskForm.ShowDialog() == DialogResult.OK)
             {
                 LoadTasksFromDatabase();

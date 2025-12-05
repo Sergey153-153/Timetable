@@ -20,10 +20,9 @@ namespace SQLiteProject
         SQLiteQueries sqliteQ;
         private HolidayService holidayService;
 
-        private const int COUNT_TABLES_IN_DB = 4; //кол-во таблиц в БД
+        private const int COUNT_TABLES_IN_DB = 6; //кол-во таблиц в БД
         public List<string> listSchedules;
         public List<string> listLessons;
-        private DbFacadeSQLite _tasksDatabase;
 
         public Form1()
         {
@@ -143,26 +142,10 @@ namespace SQLiteProject
                         Application.Exit();
                 }
                 sqliteQ.CreateTables(dbName);
-
-                InitializeTasksDatabase();
-
+                sqliteQ.CreateTasksTables(dbName);
+                sqliteQ.AddDefaultSubjects();
                 //Если БД была новая, то заполним ее тестовыми данными
                 saveDataToDB();
-            }
-        }
-
-        //подлкючение к бд заданий
-        private void InitializeTasksDatabase()
-        {
-            _tasksDatabase = new DbFacadeSQLite("tasks_database.sqlite");
-
-            if (_tasksDatabase.Open())
-            {
-                _tasksDatabase.InitializeTaskDatabase();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка подключения к базе данных заданий!");
             }
         }
 
@@ -339,8 +322,7 @@ namespace SQLiteProject
 
         private void buttonTasks_Click(object sender, EventArgs e)
         {
-            Tasks tasksForm = new Tasks();
-            tasksForm.SetConnection(_tasksDatabase.connect); // передаем покдлючение
+            Tasks tasksForm = new Tasks(sqliteQ);
             tasksForm.ShowDialog();
         }
 
