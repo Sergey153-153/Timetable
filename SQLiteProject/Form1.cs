@@ -328,7 +328,126 @@ namespace SQLiteProject
 
         private void buttonAddLesson_Click(object sender, EventArgs e)
         {
-            return;
+            using (Form addForm = BuildAddLessonForm(out Func<List<string>> collectData))
+            {
+                addForm.StartPosition = FormStartPosition.CenterParent;
+
+                if (addForm.ShowDialog() == DialogResult.OK)
+                {
+                    List<string> newLessons = collectData(); // получаем список строк
+
+                    int err = sqliteQ.AddLessons(newLessons);
+                    if (err == 0)
+                        MessageBox.Show("Пара успешно добавлена!");
+                    else
+                        MessageBox.Show("Ошибка при добавлении пары!");
+
+                }
+            }
+        }
+
+        private Form BuildAddLessonForm(out Func<List<string>> collectData)
+        {
+            Form f = new Form();
+            f.Text = "Создание новой пары";
+            f.Size = new Size(375, 648);
+            f.FormBorderStyle = FormBorderStyle.FixedDialog;
+            f.MaximizeBox = false;
+
+            // ====== ScheduleID не показываем, он всегда = 1 ======
+            int scheduleId = 1;
+
+            // ====== Неделя ======
+            Label lblWeek = new Label() { Text = "Неделя (0/1/2):", Location = new Point(20, 20) };
+            ComboBox cbWeek = new ComboBox() { Location = new Point(150, 18), Width = 200 };
+            cbWeek.Items.AddRange(new[] { "0", "1", "2" });
+            cbWeek.SelectedIndex = 0;
+
+            // ====== День недели ======
+            Label lblDay = new Label() { Text = "День недели:", Location = new Point(20, 60) };
+            ComboBox cbDay = new ComboBox() { Location = new Point(150, 58), Width = 200 };
+            cbDay.Items.AddRange(new[]{"Пн","Вт","Ср","Чт","Пт","Сб"});
+            cbDay.SelectedIndex = 0;
+
+            // ====== Номер пары ======
+            Label lblLesson = new Label() { Text = "Номер пары:", Location = new Point(20, 100) };
+            ComboBox cbLesson = new ComboBox() { Location = new Point(150, 98), Width = 200 };
+            cbLesson.Items.AddRange(new[] { "1", "2", "3", "4", "5", "6", "7" });
+            cbLesson.SelectedIndex = 0;
+
+            // ====== Предмет ======
+            Label lblSubject = new Label() { Text = "Предмет:", Location = new Point(20, 140) };
+            TextBox txtSubject = new TextBox() { Location = new Point(150, 138), Width = 200 };
+
+            // ====== Преподаватель ======
+            Label lblTeacher = new Label() { Text = "Преподаватель:", Location = new Point(20, 180) };
+            TextBox txtTeacher = new TextBox() { Location = new Point(150, 178), Width = 200 };
+
+            // ====== Аудитория ======
+            Label lblLocation = new Label() { Text = "Аудитория:", Location = new Point(20, 220) };
+            TextBox txtLocation = new TextBox() { Location = new Point(150, 218), Width = 200 };
+
+            // ====== Начало ======
+            Label lblStart = new Label() { Text = "Начало (HH:MM):", Location = new Point(20, 260) };
+            TextBox txtStart = new TextBox() { Location = new Point(150, 258), Width = 200, Text = "08:30" };
+
+            // ====== Конец ======
+            Label lblEnd = new Label() { Text = "Конец (HH:MM):", Location = new Point(20, 300) };
+            TextBox txtEnd = new TextBox() { Location = new Point(150, 298), Width = 200, Text = "10:05" };
+
+            // ====== Кнопки OK / Cancel ======
+            Button btnOk = new Button()
+            {
+                Text = "OK",
+                DialogResult = DialogResult.OK,
+                Location = new Point(80, 330),
+                Width = 100
+            };
+
+            Button btnCancel = new Button()
+            {
+                Text = "Отмена",
+                DialogResult = DialogResult.Cancel,
+                Location = new Point(200, 330),
+                Width = 100
+            };
+
+            f.Controls.AddRange(new Control[]
+                    {
+                lblWeek, cbWeek,
+                lblDay, cbDay,
+                lblLesson, cbLesson,
+                lblSubject, txtSubject,
+                lblTeacher, txtTeacher,
+                lblLocation, txtLocation,
+                lblStart, txtStart,
+                lblEnd, txtEnd,
+                btnOk, btnCancel
+            });
+
+            // ========= ЛОГИКА СОХРАНЕНИЯ ===================================
+
+            collectData = () =>
+            {
+                List<string> list = new List<string>();
+
+                string line =
+                    $"{scheduleId};" +
+                    $"{cbWeek.SelectedItem};" +
+                    $"{cbDay.SelectedIndex + 1};" +
+                    $"{cbLesson.SelectedItem};" +
+                    $"{txtSubject.Text};" +
+                    $"{txtTeacher.Text};" +
+                    $"{txtLocation.Text};" +
+                    $"{txtStart.Text};" +
+                    $"{txtEnd.Text}";
+
+                list.Add(line);
+
+                return list;
+            };
+
+            return f;
         }
 
         private void button1_Click(object sender, EventArgs e)

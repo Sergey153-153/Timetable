@@ -14,12 +14,35 @@ namespace SQLiteProject
         private SQLiteQueries _db; 
         private string _selectedFilePath = "";
 
+        private int _editTaskId = -1;
+
         public Add_task(SQLiteQueries db)
         {
             InitializeComponent();
             _db = db;
             InitializeForm();
             LoadSubjects();
+        }
+
+        // Конструктор для редактирования существующего задания
+        public Add_task(SQLiteQueries db, TaskItem taskToEdit) : this(db)
+        {
+            _editTaskId = taskToEdit.Id;
+
+            textBox_description.Text = taskToEdit.Description;
+            dateTimePicker1.Value = taskToEdit.Deadline;
+            _selectedFilePath = taskToEdit.FilePath;
+            Lesson_type.Text = taskToEdit.SubjectName;
+
+            switch (taskToEdit.Type)
+            {
+                case "ДЗ": HomeTask.Checked = true; break;
+                case "КР": Control.Checked = true; break;
+                case "Зачет": Test.Checked = true; break;
+                case "Экзамен": Exam.Checked = true; break;
+            }
+
+            this.Text = "Редактирование задания";
         }
 
         private void InitializeForm()
@@ -101,33 +124,50 @@ namespace SQLiteProject
 
         private void back_tasks_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBox_description.Text))
+            {
+                MessageBox.Show("Введите описание задания!");
+                return;
+            }
+
+            string taskType = GetSelectedTaskType();
+            if (string.IsNullOrEmpty(taskType))
+            {
+                MessageBox.Show("Выберите тип задания!");
+                return;
+            }
+
+            string subjectName = GetOrCreateSubjectName();
+            if (string.IsNullOrEmpty(subjectName)) return;
+
             try
             {
-                if (string.IsNullOrWhiteSpace(textBox_description.Text))
+                if (_editTaskId != -1)
                 {
-                    MessageBox.Show("Введите описание задания!");
-                    return;
+                    // Удаляем старое и добавляем новое
+                    bool deleted = _db.DeleteTask(_editTaskId);
+
+                    int newId = _db.AddSimpleTask(
+                        $"{taskType} - {dateTimePicker1.Value:dd.MM.yyyy}",
+                        textBox_description.Text,
+                        dateTimePicker1.Value,
+                        taskType,
+                        subjectName,
+                        _selectedFilePath
+                    );
+                }
+                else
+                {
+                    int newId = _db.AddSimpleTask(
+                        $"{taskType} - {dateTimePicker1.Value:dd.MM.yyyy}",
+                        textBox_description.Text,
+                        dateTimePicker1.Value,
+                        taskType,
+                        subjectName,
+                        _selectedFilePath
+                    );
                 }
 
-                string taskType = GetSelectedTaskType();
-                if (string.IsNullOrEmpty(taskType))
-                {
-                    MessageBox.Show("Выберите тип задания!");
-                    return;
-                }
-
-                string subjectName = GetOrCreateSubjectName();
-                if (string.IsNullOrEmpty(subjectName)) return;
-
-                SaveTaskToDatabase(
-                    textBox_description.Text,
-                    taskType,
-                    subjectName,
-                    dateTimePicker1.Value,
-                    _selectedFilePath
-                );
-
-                MessageBox.Show("Задание успешно добавлено!");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

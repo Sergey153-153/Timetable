@@ -14,7 +14,6 @@ namespace SQLiteProject
     public partial class SettingsForm1 : Form
     {
         private Form1 form1;
-        private Task task;
         private SQLiteQueries sqliteQ;
 
         //private int z;

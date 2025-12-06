@@ -20,7 +20,6 @@ namespace SQLiteProject
             InitializeComponent();
             _db = db;
             LoadTasksFromDatabase();
-            DisplayTasks();
         }
 
         private void LoadTasksFromDatabase()
@@ -40,6 +39,7 @@ namespace SQLiteProject
                 MessageBox.Show($"Ошибка загрузки задач из БД: {ex.Message}");
                 LoadTestData();
             }
+            DisplayTasks();
         }
 
         private void LoadTestData()
@@ -180,91 +180,168 @@ namespace SQLiteProject
             using (var detailsForm = new Form())
             {
                 detailsForm.Text = "Детали задания";
-                detailsForm.Size = new Size(500, 400);
-                detailsForm.StartPosition = FormStartPosition.CenterParent;
+                detailsForm.StartPosition = FormStartPosition.CenterScreen;
                 detailsForm.FormBorderStyle = FormBorderStyle.FixedDialog;
                 detailsForm.MaximizeBox = false;
                 detailsForm.MinimizeBox = false;
+                detailsForm.AutoSize = false; // мы сами считаем высоту
+                detailsForm.Width = 375; // фиксированная ширина
+                int maxHeight = 648; // максимум по высоте
 
-                Panel mainPanel = new Panel { Dock = DockStyle.Fill, Padding = new Padding(20), AutoScroll = true };
+                Panel mainPanel = new Panel
+                {
+                    Dock = DockStyle.Fill,
+                    Padding = new Padding(15),
+                    AutoScroll = true
+                };
 
+                int y = 10;
+
+                // ===== Тип и предмет =====
                 Label typeLabel = new Label
                 {
                     Text = $"{task.Type}: {task.SubjectName}",
                     Font = new Font("Arial", 14, FontStyle.Bold),
-                    Location = new Point(0, 0),
-                    AutoSize = true
+                    AutoSize = false,
+                    Width = 330,
+                    Location = new Point(5, y)
                 };
                 mainPanel.Controls.Add(typeLabel);
+                y += 40;
 
+                // ===== Дедлайн =====
                 Label deadlineLabel = new Label
                 {
                     Text = $"Срок сдачи: {task.Deadline:dd.MM.yyyy} ({task.Deadline:dddd})",
                     Font = new Font("Arial", 11),
-                    Location = new Point(0, 40),
-                    AutoSize = true
+                    AutoSize = false,
+                    Width = 330,
+                    Location = new Point(5, y)
                 };
                 mainPanel.Controls.Add(deadlineLabel);
+                y += 35;
 
+                // ===== Описание =====
                 Label descTitleLabel = new Label
                 {
                     Text = "Описание:",
                     Font = new Font("Arial", 11, FontStyle.Bold),
-                    Location = new Point(0, 80),
-                    AutoSize = true
+                    AutoSize = false,
+                    Width = 330,
+                    Location = new Point(5, y)
                 };
                 mainPanel.Controls.Add(descTitleLabel);
+                y += 25;
 
                 TextBox descriptionBox = new TextBox
                 {
                     Text = task.Description,
                     Multiline = true,
-                    ScrollBars = ScrollBars.Vertical,
-                    Location = new Point(0, 105),
-                    Size = new Size(440, 100),
                     ReadOnly = true,
+                    ScrollBars = ScrollBars.Vertical,
                     BorderStyle = BorderStyle.FixedSingle,
-                    BackColor = SystemColors.Window
+                    BackColor = SystemColors.Window,
+                    Location = new Point(5, y),
+                    Size = new Size(330, 150)
                 };
                 mainPanel.Controls.Add(descriptionBox);
+                y += 160;
 
-                int currentY = 220;
-
+                // ===== Файл =====
                 if (!string.IsNullOrEmpty(task.FilePath))
                 {
-                    Label fileTitleLabel = new Label
+                    Label fileLabel = new Label
                     {
                         Text = "Прикрепленный файл:",
                         Font = new Font("Arial", 11, FontStyle.Bold),
-                        Location = new Point(0, currentY),
-                        AutoSize = true
+                        AutoSize = false,
+                        Width = 330,
+                        Location = new Point(5, y)
                     };
-                    mainPanel.Controls.Add(fileTitleLabel);
+                    mainPanel.Controls.Add(fileLabel);
+                    y += 25;
 
                     Button downloadButton = new Button
                     {
                         Text = $" Скачать: {Path.GetFileName(task.FilePath)}",
                         Font = new Font("Arial", 10),
-                        Location = new Point(0, currentY + 30),
-                        Size = new Size(300, 35)
+                        Location = new Point(5, y),
+                        Size = new Size(330, 35)
                     };
                     downloadButton.Click += (s, e) => DownloadFile(task.FilePath);
                     mainPanel.Controls.Add(downloadButton);
-
-                    currentY += 80;
+                    y += 45;
                 }
+
+                // ===== Кнопки =====
+                Button editButton = new Button
+                {
+                    Text = "Редактировать",
+                    Font = new Font("Arial", 10),
+                    Location = new Point(5, y),
+                    Size = new Size(110, 35)
+                };
+                editButton.Click += (s, e) =>
+                {
+                    using (var editForm = new Add_task(_db, task))
+                    {
+                        if (editForm.ShowDialog() == DialogResult.OK)
+                        {
+                            detailsForm.Close();
+
+                            LoadTasksFromDatabase(); 
+                        }
+                    }
+                };
+                mainPanel.Controls.Add(editButton);
+
+                Button doneButton = new Button
+                {
+                    Text = "Выполнено",
+                    Font = new Font("Arial", 10),
+                    Location = new Point(125, y),
+                    Size = new Size(110, 35)
+                };
+                doneButton.Click += (s, e) =>
+                {
+                    if (MessageBox.Show("Удалить задачу?", "Подтвердите", MessageBoxButtons.YesNo)
+                        == DialogResult.Yes)
+                    {
+                        _db.DeleteTask(task.Id);
+                        detailsForm.Close();
+                        LoadTasksFromDatabase();
+                    }
+                };
+                mainPanel.Controls.Add(doneButton);
 
                 Button closeButton = new Button
                 {
                     Text = "Закрыть",
                     Font = new Font("Arial", 10),
-                    Location = new Point(0, currentY + 20),
-                    Size = new Size(100, 30)
+                    Location = new Point(245, y),
+                    Size = new Size(90, 35)
                 };
                 closeButton.Click += (s, e) => detailsForm.Close();
                 mainPanel.Controls.Add(closeButton);
 
                 detailsForm.Controls.Add(mainPanel);
+
+                // ===== Подбор высоты =====
+                detailsForm.Load += (s, e) =>
+                {
+                    int contentHeight = 0;
+                    foreach (Control c in mainPanel.Controls)
+                        contentHeight = Math.Max(contentHeight, c.Bottom);
+
+                    int formHeight = contentHeight + 50; // отступы и кнопки
+
+                    // если меньше maxHeight — используем авторазмер, иначе включается скролл
+                    detailsForm.Height = Math.Min(formHeight, maxHeight);
+
+                    // центрирование на экране
+                    detailsForm.StartPosition = FormStartPosition.CenterScreen;
+                };
+
                 detailsForm.ShowDialog();
             }
         }

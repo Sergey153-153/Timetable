@@ -924,29 +924,29 @@ namespace mySQLite
         }
 
         // 4. Обновление задачи
-        public bool UpdateTask(TaskItem task)
+
+        public bool ReplaceTask(TaskItem task)
         {
             try
             {
-                var parameters = new ParametersCollection();
-                parameters.Add("Title", task.Title, DbType.String);
-                parameters.Add("Description", task.Description, DbType.String);
-                parameters.Add("Deadline", task.Deadline.ToString("yyyy-MM-dd HH:mm:ss"), DbType.String);
-                parameters.Add("Type", task.Type, DbType.String);
-                parameters.Add("SubjectName", task.SubjectName, DbType.String);
-                parameters.Add("FilePath", task.FilePath, DbType.String);
-                parameters.Add("IsCompleted", task.IsCompleted ? 1 : 0, DbType.Int32);
-                parameters.Add("TaskID", task.Id, DbType.Int32);
+                // Сначала удаляем старую запись
+                bool deleted = DeleteTask(task.Id);
 
-                int result = _sqlt.Update("Tasks", parameters, "TaskID = @TaskID");
-                return result > 0;
+                // Добавляем новую запись
+                int newId = AddTask(task);
+
+                // Обновляем ID объекта на новый
+                task.Id = newId;
+
+                return true;
             }
             catch (Exception ex)
             {
-                SaveLog($"Ошибка UpdateTask: {ex.Message}");
+                SaveLog($"Ошибка ReplaceTask: {ex.Message}");
                 return false;
             }
         }
+
 
         // 5. Удаление задачи
         public bool DeleteTask(int taskId)
