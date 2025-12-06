@@ -36,6 +36,7 @@ namespace SQLiteProject
         {
             this.Text = "Задачи";
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.Size = new Size(380, 650);
         }
 
         private void LoadTasksFromDatabase()
