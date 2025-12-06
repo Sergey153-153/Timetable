@@ -19,3 +19,393 @@
 Ошибка при закрытии подключения к базе данных testDB.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+06.дек.2025 00:39:08 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 00:39:08 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 00:40:45 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+06.дек.2025 00:40:45 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT COUNT(*) as Count FROM Subjects
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:44:14 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT WeekNumber FROM Lessons WHERE ScheduleID = 1 AND WeekNumber > 0 
+SQL logic error or missing database
+no such table: Lessons
+
+06.дек.2025 00:45:38 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT WeekNumber FROM Lessons WHERE ScheduleID = 1 AND WeekNumber > 0 
+SQL logic error or missing database
+no such table: Lessons
+
+06.дек.2025 00:46:42 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+06.дек.2025 00:46:42 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT COUNT(*) as Count FROM Subjects
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:47:55 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT WeekNumber FROM Lessons WHERE ScheduleID = 1 AND WeekNumber > 0 
+SQL logic error or missing database
+no such table: Lessons
+
+06.дек.2025 00:49:42 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT WeekNumber FROM Lessons WHERE ScheduleID = 1 AND WeekNumber > 0 
+SQL logic error or missing database
+no such table: Lessons
+
+06.дек.2025 00:50:22 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 00:50:22 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при выполнении запроса в методе ExecuteNonQuery!
+Текст запроса: drop table sqlite_sequence;
+SQL logic error or missing database
+table sqlite_sequence may not be dropped
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT COUNT(*) as Count FROM Subjects
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT DISTINCT [Subject] FROM Lessons WHERE ScheduleID = 1
+SQL logic error or missing database
+no such table: Lessons
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+SQL logic error or missing database
+no such table: Subjects
+
+06.дек.2025 00:52:07 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT * FROM Tasks WHERE 1=1 AND IsCompleted = 0 ORDER BY Deadline ASC
+SQL logic error or missing database
+no such table: Tasks
+
+06.дек.2025 00:52:42 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT WeekNumber FROM Lessons WHERE ScheduleID = 1 AND WeekNumber > 0 
+SQL logic error or missing database
+no such table: Lessons
+
+06.дек.2025 00:54:11 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT WeekNumber FROM Lessons WHERE ScheduleID = 1 AND WeekNumber > 0 
+SQL logic error or missing database
+no such table: Lessons
+
+06.дек.2025 00:55:09 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 00:55:09 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 00:59:07 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:00:09 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:03:09 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:03:09 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:07:55 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:14:37 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:28:53 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:28:53 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 01:51:28 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT TaskID, Title, Description, Subject, DueDate, IsCompleted, FilePath FROM Tasks WHERE DueDate = '0001-01-01' ORDER BY TaskID
+SQL logic error or missing database
+no such column: Subject
+
+06.дек.2025 02:20:30 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:45:52 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:45:52 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:51:04 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:51:04 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:52:29 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:52:29 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:56:51 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:57:40 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:57:40 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:58:22 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:58:22 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:59:53 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 02:59:53 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:00:38 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:00:38 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:01:07 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:01:33 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:01:33 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:01:58 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:01:58 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:02:23 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:02:23 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:02:50 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:03:21 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:03:21 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:04:03 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:04:03 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:05:56 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:07:16 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 03:07:16 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".

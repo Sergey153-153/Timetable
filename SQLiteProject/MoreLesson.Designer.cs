@@ -34,7 +34,7 @@
             this.lblTeacher = new System.Windows.Forms.Label();
             this.lblTasksTitle = new System.Windows.Forms.Label();
             this.btnAddHomework = new System.Windows.Forms.Button();
-            this.flpTasks = new System.Windows.Forms.FlowLayoutPanel();
+            this.content_block = new System.Windows.Forms.FlowLayoutPanel();
             this.btnMove = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -103,15 +103,15 @@
             this.btnAddHomework.UseVisualStyleBackColor = true;
             this.btnAddHomework.Click += new System.EventHandler(this.btnAddHomework_Click);
             // 
-            // flpTasks
+            // content_block
             // 
-            this.flpTasks.AutoScroll = true;
-            this.flpTasks.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpTasks.Location = new System.Drawing.Point(12, 190);
-            this.flpTasks.Name = "flpTasks";
-            this.flpTasks.Size = new System.Drawing.Size(335, 325);
-            this.flpTasks.TabIndex = 6;
-            this.flpTasks.WrapContents = false;
+            this.content_block.AutoScroll = true;
+            this.content_block.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.content_block.Location = new System.Drawing.Point(12, 190);
+            this.content_block.Name = "content_block";
+            this.content_block.Size = new System.Drawing.Size(335, 325);
+            this.content_block.TabIndex = 6;
+            this.content_block.WrapContents = false;
             // 
             // btnMove
             // 
@@ -141,7 +141,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnMove);
-            this.Controls.Add(this.flpTasks);
+            this.Controls.Add(this.content_block);
             this.Controls.Add(this.btnAddHomework);
             this.Controls.Add(this.lblTasksTitle);
             this.Controls.Add(this.lblTeacher);
@@ -163,7 +163,7 @@
         private System.Windows.Forms.Label lblTeacher;
         private System.Windows.Forms.Label lblTasksTitle;
         private System.Windows.Forms.Button btnAddHomework;
-        private System.Windows.Forms.FlowLayoutPanel flpTasks;
+        private System.Windows.Forms.FlowLayoutPanel content_block;
         private System.Windows.Forms.Button btnMove;
         private System.Windows.Forms.Button btnDelete;
     }

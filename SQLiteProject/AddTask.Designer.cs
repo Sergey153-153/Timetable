@@ -48,7 +48,7 @@
             // 
             this.screen_tasks.Controls.Add(this.label_add_task);
             this.screen_tasks.Location = new System.Drawing.Point(16, 8);
-            this.screen_tasks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.screen_tasks.Margin = new System.Windows.Forms.Padding(2);
             this.screen_tasks.Name = "screen_tasks";
             this.screen_tasks.Size = new System.Drawing.Size(325, 51);
             this.screen_tasks.TabIndex = 1;
@@ -71,9 +71,9 @@
             this.Task_type.Controls.Add(this.Control);
             this.Task_type.Controls.Add(this.HomeTask);
             this.Task_type.Location = new System.Drawing.Point(16, 62);
-            this.Task_type.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Task_type.Margin = new System.Windows.Forms.Padding(2);
             this.Task_type.Name = "Task_type";
-            this.Task_type.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Task_type.Padding = new System.Windows.Forms.Padding(2);
             this.Task_type.Size = new System.Drawing.Size(325, 107);
             this.Task_type.TabIndex = 2;
             this.Task_type.TabStop = false;
@@ -83,7 +83,7 @@
             // 
             this.Exam.AutoSize = true;
             this.Exam.Location = new System.Drawing.Point(4, 83);
-            this.Exam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Exam.Margin = new System.Windows.Forms.Padding(2);
             this.Exam.Name = "Exam";
             this.Exam.Size = new System.Drawing.Size(70, 17);
             this.Exam.TabIndex = 3;
@@ -95,7 +95,7 @@
             // 
             this.Test.AutoSize = true;
             this.Test.Location = new System.Drawing.Point(4, 63);
-            this.Test.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Test.Margin = new System.Windows.Forms.Padding(2);
             this.Test.Name = "Test";
             this.Test.Size = new System.Drawing.Size(54, 17);
             this.Test.TabIndex = 2;
@@ -107,7 +107,7 @@
             // 
             this.Control.AutoSize = true;
             this.Control.Location = new System.Drawing.Point(4, 44);
-            this.Control.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Control.Margin = new System.Windows.Forms.Padding(2);
             this.Control.Name = "Control";
             this.Control.Size = new System.Drawing.Size(39, 17);
             this.Control.TabIndex = 1;
@@ -119,7 +119,7 @@
             // 
             this.HomeTask.AutoSize = true;
             this.HomeTask.Location = new System.Drawing.Point(4, 24);
-            this.HomeTask.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HomeTask.Margin = new System.Windows.Forms.Padding(2);
             this.HomeTask.Name = "HomeTask";
             this.HomeTask.Size = new System.Drawing.Size(41, 17);
             this.HomeTask.TabIndex = 0;
@@ -137,7 +137,7 @@
             "ТОК",
             "История"});
             this.Lesson_type.Location = new System.Drawing.Point(16, 174);
-            this.Lesson_type.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Lesson_type.Margin = new System.Windows.Forms.Padding(2);
             this.Lesson_type.Name = "Lesson_type";
             this.Lesson_type.Size = new System.Drawing.Size(325, 21);
             this.Lesson_type.TabIndex = 3;
@@ -145,7 +145,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(16, 234);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(326, 20);
             this.dateTimePicker1.TabIndex = 4;
@@ -153,7 +153,7 @@
             // Add_files
             // 
             this.Add_files.Location = new System.Drawing.Point(16, 312);
-            this.Add_files.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Add_files.Margin = new System.Windows.Forms.Padding(2);
             this.Add_files.Name = "Add_files";
             this.Add_files.Size = new System.Drawing.Size(325, 37);
             this.Add_files.TabIndex = 6;
@@ -164,7 +164,7 @@
             // back_tasks
             // 
             this.back_tasks.Location = new System.Drawing.Point(108, 376);
-            this.back_tasks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.back_tasks.Margin = new System.Windows.Forms.Padding(2);
             this.back_tasks.Name = "back_tasks";
             this.back_tasks.Size = new System.Drawing.Size(141, 29);
             this.back_tasks.TabIndex = 7;
@@ -175,7 +175,7 @@
             // textBox_description
             // 
             this.textBox_description.Location = new System.Drawing.Point(16, 204);
-            this.textBox_description.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_description.Margin = new System.Windows.Forms.Padding(2);
             this.textBox_description.Name = "textBox_description";
             this.textBox_description.Size = new System.Drawing.Size(325, 20);
             this.textBox_description.TabIndex = 8;
@@ -192,7 +192,8 @@
             this.Controls.Add(this.Lesson_type);
             this.Controls.Add(this.Task_type);
             this.Controls.Add(this.screen_tasks);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Add_task";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add_task";

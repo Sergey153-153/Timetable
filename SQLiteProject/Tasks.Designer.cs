@@ -60,10 +60,10 @@
             // task_schelude
             // 
             this.task_schelude.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.task_schelude.Location = new System.Drawing.Point(11, 562);
+            this.task_schelude.Location = new System.Drawing.Point(34, 538);
             this.task_schelude.Margin = new System.Windows.Forms.Padding(2);
             this.task_schelude.Name = "task_schelude";
-            this.task_schelude.Size = new System.Drawing.Size(107, 36);
+            this.task_schelude.Size = new System.Drawing.Size(79, 58);
             this.task_schelude.TabIndex = 1;
             this.task_schelude.Text = "Расписание";
             this.task_schelude.UseVisualStyleBackColor = true;
@@ -71,11 +71,11 @@
             // 
             // task_add
             // 
-            this.task_add.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.task_add.Location = new System.Drawing.Point(145, 562);
+            this.task_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.task_add.Location = new System.Drawing.Point(152, 538);
             this.task_add.Margin = new System.Windows.Forms.Padding(2);
             this.task_add.Name = "task_add";
-            this.task_add.Size = new System.Drawing.Size(77, 36);
+            this.task_add.Size = new System.Drawing.Size(56, 58);
             this.task_add.TabIndex = 2;
             this.task_add.Text = "+";
             this.task_add.UseVisualStyleBackColor = true;
@@ -84,10 +84,10 @@
             // task_settings
             // 
             this.task_settings.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.task_settings.Location = new System.Drawing.Point(241, 562);
+            this.task_settings.Location = new System.Drawing.Point(244, 538);
             this.task_settings.Margin = new System.Windows.Forms.Padding(2);
             this.task_settings.Name = "task_settings";
-            this.task_settings.Size = new System.Drawing.Size(107, 36);
+            this.task_settings.Size = new System.Drawing.Size(79, 58);
             this.task_settings.TabIndex = 3;
             this.task_settings.Text = "Настройки";
             this.task_settings.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             this.content_block.Location = new System.Drawing.Point(8, 74);
             this.content_block.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.content_block.Name = "content_block";
-            this.content_block.Size = new System.Drawing.Size(343, 455);
+            this.content_block.Size = new System.Drawing.Size(343, 444);
             this.content_block.TabIndex = 4;
             // 
             // Tasks
@@ -114,6 +114,7 @@
             this.Controls.Add(this.task_add);
             this.Controls.Add(this.task_schelude);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Tasks";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tasks";

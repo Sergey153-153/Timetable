@@ -456,6 +456,49 @@ namespace mySQLite
             return finalList;
         }
 
+        public List<TaskItem> GetTasksForLesson(int lessonId)
+        {
+            List<TaskItem> result = new List<TaskItem>();
+
+            // 1) Берём предмет по LessonID
+            DataTable dtLesson = _sqlt.FetchByColumn(
+                "Lessons",
+                "Subject",
+                $"LessonID = {lessonId}",
+                ""
+            );
+
+            if (dtLesson.Rows.Count == 0)
+                return result; // урока нет → заданий нет
+
+            string subjectName = dtLesson.Rows[0]["Subject"].ToString();
+
+            // 2) Берём все задания по этому предмету (без фильтра по дате!)
+            DataTable dtTasks = _sqlt.FetchByColumn(
+                "Tasks",
+                "TaskID, Title, Description, Deadline, Type, IsCompleted, SubjectName, FilePath",
+                $"SubjectName = '{subjectName}'",
+                "ORDER BY Deadline"
+            );
+
+            foreach (DataRow row in dtTasks.Rows)
+            {
+                result.Add(new TaskItem()
+                {
+                    Id = Convert.ToInt32(row["TaskID"]),
+                    Title = row["Title"].ToString(),
+                    Description = row["Description"].ToString(),
+                    Deadline = DateTime.TryParse(row["Deadline"].ToString(), out var dt) ? dt : DateTime.MinValue,
+                    Type = row["Type"].ToString(),
+                    IsCompleted = Convert.ToInt32(row["IsCompleted"]) == 1,
+                    SubjectName = row["SubjectName"].ToString(),
+                    FilePath = row["FilePath"].ToString()
+                });
+            }
+
+            return result;
+        }
+
 
         #region Добавление расписания
         public int AddSchedules(List<string> listSchedules)
@@ -710,21 +753,39 @@ namespace mySQLite
         {
             try
             {
-                // Проверяем, есть ли предметы
-                DataTable dt = _sqlt.Execute("SELECT COUNT(*) as Count FROM Subjects");
-                if (dt.Rows.Count > 0 && Convert.ToInt32(dt.Rows[0]["Count"]) == 0)
+                // Удаляем все старые предметы
+                _sqlt.Execute("DELETE FROM Subjects");
+
+                // Берем уникальные предметы из таблицы Lessons для ScheduleID = 1
+                DataTable dtLessons = _sqlt.Execute("SELECT DISTINCT [Subject] FROM Lessons WHERE ScheduleID = 1 AND [Subject] IS NOT NULL AND [Subject] != ''");
+
+                List<string> subjectsToAdd = new List<string>();
+
+                if (dtLessons != null && dtLessons.Rows.Count > 0)
                 {
-                    string[] defaultSubjects = {
+                    foreach (DataRow row in dtLessons.Rows)
+                    {
+                        string subject = row["Subject"].ToString().Trim();
+                        if (!string.IsNullOrWhiteSpace(subject))
+                            subjectsToAdd.Add(subject);
+                    }
+                }
+
+                // Если Lessons пустые или null, добавляем дефолтные
+                if (subjectsToAdd.Count == 0)
+                {
+                    subjectsToAdd.AddRange(new string[] {
                         "Математика", "Физика", "Химия", "История", "Литература",
                         "Программирование", "Английский язык", "Биология", "География"
-                    };
+                    });
+                }
 
-                    foreach (var subject in defaultSubjects)
-                    {
-                        var parameters = new ParametersCollection();
-                        parameters.Add("Name", subject, DbType.String);
-                        _sqlt.Insert("Subjects", parameters);
-                    }
+                // Добавление через ParametersCollection
+                foreach (var subj in subjectsToAdd)
+                {
+                    var paramss = new ParametersCollection();
+                    paramss.Add("Name", subj, DbType.String);
+                    _sqlt.Insert("Subjects", paramss);
                 }
             }
             catch (Exception ex)

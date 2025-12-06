@@ -14,6 +14,7 @@ namespace SQLiteProject
     public partial class SettingsForm1 : Form
     {
         private Form1 form1;
+        private Task task;
         private SQLiteQueries sqliteQ;
 
         //private int z;
@@ -25,6 +26,12 @@ namespace SQLiteProject
             form1 = parentForm;
             sqliteQ = db;
         }
+        public SettingsForm1(SQLiteQueries db)
+        {
+            InitializeComponent();
+            sqliteQ = db;
+        }
+
         public SettingsForm1()
         {
             InitializeComponent();
@@ -243,6 +250,7 @@ namespace SQLiteProject
 
                     // Очищаем таблицу LessonOverrides
                     sqliteQ.ClearLessonOverrides();
+                    sqliteQ.AddDefaultSubjects();
 
                     System.Windows.Forms.MessageBox.Show("Расписание успешно загружено!");
                 }

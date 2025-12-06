@@ -30,7 +30,6 @@ namespace SQLiteProject
                 LoadTestData();
                 return;
             }
-
             try
             {
                 // Получаем только невыполненные задачи
@@ -325,7 +324,7 @@ namespace SQLiteProject
 
         private void task_settings_Click(object sender, EventArgs e)
         {
-            SettingsForm1 settingsForm = new SettingsForm1();
+            SettingsForm1 settingsForm = new SettingsForm1(_db);
             this.Hide();
             settingsForm.ShowDialog();
             this.Close();
