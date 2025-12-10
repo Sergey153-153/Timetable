@@ -285,7 +285,7 @@ namespace SQLiteProject
 
         private void button3_Click(object sender, EventArgs e)
         {
-            HolidaysForm holidaysForm = new HolidaysForm(this); // Передаем текущую форму как родительскую
+            HolidaysForm holidaysForm = new HolidaysForm(this, sqliteQ); // Передаем текущую форму как родительскую
             holidaysForm.ShowDialog();
         }
 

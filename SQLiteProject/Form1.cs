@@ -18,9 +18,8 @@ namespace SQLiteProject
     public partial class Form1 : Form
     {
         SQLiteQueries sqliteQ;
-        private HolidayService holidayService;
 
-        private const int COUNT_TABLES_IN_DB = 6; //кол-во таблиц в БД
+        private const int COUNT_TABLES_IN_DB = 7; //кол-во таблиц в БД
         public List<string> listSchedules;
         public List<string> listLessons;
 
@@ -28,7 +27,6 @@ namespace SQLiteProject
         {
             InitializeComponent();
             panelLessons.AutoScroll = true;
-            holidayService = new HolidayService();
 
             this.Activated += Form1_Activated;
         }
@@ -37,7 +35,7 @@ namespace SQLiteProject
         {
             if (sqliteQ == null) return; // ничего не делаем, пока БД не подключена
             DateTime SelectedDate1 = dateTimePicker1.Value.Date;
-            if (holidayService.IsHoliday(SelectedDate1))
+            if (sqliteQ.IsHoliday(SelectedDate1))
             {
                 ShowHolidayMessage(SelectedDate1);
                 label1Info();
@@ -186,6 +184,18 @@ namespace SQLiteProject
                 "3;0;6;4;АИС;Пуцко Н.Н.;115;14:10;14:55"
             };
 
+            List<string> listHolidays = new List<string>()
+            {
+                "Новый год;01.01;1;Ежегодный государственный праздник",
+                "Рождество Христово;07.01;1;Ежегодный праздник",
+                "День защитника Отечества;23.02;1;Ежегодный праздник",
+                "Международный женский день;08.03;1;Ежегодный праздник",
+                "Праздник Весны и Труда;01.05;1;Ежегодный праздник",
+                "День Победы;09.05;1;Ежегодный праздник",
+                "День России;12.06;1;Ежегодный праздник",
+                "День народного единства;04.11;1;Ежегодный праздник"
+            };
+
             ParametersCollection paramss = new ParametersCollection();
 
             int errSchedules = sqliteQ.AddSchedules(listSchedules);
@@ -193,6 +203,9 @@ namespace SQLiteProject
 
             int errLessons = sqliteQ.AddLessons(listLessons);
             MessageBox.Show($"Обработано уроков: {listLessons.Count}, ошибок: {errLessons}");
+
+            int errHolidays = sqliteQ.AddHolidays(listHolidays);
+            MessageBox.Show($"Обработано праздников: {listHolidays.Count}, ошибок: {errHolidays}");
         }
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -215,7 +228,7 @@ namespace SQLiteProject
                 return;
 
             DateTime selectedDate = dateTimePicker1.Value.Date;
-            if (holidayService.IsHoliday(selectedDate))
+            if (sqliteQ.IsHoliday(selectedDate))
             {
                 ShowHolidayMessage(selectedDate);
                 label1Info();
@@ -230,40 +243,56 @@ namespace SQLiteProject
 
         private void ShowHolidayMessage(DateTime date)
         {
-            panelLessons.Controls.Clear(); // очищаем старые кнопки
+            panelLessons.Controls.Clear(); // очищаем старые элементы
 
-            string holidayName = holidayService.GetHolidayName(date);
+            Holiday holiday = sqliteQ.GetHolidayForDate(date);
+            if (holiday == null)
+                return; // на всякий случай
 
-            // Создаем специальную кнопку/лейбл для сообщения о празднике
-            Label holidayLabel = new Label();
-            holidayLabel.Text = $"ЗАНЯТИЙ НЕТ\nСегодня праздник:\n{holidayName.ToUpper()}";
-            holidayLabel.TextAlign = ContentAlignment.MiddleCenter;
-            holidayLabel.Font = new Font("Arial", 14, FontStyle.Bold);
-            holidayLabel.ForeColor = Color.DarkRed;
-            holidayLabel.BackColor = Color.LightYellow;
-            holidayLabel.BorderStyle = BorderStyle.FixedSingle;
+            // Текст заголовка
+            string title = $"ЗАНЯТИЙ НЕТ\nСегодня праздник:\n{holiday.Name.ToUpper()}";
 
-            // Настраиваем размер и позицию
-            holidayLabel.Width = panelLessons.ClientSize.Width - 20;
-            holidayLabel.Height = 120;
-            holidayLabel.Left = 10;
-            holidayLabel.Top = 50;
-
-            // Делаем многострочный текст
-            holidayLabel.AutoSize = false;
+            // Основной блок сообщения
+            Label holidayLabel = new Label
+            {
+                Text = title,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Arial", 14, FontStyle.Bold),
+                ForeColor = Color.DarkRed,
+                BackColor = Color.LightYellow,
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = panelLessons.ClientSize.Width - 20,
+                Height = 130,
+                Left = 10,
+                Top = 40,
+                AutoSize = false
+            };
 
             panelLessons.Controls.Add(holidayLabel);
 
-            // Можно добавить дополнительную информацию
-            Label infoLabel = new Label();
-            infoLabel.Text = "В этот день занятия не проводятся";
-            infoLabel.Font = new Font("Arial", 10, FontStyle.Italic);
-            infoLabel.ForeColor = Color.Gray;
-            infoLabel.TextAlign = ContentAlignment.MiddleCenter;
-            infoLabel.Width = panelLessons.ClientSize.Width - 20;
-            infoLabel.Height = 30;
-            infoLabel.Left = 10;
-            infoLabel.Top = holidayLabel.Bottom + 10;
+
+            // Дата праздника — красиво форматируем
+            string dateText = holiday.IsAnnual
+                ? $"Дата ежегодного праздника: {holiday.DateValue}"
+                : $"Дата события: {holiday.DateValue.Replace('.', '-')}";
+
+
+            // Описание (если есть)
+            Label infoLabel = new Label
+            {
+                Text = dateText +
+                      (string.IsNullOrWhiteSpace(holiday.Description)
+                        ? ""
+                        : $"\n\nОписание:\n{holiday.Description}"),
+                Font = new Font("Arial", 10, FontStyle.Italic),
+                ForeColor = Color.Gray,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Width = panelLessons.ClientSize.Width - 20,
+                Height = 100,
+                Left = 10,
+                Top = holidayLabel.Bottom + 10,
+                AutoSize = false
+            };
 
             panelLessons.Controls.Add(infoLabel);
         }

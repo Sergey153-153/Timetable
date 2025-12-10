@@ -81,6 +81,14 @@ namespace mySQLite
                     FOREIGN KEY ([LessonID]) REFERENCES Lessons([LessonID])
                     );";
 
+            sqlCmd += @"CREATE TABLE Holidays (
+                    [HolidayID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                    [Name] TEXT NOT NULL,
+                    [DateValue] TEXT NOT NULL,
+                    [IsAnnual] INTEGER NOT NULL,
+                    [Description] TEXT
+                    );;";
+
             if (isTransact)
                 _sqlt.BeginTransaction();
 
@@ -500,6 +508,7 @@ namespace mySQLite
         }
 
 
+
         #region Добавление расписания
         public int AddSchedules(List<string> listSchedules)
         {
@@ -610,6 +619,101 @@ namespace mySQLite
             }
         }
 
+        #endregion
+
+        #region управление праздниками
+        public int AddHolidays(List<string> list)
+        {
+            if (list == null || list.Count == 0) return 0;
+
+            ParametersCollection p = new ParametersCollection();
+            int cntErr = 0;
+
+            foreach (var item in list)
+            {
+                string[] arr = item.Split(';');
+                if (arr.Length < 4) { cntErr++; continue; }
+
+                p.Clear();
+                p.Add("Name", arr[0], DbType.String);
+                p.Add("DateValue", arr[1], DbType.String);
+                p.Add("IsAnnual", arr[2], DbType.Int32);
+                p.Add("Description", arr[3], DbType.String);
+
+                if (_sqlt.Insert("Holidays", p) == 0)
+                    cntErr++;
+            }
+
+            return cntErr;
+        }
+
+        public int DeleteHoliday(int holidayId)
+        {
+            return _sqlt.Delete("Holidays", $"HolidayID = {holidayId}");
+        }
+
+        public int ReplaceHoliday(int oldId, List<string> newHoliday)
+        {
+            int err = DeleteHoliday(oldId);
+            err += AddHolidays(newHoliday);
+            return err;
+        }
+
+        public List<Holiday> GetAllHolidays()
+        {
+            DataTable dt = _sqlt.FetchByColumn("Holidays", "*", "1=1", "ORDER BY HolidayID");
+
+            List<Holiday> list = new List<Holiday>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                list.Add(new Holiday()
+                {
+                    HolidayID = Convert.ToInt32(row["HolidayID"]),
+                    Name = row["Name"].ToString(),
+                    DateValue = row["DateValue"].ToString(),
+                    IsAnnual = Convert.ToInt32(row["IsAnnual"]) == 1,
+                    Description = row["Description"].ToString()
+                });
+            }
+
+            return list;
+        }
+
+        public Holiday GetHolidayForDate(DateTime date)
+        {
+            string d = date.Day.ToString("00");
+            string m = date.Month.ToString("00");
+            string yyyy = date.Year.ToString();
+
+            string annualKey = $"{d}.{m}";
+            string fullKey = $"{yyyy}.{m}.{d}";
+
+            DataTable dt = _sqlt.FetchByColumn(
+                "Holidays",
+                "*",
+                $"DateValue = '{annualKey}' OR DateValue = '{fullKey}'",
+                ""
+            );
+
+            if (dt.Rows.Count == 0) return null;
+
+            DataRow row = dt.Rows[0];
+
+            return new Holiday()
+            {
+                HolidayID = Convert.ToInt32(row["HolidayID"]),
+                Name = row["Name"].ToString(),
+                DateValue = row["DateValue"].ToString(),
+                IsAnnual = Convert.ToInt32(row["IsAnnual"]) == 1,
+                Description = row["Description"].ToString()
+            };
+        }
+
+        public bool IsHoliday(DateTime date)
+        {
+            return GetHolidayForDate(date) != null;
+        }
         #endregion
 
         #region Получение расписания

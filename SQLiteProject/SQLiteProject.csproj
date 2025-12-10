@@ -73,7 +73,6 @@
     <Compile Include="AddTask.Designer.cs">
       <DependentUpon>AddTask.cs</DependentUpon>
     </Compile>
-    <Compile Include="HolidayService.cs" />
     <Compile Include="HolidaysForm.cs">
       <SubType>Form</SubType>
     </Compile>
