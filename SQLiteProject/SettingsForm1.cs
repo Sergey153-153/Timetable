@@ -31,10 +31,6 @@ namespace SQLiteProject
             sqliteQ = db;
         }
 
-        public SettingsForm1()
-        {
-            InitializeComponent();
-        }
         private void DownloadSchedule()
         {
             using (System.Windows.Forms.SaveFileDialog saveFileDialog = new System.Windows.Forms.SaveFileDialog())

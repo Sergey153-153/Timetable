@@ -47,7 +47,7 @@ namespace mySQLite
 
         public int CreateTables(string dbName, bool isTransact = true)
         {
-            // ClearDB();
+            ClearDB();
 
             string sqlCmd = @"CREATE TABLE Schedules (
                     [ScheduleID] INTEGER PRIMARY KEY,
@@ -170,22 +170,6 @@ namespace mySQLite
             return 1;
         }
         #endregion
-
-        public int GetNextScheduleID()
-        {
-            DataTable dt = _sqlt.FetchByColumn(
-                "Schedules",
-                "MAX(ScheduleID) AS maxId",
-                "",
-                ""
-            );
-
-            int maxId = 0;
-            if (dt.Rows.Count > 0 && dt.Rows[0]["maxId"].ToString() != "")
-                maxId = int.Parse(dt.Rows[0]["maxId"].ToString());
-
-            return maxId + 1;
-        }
 
         public int ClearLessonOverrides()
         {
@@ -508,7 +492,6 @@ namespace mySQLite
         }
 
 
-
         #region Добавление расписания
         public int AddSchedules(List<string> listSchedules)
         {
@@ -798,7 +781,6 @@ namespace mySQLite
 
         #region Создание таблиц для задач
 
-        // Исправленное название метода
         public int CreateTasksTables(string dbName, bool isTransact = true)
         {
             string sqlCmd = @"CREATE TABLE IF NOT EXISTS Subjects (
@@ -1028,7 +1010,6 @@ namespace mySQLite
         }
 
         // 4. Обновление задачи
-
         public bool ReplaceTask(TaskItem task)
         {
             try
@@ -1050,7 +1031,6 @@ namespace mySQLite
                 return false;
             }
         }
-
 
         // 5. Удаление задачи
         public bool DeleteTask(int taskId)

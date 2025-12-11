@@ -101,18 +101,6 @@ namespace SQLiteProject
             return subjectName;
         }
 
-        private void SaveTaskToDatabase(string description, string type, string subjectName, DateTime deadline, string filePath)
-        {
-            if (_db == null)
-            {
-                MessageBox.Show("Ошибка: подключение к БД не установлено!");
-                return;
-            }
-
-            string title = $"{type} - {deadline:dd.MM.yyyy}";
-            _db.AddSimpleTask(title, description, deadline, type, subjectName, filePath);
-        }
-
         private string GetSelectedTaskType()
         {
             if (HomeTask.Checked) return "ДЗ";
