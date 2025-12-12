@@ -660,3 +660,37 @@ UNIQUE constraint failed: Schedules.ScheduleID
 Ошибка при закрытии подключения к базе данных User.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+13.дек.2025 00:42:57 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT * FROM Holidays WHERE DateValue = '13.12' OR DateValue = '2025.12.13' 
+SQL logic error or missing database
+no such table: Holidays
+
+13.дек.2025 00:59:02 ERR 
+Ошибка при получении из базы данных testDB.db!
+Метод: Execute(string query)
+Текст запроса: SELECT * FROM Holidays WHERE DateValue = '13.12' OR DateValue = '2025.12.13' 
+SQL logic error or missing database
+no such table: Holidays
+
+13.дек.2025 01:05:19 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+13.дек.2025 01:05:19 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+13.дек.2025 01:13:35 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+13.дек.2025 01:13:35 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
