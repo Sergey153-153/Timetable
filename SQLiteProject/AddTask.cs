@@ -30,7 +30,12 @@ namespace SQLiteProject
             _editTaskId = taskToEdit.Id;
 
             textBox_description.Text = taskToEdit.Description;
+
+            dateTimePicker1.MinDate = DateTimePicker.MinimumDateTime;
+            dateTimePicker1.MaxDate = DateTimePicker.MaximumDateTime;
+
             dateTimePicker1.Value = taskToEdit.Deadline;
+
             _selectedFilePath = taskToEdit.FilePath;
             Lesson_type.Text = taskToEdit.SubjectName;
 
