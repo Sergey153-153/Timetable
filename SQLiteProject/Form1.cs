@@ -1,17 +1,17 @@
-﻿using System;
+﻿using DatabaseLib;
+using Microsoft.VisualBasic;
+using mySQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using System.Data.SQLite;
-using DatabaseLib;
-using mySQLite;
 
 namespace SQLiteProject
 {
@@ -357,7 +357,8 @@ namespace SQLiteProject
 
         private void buttonAddLesson_Click(object sender, EventArgs e)
         {
-            using (Form addForm = BuildAddLessonForm(out Func<List<string>> collectData))
+            DateTime selectedDate1 = dateTimePicker1.Value.Date;
+            using (Form addForm = BuildAddLessonForm(out Func<List<string>> collectData, selectedDate1))
             {
                 addForm.StartPosition = FormStartPosition.CenterParent;
 
@@ -375,105 +376,171 @@ namespace SQLiteProject
             }
         }
 
-        private Form BuildAddLessonForm(out Func<List<string>> collectData)
+        private Form BuildAddLessonForm(out Func<List<string>> collectData, DateTime selectedDate)
         {
             Form f = new Form();
             f.Text = "Создание новой пары";
-            f.Size = new Size(375, 648);
+            f.AutoSize = true;
+            f.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             f.FormBorderStyle = FormBorderStyle.FixedDialog;
             f.MaximizeBox = false;
+            f.StartPosition = FormStartPosition.CenterParent;
 
-            // ====== ScheduleID не показываем, он всегда = 1 ======
+            FlowLayoutPanel panel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                FlowDirection = FlowDirection.TopDown,
+                Padding = new Padding(15),
+                AutoSize = true
+            };
+            f.Controls.Add(panel);
+
             int scheduleId = 1;
 
             // ====== Неделя ======
-            Label lblWeek = new Label() { Text = "Неделя (0/1/2):", Location = new Point(20, 20) };
-            ComboBox cbWeek = new ComboBox() { Location = new Point(150, 18), Width = 200 };
+            panel.Controls.Add(new Label { Text = "Неделя (0/1/2):" });
+            ComboBox cbWeek = new ComboBox { Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
             cbWeek.Items.AddRange(new[] { "0", "1", "2" });
             cbWeek.SelectedIndex = 0;
+            panel.Controls.Add(cbWeek);
 
             // ====== День недели ======
-            Label lblDay = new Label() { Text = "День недели:", Location = new Point(20, 60) };
-            ComboBox cbDay = new ComboBox() { Location = new Point(150, 58), Width = 200 };
-            cbDay.Items.AddRange(new[]{"Пн","Вт","Ср","Чт","Пт","Сб"});
-            cbDay.SelectedIndex = 0;
+            panel.Controls.Add(new Label { Text = "День недели:" });
+            ComboBox cbDay = new ComboBox { Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
+            string[] days = new[] { "Пн", "Вт", "Ср", "Чт", "Пт", "Сб" };
+            cbDay.Items.AddRange(days);
 
-            // ====== Номер пары ======
-            Label lblLesson = new Label() { Text = "Номер пары:", Location = new Point(20, 100) };
-            ComboBox cbLesson = new ComboBox() { Location = new Point(150, 98), Width = 200 };
-            cbLesson.Items.AddRange(new[] { "1", "2", "3", "4", "5", "6", "7" });
-            cbLesson.SelectedIndex = 0;
+            int dayIndex = 0; // По умолчанию Пн
+
+            switch (selectedDate.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    dayIndex = 0;
+                    break;
+                case DayOfWeek.Tuesday:
+                    dayIndex = 1;
+                    break;
+                case DayOfWeek.Wednesday:
+                    dayIndex = 2;
+                    break;
+                case DayOfWeek.Thursday:
+                    dayIndex = 3;
+                    break;
+                case DayOfWeek.Friday:
+                    dayIndex = 4;
+                    break;
+                case DayOfWeek.Saturday:
+                    dayIndex = 5;
+                    break;
+
+                case DayOfWeek.Sunday:
+                    dayIndex = 0; // Если воскресенье — ставим Пн
+                    break;
+            }
+            cbDay.SelectedIndex = dayIndex;
+
+            panel.Controls.Add(cbDay);
 
             // ====== Предмет ======
-            Label lblSubject = new Label() { Text = "Предмет:", Location = new Point(20, 140) };
-            TextBox txtSubject = new TextBox() { Location = new Point(150, 138), Width = 200 };
+            panel.Controls.Add(new Label { Text = "Предмет:" });
+            ComboBox cbSubject = new ComboBox { Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
+            var subjects = sqliteQ.GetAllSubjects();
+            cbSubject.Items.AddRange(subjects.Select(s => s.Name).ToArray());
+            cbSubject.Items.Add("Добавить новый...");
+            cbSubject.SelectedIndex = 0;
+            panel.Controls.Add(cbSubject);
+
+            cbSubject.SelectedIndexChanged += (s, e) =>
+            {
+                if (cbSubject.SelectedItem.ToString() == "Добавить новый...")
+                {
+                    string newSubject = Microsoft.VisualBasic.Interaction.InputBox("Введите название нового предмета:", "Новый предмет");
+                    if (!string.IsNullOrWhiteSpace(newSubject))
+                    {
+                        if (sqliteQ.AddSubject(newSubject))
+                        {
+                            cbSubject.Items.Insert(cbSubject.Items.Count - 1, newSubject);
+                            cbSubject.SelectedItem = newSubject;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ошибка при добавлении предмета.");
+                            cbSubject.SelectedIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        cbSubject.SelectedIndex = 0;
+                    }
+                }
+            };
 
             // ====== Преподаватель ======
-            Label lblTeacher = new Label() { Text = "Преподаватель:", Location = new Point(20, 180) };
-            TextBox txtTeacher = new TextBox() { Location = new Point(150, 178), Width = 200 };
+            panel.Controls.Add(new Label { Text = "Преподаватель:" });
+            TextBox txtTeacher = new TextBox { Width = 200 };
+            panel.Controls.Add(txtTeacher);
 
             // ====== Аудитория ======
-            Label lblLocation = new Label() { Text = "Аудитория:", Location = new Point(20, 220) };
-            TextBox txtLocation = new TextBox() { Location = new Point(150, 218), Width = 200 };
+            panel.Controls.Add(new Label { Text = "Аудитория:" });
+            TextBox txtLocation = new TextBox { Width = 200 };
+            panel.Controls.Add(txtLocation);
 
-            // ====== Начало ======
-            Label lblStart = new Label() { Text = "Начало (HH:MM):", Location = new Point(20, 260) };
-            TextBox txtStart = new TextBox() { Location = new Point(150, 258), Width = 200, Text = "08:30" };
-
-            // ====== Конец ======
-            Label lblEnd = new Label() { Text = "Конец (HH:MM):", Location = new Point(20, 300) };
-            TextBox txtEnd = new TextBox() { Location = new Point(150, 298), Width = 200, Text = "10:05" };
-
-            // ====== Кнопки OK / Cancel ======
-            Button btnOk = new Button()
+            // ====== Время начала и конца ======
+            panel.Controls.Add(new Label { Text = "Начало:" });
+            DateTimePicker dtStart = new DateTimePicker
             {
-                Text = "OK",
-                DialogResult = DialogResult.OK,
-                Location = new Point(80, 330),
-                Width = 100
+                Format = DateTimePickerFormat.Custom,
+                CustomFormat = "HH:mm",
+                ShowUpDown = true,
+                Value = DateTime.Today.AddHours(8).AddMinutes(30),
+                Width = 200
+            };
+            panel.Controls.Add(dtStart);
+
+            panel.Controls.Add(new Label { Text = "Конец:" });
+            DateTimePicker dtEnd = new DateTimePicker
+            {
+                Format = DateTimePickerFormat.Custom,
+                CustomFormat = "HH:mm",
+                ShowUpDown = true,
+                Value = dtStart.Value.AddMinutes(90),
+                Width = 200
+            };
+            panel.Controls.Add(dtEnd);
+
+            bool manualEndChange = false;
+
+            dtStart.ValueChanged += (s, e) =>
+            {
+                if (!manualEndChange)
+                    dtEnd.Value = dtStart.Value.AddMinutes(90);
             };
 
-            Button btnCancel = new Button()
-            {
-                Text = "Отмена",
-                DialogResult = DialogResult.Cancel,
-                Location = new Point(200, 330),
-                Width = 100
-            };
+            dtEnd.ValueChanged += (s, e) => manualEndChange = true;
 
-            f.Controls.AddRange(new Control[]
-                    {
-                lblWeek, cbWeek,
-                lblDay, cbDay,
-                lblLesson, cbLesson,
-                lblSubject, txtSubject,
-                lblTeacher, txtTeacher,
-                lblLocation, txtLocation,
-                lblStart, txtStart,
-                lblEnd, txtEnd,
-                btnOk, btnCancel
-            });
+            // ====== Кнопки ======
+            FlowLayoutPanel btnPanel = new FlowLayoutPanel { FlowDirection = FlowDirection.LeftToRight, AutoSize = true };
+            Button btnOk = new Button { Text = "OK", DialogResult = DialogResult.OK, Width = 100 };
+            Button btnCancel = new Button { Text = "Отмена", DialogResult = DialogResult.Cancel, Width = 100 };
+            btnPanel.Controls.Add(btnOk);
+            btnPanel.Controls.Add(btnCancel);
+            panel.Controls.Add(btnPanel);
 
-            // ========= ЛОГИКА СОХРАНЕНИЯ ===================================
-
+            // ========= Сбор данных ===================================
             collectData = () =>
             {
-                List<string> list = new List<string>();
+                string subjectName = cbSubject.SelectedItem.ToString();
+                int week = int.Parse(cbWeek.SelectedItem.ToString());
+                int day = cbDay.SelectedIndex + 1;
+                string teacher = txtTeacher.Text;
+                string location = txtLocation.Text;
+                string startTime = dtStart.Value.ToString("HH:mm");
+                string endTime = dtEnd.Value.ToString("HH:mm");
 
-                string line =
-                    $"{scheduleId};" +
-                    $"{cbWeek.SelectedItem};" +
-                    $"{cbDay.SelectedIndex + 1};" +
-                    $"{cbLesson.SelectedItem};" +
-                    $"{txtSubject.Text};" +
-                    $"{txtTeacher.Text};" +
-                    $"{txtLocation.Text};" +
-                    $"{txtStart.Text};" +
-                    $"{txtEnd.Text}";
-
-                list.Add(line);
-
-                return list;
+                return new List<string>
+                {
+                    $"{scheduleId};{week};{day};1;{subjectName};{teacher};{location};{startTime};{endTime}"
+                };
             };
 
             return f;

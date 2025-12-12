@@ -549,7 +549,10 @@ namespace SQLiteProject
                 int err1 = sqliteQ.AddLessonOverrides(listOverrides1);
 
                 if (err == 0)
+                { 
                     MessageBox.Show($"Пара успешно перенесена!\n{startTime:dd.MM.yyyy HH:mm} - {endTime:HH:mm}");
+                    button1_Click(sender, e);
+                }
                 else
                     MessageBox.Show("Ошибка при переносе пары.");
             }
@@ -587,17 +590,23 @@ namespace SQLiteProject
                     List<string> listOverrides = new List<string>() { line };
                     int err = sqliteQ.AddLessonOverrides(listOverrides);
 
-                    if (err == 0)
+                    if (err == 0) 
+                    { 
                         MessageBox.Show("Пара удалена только на выбранный день!");
-                    else
-                        MessageBox.Show("Ошибка удаления пары на выбранный день.");
+                        button1_Click(sender, e);
+                    }
+                else
+                    MessageBox.Show("Ошибка удаления пары на выбранный день.");
                 }
 
                 else if (deleteForm.DialogResult == DialogResult.OK)
                 {
                     // Удаление навсегда
                     if (sqliteQ.DeleteLessonForever(LessonId) > 0)
+                    {
                         MessageBox.Show("Пара удалена навсегда!");
+                        button1_Click(sender, e);
+                    }
                     else
                         MessageBox.Show("Ошибка удаления пары навсегда.");
                 }
