@@ -340,3 +340,323 @@
 Ошибка при закрытии подключения к базе данных User.db
 Доступ к ликвидированному объекту невозможен.
 Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:15:53 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+06.дек.2025 10:15:53 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:15:53 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:15:53 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:15:53 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+06.дек.2025 10:15:53 SQL 
+База данных задач успешно инициализирована
+
+06.дек.2025 10:15:53 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:15:53 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:15:53 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:16:02 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:16:02 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:16:02 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:16:38 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+06.дек.2025 10:16:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:16:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:16:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:16:38 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+06.дек.2025 10:16:38 SQL 
+База данных задач успешно инициализирована
+
+06.дек.2025 10:16:38 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:16:38 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:16:38 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:17:02 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+06.дек.2025 10:17:02 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:17:02 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:17:02 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:17:02 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+06.дек.2025 10:17:02 SQL 
+База данных задач успешно инициализирована
+
+06.дек.2025 10:17:02 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:17:02 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:17:02 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:21:12 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:21:12 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:21:12 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:35:04 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+06.дек.2025 10:35:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:35:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:35:04 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:35:04 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+06.дек.2025 10:35:04 SQL 
+База данных задач успешно инициализирована
+
+06.дек.2025 10:35:04 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:35:04 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:35:04 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:37:22 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:37:22 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:37:22 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:37:38 ERR 
+Ошибка при генерации таблиц новой базы данных: SQL logic error or missing database
+table Schedules already exists!
+
+06.дек.2025 10:37:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:37:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:37:38 ERR 
+Ошибка при вставке новой записи в таблицу Subjects!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Subjects (Name) VALUES (@Name)
+constraint failed
+UNIQUE constraint failed: Subjects.Name
+
+06.дек.2025 10:37:38 SQL 
+Добавлены предметы по умолчанию: Физика, ТРПО, АИС
+
+06.дек.2025 10:37:38 SQL 
+База данных задач успешно инициализирована
+
+06.дек.2025 10:37:38 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:37:39 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:37:39 ERR 
+Ошибка при вставке новой записи в таблицу Schedules!
+Метод: Insert(string tablename, ParametersCollection parameters)
+Текст запроса: INSERT INTO Schedules (ScheduleID,Code,Name,Type) VALUES (@ScheduleID,@Code,@Name,@Type)
+constraint failed
+UNIQUE constraint failed: Schedules.ScheduleID
+
+06.дек.2025 10:42:45 ERR 
+Ошибка при закрытии подключения к базе данных tasks_database.sqlite
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:42:45 ERR 
+Ошибка при закрытии подключения к базе данных testDB.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
+
+06.дек.2025 10:42:45 ERR 
+Ошибка при закрытии подключения к базе данных User.db
+Доступ к ликвидированному объекту невозможен.
+Имя объекта: "SQLiteConnection".
