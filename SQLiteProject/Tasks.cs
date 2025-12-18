@@ -1,8 +1,6 @@
 ﻿using mySQLite;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -26,31 +24,22 @@ namespace SQLiteProject
         {
             if (_db == null)
             {
-                LoadTestData();
                 return;
             }
             try
             {
-                // Получаем только невыполненные задачи
-                _tasks = _db.GetTasksByFilter(isCompleted: false);
+                // Загружаем только невыполненные задачи
+                _tasks = _db.GetTasksByFilter(isCompleted: false); // Только активные задачи
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка загрузки задач из БД: {ex.Message}");
-                LoadTestData();
+                
             }
             DisplayTasks();
         }
 
-        private void LoadTestData()
-        {
-            _tasks = new List<TaskItem>
-            {
-                new TaskItem { Id = 1, Title = "Математика - упражнения", Description = "Решить задачи №1-10", Deadline = DateTime.Now.AddDays(1), Type = "ДЗ", SubjectName = "Математика" },
-                new TaskItem { Id = 2, Title = "Физика - лабораторная", Description = "Оформить отчет", Deadline = DateTime.Now.AddDays(1), Type = "КР", SubjectName = "Физика" }
-            };
-        }
-
+        
         private void DisplayTasks()
         {
             content_block.Controls.Clear();
@@ -59,21 +48,22 @@ namespace SQLiteProject
             {
                 Label noTasksLabel = new Label
                 {
-                    Text = "Заданий нет",
+                    Text = "Нет активных заданий",
                     Font = new Font("Arial", 12),
                     TextAlign = ContentAlignment.MiddleCenter,
-                    Dock = DockStyle.Fill
+                    Dock = DockStyle.Fill,
+                    ForeColor = Color.Gray
                 };
                 content_block.Controls.Add(noTasksLabel);
                 return;
             }
 
+            int currentY = 10;
+
             var groupedTasks = _tasks
-                .Where(t => !t.IsCompleted)
+                .Where(t => !t.IsCompleted) // Еще раз фильтруем на всякий случай
                 .GroupBy(t => t.Deadline.Date)
                 .OrderBy(g => g.Key);
-
-            int currentY = 10;
 
             foreach (var group in groupedTasks)
             {
@@ -119,15 +109,30 @@ namespace SQLiteProject
             {
                 Size = new Size(content_block.Width - 30, 70),
                 Location = new Point(5, yPosition),
-                BorderStyle = BorderStyle.FixedSingle
+                BorderStyle = BorderStyle.FixedSingle,
+                BackColor = SystemColors.Window,
+                Tag = task
             };
+
+            // CheckBox для отметки выполнения
+            CheckBox completeCheckBox = new CheckBox
+            {
+                Text = "",
+                Checked = false, // показываем только невыполненные
+                Location = new Point(10, 25),
+                Size = new Size(20, 20),
+                Tag = task,
+                BackColor = Color.Transparent
+            };
+            completeCheckBox.CheckedChanged += CompleteCheckBox_CheckedChanged;
+            panel.Controls.Add(completeCheckBox);
 
             // Заголовок задачи
             Label titleLabel = new Label
             {
                 Text = $"{task.Type}: {task.SubjectName}",
                 Font = new Font("Arial", 11, FontStyle.Bold),
-                Location = new Point(10, 10),
+                Location = new Point(35, 10),
                 AutoSize = true
             };
 
@@ -136,7 +141,7 @@ namespace SQLiteProject
             {
                 Text = task.Description,
                 Font = new Font("Arial", 9),
-                Location = new Point(10, 35),
+                Location = new Point(35, 35),
                 AutoSize = true
             };
 
@@ -149,8 +154,8 @@ namespace SQLiteProject
                 Label fileIcon = new Label
                 {
                     Text = "!!",
-                    Font = new Font("Arial", 10, FontStyle.Bold),
-                    Location = new Point(panel.Width - 30, 10),
+                    Font = new Font("Arial", 12, FontStyle.Bold),
+                    Location = new Point(panel.Width - 40, 10),
                     AutoSize = true,
                     Cursor = Cursors.Hand,
                     Tag = task
@@ -165,6 +170,57 @@ namespace SQLiteProject
             descLabel.Click += (s, e) => ShowTaskDetails(task);
 
             return panel;
+        }
+
+        private void CompleteCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is CheckBox checkBox && checkBox.Tag is TaskItem task)
+            {
+                try
+                {
+                    if (checkBox.Checked)
+                    {
+                        DialogResult result = MessageBox.Show(
+                            "Отметить задачу как выполненную?",
+                            "Подтверждение",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            // Обновляем статус задачи в базе данных
+                            bool success = _db.UpdateTaskCompletion(task.Id, true);
+
+                            if (success)
+                            {
+                                // Удаляем задачу из локального списка
+                                if (_tasks.Contains(task))
+                                {
+                                    _tasks.Remove(task);
+                                }
+
+                                // Обновляем отображение
+                                DisplayTasks();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Не удалось обновить статус задачи", "Ошибка",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                checkBox.Checked = false;
+                            }
+                        }
+                        else
+                        {
+                            checkBox.Checked = false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при изменении статуса: {ex.Message}");
+                    checkBox.Checked = false;
+                }
+            }
         }
 
         private void FileIcon_Click(object sender, EventArgs e)
@@ -185,8 +241,8 @@ namespace SQLiteProject
                 detailsForm.MaximizeBox = false;
                 detailsForm.MinimizeBox = false;
                 detailsForm.AutoSize = false;
-                detailsForm.Width = 375; 
-                int maxHeight = 648; 
+                detailsForm.Width = 375;
+                int maxHeight = 648;
 
                 Panel mainPanel = new Panel
                 {
@@ -263,7 +319,7 @@ namespace SQLiteProject
 
                     Button downloadButton = new Button
                     {
-                        Text = $" Скачать: {Path.GetFileName(task.FilePath)}",
+                        Text = $"Скачать: {Path.GetFileName(task.FilePath)}",
                         Font = new Font("Arial", 10),
                         Location = new Point(5, y),
                         Size = new Size(330, 35)
@@ -279,7 +335,7 @@ namespace SQLiteProject
                     Text = "Редактировать",
                     Font = new Font("Arial", 10),
                     Location = new Point(5, y),
-                    Size = new Size(110, 35)
+                    Size = new Size(115, 45)
                 };
                 editButton.Click += (s, e) =>
                 {
@@ -288,38 +344,52 @@ namespace SQLiteProject
                         if (editForm.ShowDialog() == DialogResult.OK)
                         {
                             detailsForm.Close();
-
-                            LoadTasksFromDatabase(); 
+                            LoadTasksFromDatabase();
                         }
                     }
                 };
                 mainPanel.Controls.Add(editButton);
 
-                Button doneButton = new Button
+                // Кнопка отметки как выполненной
+                Button markAsDoneButton = new Button
                 {
-                    Text = "Выполнено",
+                    Text = "Отметить выполненным",
                     Font = new Font("Arial", 10),
-                    Location = new Point(125, y),
-                    Size = new Size(110, 35)
+                    Location = new Point(135, y),
+                    Size = new Size(110, 45),
                 };
-                doneButton.Click += (s, e) =>
+                markAsDoneButton.Click += (s, e) =>
                 {
-                    if (MessageBox.Show("Удалить задачу?", "Подтвердите", MessageBoxButtons.YesNo)
-                        == DialogResult.Yes)
+                    DialogResult result = MessageBox.Show(
+                        "Отметить задачу как выполненную?",
+                        "Подтверждение",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (result == DialogResult.Yes)
                     {
-                        _db.DeleteTask(task.Id);
-                        detailsForm.Close();
-                        LoadTasksFromDatabase();
+                        bool success = _db.UpdateTaskCompletion(task.Id, true);
+
+                        if (success)
+                        {
+                            detailsForm.Close();
+                            LoadTasksFromDatabase();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не удалось обновить статус задачи", "Ошибка",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 };
-                mainPanel.Controls.Add(doneButton);
+                mainPanel.Controls.Add(markAsDoneButton);
 
                 Button closeButton = new Button
                 {
                     Text = "Закрыть",
                     Font = new Font("Arial", 10),
-                    Location = new Point(245, y),
-                    Size = new Size(90, 35)
+                    Location = new Point(260, y),
+                    Size = new Size(75, 45)
                 };
                 closeButton.Click += (s, e) => detailsForm.Close();
                 mainPanel.Controls.Add(closeButton);
@@ -333,12 +403,8 @@ namespace SQLiteProject
                     foreach (Control c in mainPanel.Controls)
                         contentHeight = Math.Max(contentHeight, c.Bottom);
 
-                    int formHeight = contentHeight + 50; // отступы и кнопки
-
-                    // если меньше maxHeight — используем авторазмер, иначе включается скролл
+                    int formHeight = contentHeight + 50;
                     detailsForm.Height = Math.Min(formHeight, maxHeight);
-
-                    // центрирование на экране
                     detailsForm.StartPosition = FormStartPosition.CenterScreen;
                 };
 
@@ -413,7 +479,6 @@ namespace SQLiteProject
             if (addTaskForm.ShowDialog() == DialogResult.OK)
             {
                 LoadTasksFromDatabase();
-                DisplayTasks();
             }
         }
     }

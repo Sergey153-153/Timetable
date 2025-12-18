@@ -1107,6 +1107,21 @@ namespace mySQLite
         }
 
         #endregion
+        public bool UpdateTaskCompletion(int taskId, bool isCompleted)
+        {
+            try
+            {
+                string query = $"UPDATE tasks SET is_completed = {(isCompleted ? 1 : 0)} WHERE id = {taskId}";
+
+                int rowsAffected = _sqlt.ExecuteNonQuery(query);
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка обновления статуса задачи: {ex.Message}");
+                return false;
+            }
+        }
 
         #region Методы для работы с предметами
 
