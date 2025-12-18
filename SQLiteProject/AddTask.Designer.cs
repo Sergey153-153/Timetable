@@ -43,6 +43,7 @@
             this.labelSubject = new System.Windows.Forms.Label();
             this.labelAbout = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.labelFileName = new System.Windows.Forms.Label();
             this.screen_tasks.SuspendLayout();
             this.Task_type.SuspendLayout();
             this.SuspendLayout();
@@ -145,7 +146,7 @@
             // 
             // Add_files
             // 
-            this.Add_files.Location = new System.Drawing.Point(24, 504);
+            this.Add_files.Location = new System.Drawing.Point(24, 532);
             this.Add_files.Name = "Add_files";
             this.Add_files.Size = new System.Drawing.Size(488, 57);
             this.Add_files.TabIndex = 6;
@@ -155,7 +156,7 @@
             // 
             // back_tasks
             // 
-            this.back_tasks.Location = new System.Drawing.Point(162, 578);
+            this.back_tasks.Location = new System.Drawing.Point(162, 611);
             this.back_tasks.Name = "back_tasks";
             this.back_tasks.Size = new System.Drawing.Size(212, 45);
             this.back_tasks.TabIndex = 7;
@@ -197,11 +198,20 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Срок сдачи:";
             // 
+            // labelFileName
+            // 
+            this.labelFileName.AutoSize = true;
+            this.labelFileName.Location = new System.Drawing.Point(31, 495);
+            this.labelFileName.Name = "labelFileName";
+            this.labelFileName.Size = new System.Drawing.Size(0, 20);
+            this.labelFileName.TabIndex = 12;
+            // 
             // Add_task
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 638);
+            this.ClientSize = new System.Drawing.Size(538, 677);
+            this.Controls.Add(this.labelFileName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelAbout);
             this.Controls.Add(this.labelSubject);
@@ -242,5 +252,6 @@
         private System.Windows.Forms.Label labelSubject;
         private System.Windows.Forms.Label labelAbout;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelFileName;
     }
 }

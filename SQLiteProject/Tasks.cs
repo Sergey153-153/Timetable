@@ -184,9 +184,9 @@ namespace SQLiteProject
                 detailsForm.FormBorderStyle = FormBorderStyle.FixedDialog;
                 detailsForm.MaximizeBox = false;
                 detailsForm.MinimizeBox = false;
-                detailsForm.AutoSize = false; // мы сами считаем высоту
-                detailsForm.Width = 375; // фиксированная ширина
-                int maxHeight = 648; // максимум по высоте
+                detailsForm.AutoSize = false;
+                detailsForm.Width = 375; 
+                int maxHeight = 648; 
 
                 Panel mainPanel = new Panel
                 {

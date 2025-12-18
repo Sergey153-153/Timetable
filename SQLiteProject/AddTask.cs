@@ -100,7 +100,7 @@ namespace SQLiteProject
                 _db.AddSubject(subjectName);
                 LoadSubjects();
                 Lesson_type.Text = subjectName;
-                MessageBox.Show($"Предмет '{subjectName}' добавлен в базу данных");
+                //MessageBox.Show($"Предмет '{subjectName}' добавлен в базу данных");
             }
 
             return subjectName;
@@ -180,7 +180,7 @@ namespace SQLiteProject
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     _selectedFilePath = openFileDialog.FileName;
-                    MessageBox.Show($"Файл выбран: {Path.GetFileName(_selectedFilePath)}");
+                    labelFileName.Text = $"{Path.GetFileName(_selectedFilePath)}";
                 }
             }
         }
