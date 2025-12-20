@@ -10,7 +10,7 @@ namespace SQLiteProject
         public bool IsAnnual { get; set; }
         public string Description { get; set; }
 
-        public DateTime? GetDate(int year)
+        public DateTime? GetDate(int year) 
         {
             try
             {
